@@ -8,11 +8,11 @@ export const setAuthorizationHeader = ({token, isLoggedIn}) => {
     }
 }
 
-export const login = (credentials) => {
+export const login = credentials => {
     return axios.post("/users/login", credentials);
 }
 
-export const signup = (user) => {
+export const signup = user => {
     return axios.post("/users/register", user);
 }
 
@@ -26,4 +26,12 @@ export const updateUser = user => {
 
 export const updatePassword = password => {
     return axios.put("/users/updatePassword", password);
+}
+
+export const getMyInstitution = () => {
+    return axios.get("/institutions/myInstitution");
+}
+
+export const saveMyInstitution = institution => {
+    return axios.post("/institutions/myInstitution", institution);
 }

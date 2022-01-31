@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
+import MyInstitutionPage from "./pages/MyInstitutionPage";
 import {connect} from "react-redux";
 
 
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/login" component={LoginPage}/>
           <Route exact path="/signup" component={SignupPage}/>
           {user.isLoggedIn && <Route exact path="/profile" component={ProfilePage} />}
+          {user.isLoggedIn && <Route exact path="/myInstitution" component={MyInstitutionPage} />}
           <Redirect to="/"/>
         </Switch>
     );

@@ -33,6 +33,7 @@ class Navigation extends Component {
                                             </a>
 
                                             <div className="my-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <NavLink className="dropdown-item" to="/myInstitution">My Institution</NavLink>
                                                 <NavLink className="dropdown-item" to="/profile">My profile</NavLink>
                                                 <div className="dropdown-divider"/>
                                                 <a onClick={(e) => {e.preventDefault(); this.props.logout();}} href="/#" className="dropdown-item" id="logout">Logout</a>

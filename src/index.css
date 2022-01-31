@@ -1,5 +1,6 @@
 body {
   padding-top: 65px;
+  padding-bottom: 45px;
   background: slategray url("./assets/work.jpg") no-repeat fixed;
 }
 
@@ -88,7 +89,15 @@ footer {
   background-color: #023d75;
   bottom: 0;
   color: white;
+  height: 45px;
   font-size: 1.15em;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+
+/* images */
+img.sizedImg {
+  max-width: 180px;
+  max-height: 180px;
 }
