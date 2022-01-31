@@ -19,3 +19,11 @@ export const signup = (user) => {
 export const getFreshToken = () => {
     return axios.get("/users/token");
 }
+
+export const updateUser = user => {
+    return axios.put("/users/updateUser", user);
+}
+
+export const updatePassword = password => {
+    return axios.put("/users/updatePassword", password);
+}
