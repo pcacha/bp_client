@@ -63,3 +63,19 @@ export const getAllExhibitsOfMyInstitution = () => {
 export const deleteExhibit = exhibitId => {
     return axios.delete("/exhibits/" + exhibitId);
 }
+
+export const getExhibit = exhibitId => {
+    return axios.get("/exhibits/" + exhibitId);
+}
+
+export const updateExhibitImage = (exhibitId, img) => {
+    return axios.put("/exhibits/" + exhibitId + "/updateImage", img);
+}
+
+export const updateExhibitInfoLabelImage = (exhibitId, img) => {
+    return axios.put("/exhibits/" + exhibitId + "/updateInfoLabel", img);
+}
+
+export const updateExhibit = (exhibitId, exhibit) => {
+    return axios.put("/exhibits/" + exhibitId, exhibit);
+}

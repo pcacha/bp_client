@@ -71,6 +71,7 @@ class AddExhibitPage extends Component {
             this.setState({errors, encodedInfoLabel: null, infoLabelSelect: "",});
         }
     }
+
     onInfoLabelTextChange = (event, editor) => {
         const errors = {...this.state.errors};
         delete errors["infoLabelText"];

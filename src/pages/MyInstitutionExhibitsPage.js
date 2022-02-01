@@ -57,7 +57,7 @@ class MyInstitutionExhibitsPage extends Component {
 
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
-            content = this.state.exhibits.length === 0 ? <h3>There are no exhibits</h3> : exhibits;
+            content = this.state.exhibits.length === 0 ? <h4>There are no exhibits</h4> : exhibits;
         }
 
         return (
