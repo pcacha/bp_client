@@ -48,10 +48,18 @@ export const getMyInstitutionLanguages = () => {
     return axios.get("/institutions/myInstitution/languages");
 }
 
-export const addInstitutionLanguage = (languageId) => {
+export const addInstitutionLanguage = languageId => {
     return axios.post("/institutions/myInstitution/languages/" + languageId);
 }
 
-export const addExhibit = (exhibit) => {
+export const addExhibit = exhibit => {
     return axios.post("/exhibits", exhibit);
+}
+
+export const getAllExhibitsOfMyInstitution = () => {
+    return axios.get("/exhibits/all/myInstitution");
+}
+
+export const deleteExhibit = exhibitId => {
+    return axios.delete("/exhibits/" + exhibitId);
 }

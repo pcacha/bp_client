@@ -85,7 +85,7 @@ class AddLanguagesPage extends Component {
 
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
-                <h4 className="mb-5 font-weight-bold">Add languages to your institution</h4>
+                <h2 className="mb-5 font-weight-bold">Add Languages</h2>
 
                 <div className="row">
                     <div className="col-md-6 px-md-5">
@@ -100,7 +100,7 @@ class AddLanguagesPage extends Component {
                         <div>
                             {
                                 filtered.map(lan =>
-                                    <ButtonWithProgress  key={lan.id}
+                                    <ButtonWithProgress  key={lan.languageId}
                                                          onClick={() => this.onLanguageAddClick(lan)}
                                                          className="btn btn-success w-100 my-1"
                                                          disabled={lan.pendingApiCall}
@@ -120,7 +120,7 @@ class AddLanguagesPage extends Component {
                                 <div className="card">
                                     <ul className="list-group list-group-flush">
                                         { chosen.map(lan =>
-                                            <li key={lan.id} className="list-group-item">{lan.name}</li>
+                                            <li key={lan.languageId} className="list-group-item">{lan.name}</li>
                                         )}
                                     </ul>
                                 </div>

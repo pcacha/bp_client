@@ -243,21 +243,21 @@ class UpdateInstitutionPage extends Component {
 
                 <Link exact to="/myInstitution/addLanguages" >
                     <button type="button" className="btn btn-lg mt-3 btn-success">
-                        Add languages
+                        <i className="fa fa-plus-circle" /> {" Add languages"}
                     </button>
                 </Link>
 
                 <br />
                 <Link exact to="/myInstitution/addExhibit" >
                     <button type="button" className="btn btn-lg mt-3 btn-success">
-                        Add exhibit
+                        <i className="fa fa-plus-circle" /> {" Add exhibit"}
                     </button>
                 </Link>
 
                 <br />
                 <Link exact to="/myInstitution/exhibits" >
                     <button type="button" className="btn btn-lg mt-3 btn-info">
-                        View exhibits
+                        <i className="fa fa-bars" /> {" View exhibits"}
                     </button>
                 </Link>
 
@@ -289,7 +289,9 @@ class UpdateInstitutionPage extends Component {
                                      className="btn btn-lg mt-3 btn-danger"
                                      disabled={pendingApiCallDeleteInstitution}
                                      pendingApiCall={pendingApiCallDeleteInstitution}
-                                     text="Delete institution" />
+                                     hasChildren>
+                    <i className="fa fa-times" /> {" Delete institution"}
+                </ButtonWithProgress>
             </div>
         );
     }

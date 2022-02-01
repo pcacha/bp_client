@@ -82,7 +82,7 @@ class CreateInstitutionPage extends Component {
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
                 <form>
-                    <h4 className="mb-4 font-weight-bold">Create your institution</h4>
+                    <h2 className="mb-4 font-weight-bold">Create Institution</h2>
 
                     <div className="form-group">
                         <Input type="file"

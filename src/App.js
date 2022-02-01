@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import MyInstitutionPage from "./pages/MyInstitutionPage";
 import AddLanguagesPage from "./pages/AddLanguagesPage";
 import AddExhibitPage from "./pages/AddExhibitPage";
+import MyInstitutionExhibitsPage from "./pages/MyInstitutionExhibitsPage";
 
 
 class App extends Component {
@@ -25,7 +26,7 @@ class App extends Component {
           {user.isLoggedIn && <Route exact path="/myInstitution" component={MyInstitutionPage} />}
           {user.isInstitutionOwner && <Route exact path="/myInstitution/addLanguages" component={AddLanguagesPage} />}
           {user.isInstitutionOwner && <Route exact path="/myInstitution/addExhibit" component={AddExhibitPage} />}
-          {user.isInstitutionOwner && <Route exact path="/myInstitution/exhibits" component={AddLanguagesPage} />}
+          {user.isInstitutionOwner && <Route exact path="/myInstitution/exhibits" component={MyInstitutionExhibitsPage} />}
           <Redirect to="/"/>
         </Switch>
     );
