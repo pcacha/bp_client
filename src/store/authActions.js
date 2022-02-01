@@ -72,3 +72,10 @@ export const setEmail = (email) => {
         payload: email,
     }
 }
+
+export const setIsInstitutionOwner = (value) => {
+    return {
+        type: actionsTypes.SET_IS_INSTITUTION_OWNER,
+        payload: value,
+    }
+}

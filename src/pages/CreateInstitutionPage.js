@@ -3,6 +3,8 @@ import Input from "../components/Input";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
+import * as authActions from "../store/authActions";
+import {connect} from "react-redux";
 
 class CreateInstitutionPage extends Component {
 
@@ -24,7 +26,9 @@ class CreateInstitutionPage extends Component {
     }
 
     onImageSelect = (event) => {
-        this.setState({[event.target.name]: event.target.value});
+        const errors = {...this.state.errors};
+        delete errors["encodedImage"];
+        this.setState({errors, [event.target.name]: event.target.value});
         if (event.target.files.length === 0) {
             return;
         }
@@ -55,6 +59,7 @@ class CreateInstitutionPage extends Component {
 
         apiCalls.saveMyInstitution(institution).then(response => {
             this.setState({pendingApiCall: false}, () => {
+                this.props.setIsInstitutionOwner(true);
                 this.props.redirect("/");
             });
         }).catch(error => {
@@ -148,4 +153,10 @@ class CreateInstitutionPage extends Component {
     }
 }
 
-export default CreateInstitutionPage;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setIsInstitutionOwner: value => dispatch(authActions.setIsInstitutionOwner(value)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreateInstitutionPage);

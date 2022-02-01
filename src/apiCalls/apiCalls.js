@@ -35,3 +35,11 @@ export const getMyInstitution = () => {
 export const saveMyInstitution = institution => {
     return axios.post("/institutions/myInstitution", institution);
 }
+
+export const updateInstitutionImage = img => {
+    return axios.put("/institutions/myInstitution/updateImage", img);
+}
+
+export const updateInstitution = institution => {
+    return axios.put("/institutions/myInstitution", institution);
+}

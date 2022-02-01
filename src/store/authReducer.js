@@ -31,6 +31,11 @@ export default function authReducer(state = initialState, action) {
                 ...state,
                 email: action.payload,
             }
+        case actions.SET_IS_INSTITUTION_OWNER:
+            return {
+                ...state,
+                isInstitutionOwner: action.payload,
+            }
         default:
             return state;
     }
