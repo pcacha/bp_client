@@ -85,6 +85,8 @@ class AddLanguagesPage extends Component {
 
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+                <h4 className="mb-5 font-weight-bold">Add languages to your institution</h4>
+
                 <div className="row">
                     <div className="col-md-6 px-md-5">
                         <div className="input-group mb-4">

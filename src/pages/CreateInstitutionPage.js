@@ -60,7 +60,7 @@ class CreateInstitutionPage extends Component {
         apiCalls.saveMyInstitution(institution).then(response => {
             this.setState({pendingApiCall: false}, () => {
                 this.props.setIsInstitutionOwner(true);
-                this.props.redirect("/");
+                this.props.redirect("/myInstitution/addLanguages");
             });
         }).catch(error => {
             return handleError(error);

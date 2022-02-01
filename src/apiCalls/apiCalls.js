@@ -51,3 +51,7 @@ export const getMyInstitutionLanguages = () => {
 export const addInstitutionLanguage = (languageId) => {
     return axios.post("/institutions/myInstitution/languages/" + languageId);
 }
+
+export const addExhibit = (exhibit) => {
+    return axios.post("/exhibits", exhibit);
+}

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import Layout from "./components/Layout"
 import {Route, Switch, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
 import MyInstitutionPage from "./pages/MyInstitutionPage";
 import AddLanguagesPage from "./pages/AddLanguagesPage";
-import {connect} from "react-redux";
+import AddExhibitPage from "./pages/AddExhibitPage";
 
 
 class App extends Component {
@@ -23,7 +24,7 @@ class App extends Component {
           {user.isLoggedIn && <Route exact path="/profile" component={ProfilePage} />}
           {user.isLoggedIn && <Route exact path="/myInstitution" component={MyInstitutionPage} />}
           {user.isInstitutionOwner && <Route exact path="/myInstitution/addLanguages" component={AddLanguagesPage} />}
-          {user.isInstitutionOwner && <Route exact path="/myInstitution/addExhibit" component={AddLanguagesPage} />}
+          {user.isInstitutionOwner && <Route exact path="/myInstitution/addExhibit" component={AddExhibitPage} />}
           {user.isInstitutionOwner && <Route exact path="/myInstitution/exhibits" component={AddLanguagesPage} />}
           <Redirect to="/"/>
         </Switch>
