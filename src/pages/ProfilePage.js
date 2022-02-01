@@ -102,7 +102,7 @@ class ProfilePage extends Component {
         const {createdAt} = this.props.user;
 
         return (
-            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background">
+            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
                 <h2 className="mb-4 font-weight-bold">My Profile</h2>
 
                 <div className="mb-4">

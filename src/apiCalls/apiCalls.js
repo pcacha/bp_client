@@ -43,3 +43,11 @@ export const updateInstitutionImage = img => {
 export const updateInstitution = institution => {
     return axios.put("/institutions/myInstitution", institution);
 }
+
+export const getMyInstitutionLanguages = () => {
+    return axios.get("/institutions/myInstitution/languages");
+}
+
+export const addInstitutionLanguage = (languageId) => {
+    return axios.post("/institutions/myInstitution/languages/" + languageId);
+}

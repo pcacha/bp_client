@@ -6,6 +6,7 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import {INSTITUTIONS_IMAGES_URL} from "../shared/sharedConstants";
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
+import Link from "react-router-dom/es/Link";
 
 class UpdateInstitutionPage extends Component {
 
@@ -18,10 +19,14 @@ class UpdateInstitutionPage extends Component {
         encodedImage: null,
         imageSelect: "",
         createdAt: this.props.institution.createdAt,
+        email: "",
         pendingApiCallUpdateInstitution: false,
         pendingApiCallUpdateImage: false,
+        pendingApiCallDeleteInstitution: false,
+        pendingApiCallAddManager: false,
         institutionUpdated: false,
         imageUpdated: false,
+        managerAdded: false,
         errors: {},
     }
 
@@ -81,6 +86,12 @@ class UpdateInstitutionPage extends Component {
         this.setState({errors, institutionUpdated: false, [event.target.name]: event.target.value});
     }
 
+    onEmailChange = event => {
+        const errors = {...this.state.errors};
+        delete errors[event.target.name];
+        this.setState({errors, managerAdded: false, [event.target.name]: event.target.value});
+    }
+
     onClickInstitutionUpdate = () => {
         this.setState({pendingApiCallUpdateInstitution: true});
         const institution = {
@@ -99,6 +110,14 @@ class UpdateInstitutionPage extends Component {
         });
     }
 
+    onClickInstitutionDelete = () => {
+
+    }
+
+    onClickManagerAdd = () => {
+
+    }
+
     render() {
         const {
             name,
@@ -109,20 +128,24 @@ class UpdateInstitutionPage extends Component {
             encodedImage,
             imageSelect,
             createdAt,
+            email,
             pendingApiCallUpdateInstitution,
             pendingApiCallUpdateImage,
+            pendingApiCallDeleteInstitution,
+            pendingApiCallAddManager,
             institutionUpdated,
             imageUpdated,
+            managerAdded,
             errors,
         } = this.state;
 
         return (
-            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background">
+            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
                 <h2 className="mb-4 font-weight-bold">My Institution</h2>
 
                 <div className="mb-4">
                     <span className="font-weight-bold">Registration date: </span>
-                    {new Date(createdAt * 1).toLocaleDateString("en-US")}
+                    {new Date(createdAt).toLocaleDateString("en-US")}
                 </div>
 
                 <form className="mb-4">
@@ -216,6 +239,57 @@ class UpdateInstitutionPage extends Component {
                                          pendingApiCall={pendingApiCallUpdateInstitution}
                                          text="Update institution information" />
                 </form>
+
+
+                <Link exact to="/myInstitution/addLanguages" >
+                    <button type="button" className="btn btn-lg mt-3 btn-success">
+                        Add languages
+                    </button>
+                </Link>
+
+                <br />
+                <Link exact to="/myInstitution/addExhibit" >
+                    <button type="button" className="btn btn-lg mt-3 btn-success">
+                        Add exhibit
+                    </button>
+                </Link>
+
+                <br />
+                <Link exact to="/myInstitution/exhibits" >
+                    <button type="button" className="btn btn-lg mt-3 btn-info">
+                        View exhibits
+                    </button>
+                </Link>
+
+                <form className="mt-4">
+                    {
+                        managerAdded &&
+                        <div className="alert alert-success" role="alert">
+                            New manager added
+                        </div>
+                    }
+
+                    <Input
+                        label="Add new institution manager"
+                        placeholder="Enter new manager's email" name="email" value={email}
+                        onChange={this.onEmailChange}
+                        hasError={errors.email && true}
+                        error={errors.email}
+                    />
+
+                    <ButtonWithProgress  onClick={this.onClickManagerAdd}
+                                         className="btn btn-primary w-100 my-2"
+                                         disabled={pendingApiCallAddManager || email === ""}
+                                         pendingApiCall={pendingApiCallAddManager}
+                                         text="Add new institution manager" />
+                </form>
+
+                <br />
+                <ButtonWithProgress  onClick={this.onClickInstitutionDelete}
+                                     className="btn btn-lg mt-3 btn-danger"
+                                     disabled={pendingApiCallDeleteInstitution}
+                                     pendingApiCall={pendingApiCallDeleteInstitution}
+                                     text="Delete institution" />
             </div>
         );
     }

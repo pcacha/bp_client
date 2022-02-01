@@ -36,9 +36,9 @@ body {
   cursor: pointer;
 }
 
-.blue-nav div div ul li a:hover,
-.blue-nav div div ul li a:active,
-.blue-nav div div ul li a.active {
+.blue-nav div div ul li > a:hover,
+.blue-nav div div ul li > a:active,
+.blue-nav div div ul li > a.active {
   color: #ffffffff;
   padding-bottom: 0.25rem;
   border-bottom: 4px solid #ffffffff;

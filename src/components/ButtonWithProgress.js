@@ -13,7 +13,13 @@ const ButtonWithProgress = (props) => {
                 </div>
             }
 
-            {props.text}
+            {
+                props.hasChildren ?
+                    props.children
+                    :
+                    props.text
+            }
+
         </button>
     )
 }
