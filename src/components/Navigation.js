@@ -23,7 +23,8 @@ class Navigation extends Component {
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav ml-auto d-flex align-items-center">
                                 <NavigationItem to="/">Home</NavigationItem>
-                                {user.isInstitutionOwner && <NavigationItem to="/officialTranslations">Official Translations</NavigationItem>}
+                                {user.isInstitutionOwner && <NavigationItem to="/approveTranslations">Approve translation</NavigationItem>}
+                                {user.isTranslator && <NavigationItem to="/institutions">Translate</NavigationItem>}
                                 {
                                     user.isLoggedIn ?
                                         <li className="nav-item dropdown">

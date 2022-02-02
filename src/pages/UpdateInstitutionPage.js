@@ -7,7 +7,6 @@ import {INSTITUTIONS_IMAGES_URL} from "../shared/sharedConstants";
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Link from "react-router-dom/es/Link";
-import {addInstitutionManager} from "../apiCalls/apiCalls";
 
 class UpdateInstitutionPage extends Component {
 

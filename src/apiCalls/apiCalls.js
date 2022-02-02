@@ -57,7 +57,7 @@ export const addExhibit = exhibit => {
 }
 
 export const getAllExhibitsOfMyInstitution = () => {
-    return axios.get("/exhibits/all/myInstitution");
+    return axios.get("/exhibits/all");
 }
 
 export const deleteExhibit = exhibitId => {
@@ -86,4 +86,12 @@ export const addInstitutionManager = email => {
 
 export const deleteInstitution = () => {
     return axios.delete("/institutions/myInstitution");
+}
+
+export const getAllInstitutions = () => {
+    return axios.get("/institutions");
+}
+
+export const getExhibitsTranslate = institutionId => {
+    return axios.get("/exhibits/translate/" + institutionId);
 }
