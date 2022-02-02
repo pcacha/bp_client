@@ -7,6 +7,7 @@ import {INSTITUTIONS_IMAGES_URL} from "../shared/sharedConstants";
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Link from "react-router-dom/es/Link";
+import {addInstitutionManager} from "../apiCalls/apiCalls";
 
 class UpdateInstitutionPage extends Component {
 
@@ -111,11 +112,32 @@ class UpdateInstitutionPage extends Component {
     }
 
     onClickInstitutionDelete = () => {
+        if (window.confirm("Do you really want to delete your institution?")) {
+            this.setState({pendingApiCallDeleteInstitution: true});
 
+            apiCalls.deleteInstitution().then(response => {
+                this.setState({pendingApiCallDeleteInstitution: false}, () => {
+                    this.props.setIsInstitutionOwner(false);
+                    this.props.redirect("/");
+                });
+            }).catch(error => {
+                return handleError(error);
+            });
+        }
     }
 
     onClickManagerAdd = () => {
+        if (window.confirm("Do you really want to add a new manager to your institution?")) {
+            this.setState({pendingApiCallAddManager: true});
 
+            apiCalls.addInstitutionManager({email: this.state.email}).then(response => {
+                this.setState({pendingApiCallAddManager: false, email: ""}, () => this.setState({managerAdded: true}));
+            }).catch(error => {
+                return handleError(error);
+            }).catch(apiError => {
+                this.handleApiError(apiError, "pendingApiCallAddManager");
+            });
+        }
     }
 
     render() {
@@ -308,7 +330,7 @@ class UpdateInstitutionPage extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        setIsInstitutionOwner: (value) => dispatch(authActions.setIsInstitutionOwner(value)),
     }
 }
 

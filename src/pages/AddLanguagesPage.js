@@ -106,7 +106,7 @@ class AddLanguagesPage extends Component {
                                                          disabled={lan.pendingApiCall}
                                                          pendingApiCall={lan.pendingApiCall}
                                                          hasChildren >
-                                        <i className="fa fa-plus-circle" /> lan.name
+                                        <i className="fa fa-plus-circle" /> {lan.name}
                                     </ButtonWithProgress>
                                 )
                             }

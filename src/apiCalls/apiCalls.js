@@ -79,3 +79,11 @@ export const updateExhibitInfoLabelImage = (exhibitId, img) => {
 export const updateExhibit = (exhibitId, exhibit) => {
     return axios.put("/exhibits/" + exhibitId, exhibit);
 }
+
+export const addInstitutionManager = email => {
+    return axios.post("/institutions/myInstitution/addManager", email);
+}
+
+export const deleteInstitution = () => {
+    return axios.delete("/institutions/myInstitution");
+}
