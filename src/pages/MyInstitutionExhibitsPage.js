@@ -62,7 +62,7 @@ class MyInstitutionExhibitsPage extends Component {
 
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
-                <h2 className="mb-5 font-weight-bold">Institution's Exhibits</h2>
+                <h2 className="mb-5 font-weight-bold">Institution Exhibits</h2>
                 {content}
             </div>
         );

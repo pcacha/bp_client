@@ -136,7 +136,9 @@ class ProfilePage extends Component {
                                         className="btn btn-primary w-100 my-2"
                                         disabled={pendingApiCallUpdateUser || username === "" || email === ""}
                                         pendingApiCall={pendingApiCallUpdateUser}
-                                        text="Update information"/>
+                                        hasChildren>
+                        <i className="fa fa-paper-plane" /> Update information
+                    </ButtonWithProgress>
                 </form>
 
                 <form>
@@ -171,7 +173,9 @@ class ProfilePage extends Component {
                                         className="btn btn-primary w-100 my-2"
                                         disabled={pendingApiCallUpdatePassword || !passwordRepeatConfirmed || password === "" || passwordRepeat === ""}
                                         pendingApiCall={pendingApiCallUpdatePassword}
-                                        text="Change password"/>
+                                        hasChildren>
+                        <i className="fa fa-paper-plane" /> Change password
+                    </ButtonWithProgress>
                 </form>
             </div>
         );

@@ -115,7 +115,9 @@ class SignupPage extends Component {
                                          className="btn btn-primary w-100 my-2"
                                          disabled={this.state.pendingApiCall || !this.state.passwordRepeatConfirmed || disabledSubmit}
                                          pendingApiCall={this.state.pendingApiCall}
-                                         text="Sign up" />
+                                         hasChildren>
+                        <i className="fa fa-paper-plane" /> Sign up
+                    </ButtonWithProgress>
                 </form>
             </div>
         );

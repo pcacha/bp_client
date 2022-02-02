@@ -153,7 +153,9 @@ class AddExhibitPage extends Component {
                             <div>
                                 <img className="img-fluid sizedImg img-thumbnail mt-2" src={encodedImage} alt="upload" />
                                 <br />
-                                <button className="btn btn-danger btn-lg mt-2" onClick={() => this.clearImage("imageSelect")}>Clear</button>
+                                <button className="btn btn-danger btn-lg mt-2" onClick={() => this.clearImage("imageSelect")}>
+                                    <i className="fa fa-times" /> Clear
+                                </button>
                             </div>
                         }
                     </div>
@@ -174,7 +176,9 @@ class AddExhibitPage extends Component {
                             <div>
                                 <img className="img-fluid mt-2" src={encodedInfoLabel} alt="upload" />
                                 <br />
-                                <button className="btn btn-danger btn-lg mt-2" onClick={() => this.clearImage("infoLabelSelect")}>Clear</button>
+                                <button className="btn btn-danger btn-lg mt-2" onClick={() => this.clearImage("infoLabelSelect")}>
+                                    <i className="fa fa-times" /> Clear
+                                </button>
                             </div>
                         }
                     </div>
@@ -229,7 +233,10 @@ class AddExhibitPage extends Component {
                                          className="btn btn-primary w-100 my-2"
                                          disabled={pendingApiCall || disabledSubmit}
                                          pendingApiCall={pendingApiCall}
-                                         text="Add exhibit" />
+                                         hasChildren>
+                        <i className="fa fa-paper-plane" /> Create exhibit
+                    </ButtonWithProgress>
+
                 </form>
             </div>
         );

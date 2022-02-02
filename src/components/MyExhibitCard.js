@@ -59,7 +59,7 @@ const MyExhibitCard = (props) => (
                                          disabled={props.pendingApiCall}
                                          pendingApiCall={props.pendingApiCall}
                                          hasChildren>
-                        <i className="fa fa-times" /> {" Delete"}
+                        <i className="fa fa-times" /> Delete
                     </ButtonWithProgress>
                 </div>
             </div>

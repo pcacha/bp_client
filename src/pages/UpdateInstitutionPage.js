@@ -173,12 +173,16 @@ class UpdateInstitutionPage extends Component {
                                 <div>
                                     <img className="img-fluid sizedImg img-thumbnail mt-2" src={encodedImage} alt="upload" />
                                     <br />
-                                    <button className="btn btn-danger btn-lg mt-2" disabled={pendingApiCallUpdateImage} onClick={this.clearImage}>Clear</button>
+                                    <button className="btn btn-danger btn-lg mt-2" disabled={pendingApiCallUpdateImage} onClick={this.clearImage}>
+                                        <i className="fa fa-times" /> Clear
+                                    </button>
                                     <ButtonWithProgress onClick={this.onClickImageUpdate}
                                                         className="btn btn-success btn-lg ml-2 mt-2"
                                                         disabled={pendingApiCallUpdateImage}
                                                         pendingApiCall={pendingApiCallUpdateImage}
-                                                        text="Update image"/>
+                                                        hasChildren>
+                                        <i className="fa fa-paper-plane" /> Update image
+                                    </ButtonWithProgress>
                                 </div>
                                 :
                                 <div>
@@ -237,7 +241,10 @@ class UpdateInstitutionPage extends Component {
                                          className="btn btn-primary w-100 my-2"
                                          disabled={pendingApiCallUpdateInstitution || name === "" || address === "" || latitudeString === "" || longitudeString === ""}
                                          pendingApiCall={pendingApiCallUpdateInstitution}
-                                         text="Update institution information" />
+                                         hasChildren>
+                        <i className="fa fa-paper-plane" /> Update institution information
+                    </ButtonWithProgress>
+
                 </form>
 
 
@@ -281,7 +288,9 @@ class UpdateInstitutionPage extends Component {
                                          className="btn btn-primary w-100 my-2"
                                          disabled={pendingApiCallAddManager || email === ""}
                                          pendingApiCall={pendingApiCallAddManager}
-                                         text="Add new institution manager" />
+                                         hasChildren>
+                        <i className="fa fa-paper-plane" /> Add new institution manager
+                    </ButtonWithProgress>
                 </form>
 
                 <br />
@@ -290,7 +299,7 @@ class UpdateInstitutionPage extends Component {
                                      disabled={pendingApiCallDeleteInstitution}
                                      pendingApiCall={pendingApiCallDeleteInstitution}
                                      hasChildren>
-                    <i className="fa fa-times" /> {" Delete institution"}
+                    <i className="fa fa-times" /> Delete institution
                 </ButtonWithProgress>
             </div>
         );

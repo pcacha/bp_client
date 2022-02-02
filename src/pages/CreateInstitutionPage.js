@@ -101,7 +101,9 @@ class CreateInstitutionPage extends Component {
                             <div>
                                 <img className="img-fluid sizedImg img-thumbnail mt-2" src={this.state.encodedImage} alt="upload" />
                                 <br />
-                                <button className="btn btn-danger btn-lg mt-2" onClick={this.clearImage}>Clear</button>
+                                <button className="btn btn-danger btn-lg mt-2" onClick={this.clearImage}>
+                                    <i className="fa fa-times" /> Clear
+                                </button>
                             </div>
                         }
                     </div>
@@ -146,7 +148,9 @@ class CreateInstitutionPage extends Component {
                                          className="btn btn-primary w-100 my-2"
                                          disabled={this.state.pendingApiCall || disabledSubmit}
                                          pendingApiCall={this.state.pendingApiCall}
-                                         text="Create institution" />
+                                         hasChildren>
+                        <i className="fa fa-paper-plane" /> Create institution
+                    </ButtonWithProgress>
                 </form>
             </div>
         );

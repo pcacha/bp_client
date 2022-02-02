@@ -68,9 +68,10 @@ class LoginPage extends Component {
                     className="btn btn-primary w-100 my-2"
                     onClick={this.onClickLogin}
                     disabled={disabledSubmit || this.state.pendingApiCall}
-                    text="Log in"
                     pendingApiCall={this.state.pendingApiCall}
-                />
+                    hasChildren>
+                    <i className="fa fa-paper-plane" /> Log in
+                </ButtonWithProgress>
 
                 <Link to="/signup">Don't have an account? Sign up</Link>
             </form>

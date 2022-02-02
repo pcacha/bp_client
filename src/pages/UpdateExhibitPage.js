@@ -199,13 +199,15 @@ class UpdateExhibitPage extends Component {
                                         <img className="img-fluid sizedImg img-thumbnail mt-2" src={encodedImage} alt="upload" />
                                         <br />
                                         <button className="btn btn-danger btn-lg mt-2" disabled={pendingApiCallUpdateImage} onClick={() => this.clearImage("encodedImage", "imageSelect")}>
-                                            Clear
+                                            <i className="fa fa-times" /> Clear
                                         </button>
                                         <ButtonWithProgress onClick={this.onClickImageUpdate}
                                                             className="btn btn-success btn-lg ml-2 mt-2"
                                                             disabled={pendingApiCallUpdateImage}
                                                             pendingApiCall={pendingApiCallUpdateImage}
-                                                            text="Update image"/>
+                                                            hasChildren>
+                                            <i className="fa fa-paper-plane" /> Update image
+                                        </ButtonWithProgress>
                                     </div>
                                     :
                                     <div>
@@ -241,13 +243,15 @@ class UpdateExhibitPage extends Component {
                                         <img className="img-fluid mt-2" src={encodedInfoLabel} alt="upload" />
                                         <br />
                                         <button className="btn btn-danger btn-lg mt-2" disabled={pendingApiCallUpdateInfoLabel} onClick={() => this.clearImage("encodedInfoLabel", "infoLabelSelect")}>
-                                            Clear
+                                            <i className="fa fa-times" /> Clear
                                         </button>
                                         <ButtonWithProgress onClick={(event) => {event.preventDefault(); this.onClickInfoImageUpdate();}}
                                                             className="btn btn-success btn-lg ml-2 mt-2"
                                                             disabled={pendingApiCallUpdateImage}
                                                             pendingApiCall={pendingApiCallUpdateImage}
-                                                            text="Update information label image"/>
+                                                            hasChildren>
+                                            <i className="fa fa-paper-plane" /> Update information label image
+                                        </ButtonWithProgress>
                                     </div>
                                     :
                                     <div>
@@ -316,7 +320,9 @@ class UpdateExhibitPage extends Component {
                                              className="btn btn-primary w-100 my-2"
                                              disabled={pendingApiCallUpdateInstitution || name === ""}
                                              pendingApiCall={pendingApiCallUpdateInstitution}
-                                             text="Update exhibit" />
+                                             hasChildren>
+                            <i className="fa fa-paper-plane" /> Update exhibit
+                        </ButtonWithProgress>
                     </form>
                 </div>
             )
