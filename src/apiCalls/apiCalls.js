@@ -111,3 +111,11 @@ export const getRateOverview = (exhibitId, languageId) => {
 export const setLike = (translationId, value) => {
     return axios.put("/translations/like/" + translationId, value);
 }
+
+export const getExhibitsApproveTranslations = () => {
+    return axios.get("/exhibits/approveTranslations");
+}
+
+export const setOfficial = (translationId, value) => {
+    return axios.put("/translations/official/" + translationId, value);
+}

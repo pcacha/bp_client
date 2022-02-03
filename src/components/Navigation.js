@@ -24,7 +24,7 @@ class Navigation extends Component {
                             <ul className="navbar-nav ml-auto d-flex align-items-center">
                                 <NavigationItem to="/">Home</NavigationItem>
                                 {user.isTranslator && <NavigationItem to="/institutions">Translate</NavigationItem>}
-                                {user.isInstitutionOwner && <NavigationItem to="/approveTranslations">Approve</NavigationItem>}
+                                {user.isInstitutionOwner && <NavigationItem to="/approve">Approve</NavigationItem>}
                                 {
                                     user.isLoggedIn ?
                                         <li className="nav-item dropdown">

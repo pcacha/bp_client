@@ -15,6 +15,8 @@ import TranslateInstitutionsPage from "./pages/TranslateInstitutionsPage";
 import TranslateExhibitPage from "./pages/TranslateExhibitPage";
 import NewTranslationPage from "./pages/NewTranslationPage";
 import TranslatorRatePage from "./pages/TranslatorRatePage";
+import ApproveExhibitPage from "./pages/ApproveExhibitPage";
+import OwnerRatePage from "./pages/OwnerRatePage";
 
 
 class App extends Component {
@@ -33,6 +35,8 @@ class App extends Component {
           {user.isInstitutionOwner && <Route exact path="/myInstitution/addExhibit" component={AddExhibitPage} />}
           {user.isInstitutionOwner && <Route exact path="/myInstitution/exhibits" component={MyInstitutionExhibitsPage} />}
           {user.isInstitutionOwner && <Route exact path="/myInstitution/exhibits/:exhibitId" component={UpdateExhibitPage} />}
+          {user.isInstitutionOwner && <Route exact path="/approve" component={ApproveExhibitPage} />}
+          {user.isInstitutionOwner && <Route exact path="/approve/:exhibitId/:languageId" component={OwnerRatePage} />}
           {user.isTranslator && <Route exact path="/institutions" component={TranslateInstitutionsPage} />}
           {user.isTranslator && <Route exact path="/institutions/:institutionId" component={TranslateExhibitPage} />}
           {user.isTranslator && <Route exact path="/institutions/:institutionId/translate/:exhibitId/:languageId" component={NewTranslationPage} />}

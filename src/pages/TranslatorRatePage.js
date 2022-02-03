@@ -59,7 +59,6 @@ class TranslatorRatePage extends Component {
 
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
-            let i = 5;
             const {name, infoLabel, infoLabelText} = this.state.exhibit;
 
             content = (
@@ -83,7 +82,7 @@ class TranslatorRatePage extends Component {
 
                   {
                       translations.length === 0 ?
-                          <h4 className="mt-3">There are no translations</h4>
+                          <h4 className="mt-5">There are no translations</h4>
                           :
                           <div className="mt-3">
                               <h3 className="my-5">Translations</h3>

@@ -1,15 +1,21 @@
 import React from 'react';
 import parse from "html-react-parser";
+import ButtonWithProgress from "./ButtonWithProgress";
 
-const TranslatorRateTranslationCard = (props) => {
+const OwnerRateTranslationCard = (props) => {
     let cardStyle = "card mb-4"
     if(props.isOfficial) {
         cardStyle += " bg-warning";
     }
 
-    let btnClass = "btn btn-primary";
+    let likeBtnClass = "btn btn-primary";
     if(!props.liked) {
-        btnClass = "btn btn-secondary";
+        likeBtnClass = "btn btn-secondary";
+    }
+
+    let officialBtnClass = "btn btn-success w-100 mt-3";
+    if(!props.isOfficial) {
+        officialBtnClass = "btn btn-secondary w-100 mt-3";
     }
 
     return (
@@ -39,7 +45,7 @@ const TranslatorRateTranslationCard = (props) => {
                                 <i className="fa fa-thumbs-up" /> {props.likesCount + "x"}
                             </div>
 
-                            <button onClick={() => props.onLikeChange(props.translationId)} type="button" className={btnClass}>
+                            <button onClick={() => props.onLikeChange(props.translationId)} type="button" className={likeBtnClass}>
                                 {
                                     props.liked ?
                                         <i className="fa fa-thumbs-up" />
@@ -48,6 +54,19 @@ const TranslatorRateTranslationCard = (props) => {
                                 }
                             </button>
                         </div>
+
+                        <ButtonWithProgress  onClick={() => props.onOfficialChange(props.translationId)}
+                                             className={officialBtnClass}
+                                             disabled={props.pendingApiCallSetOfficial}
+                                             pendingApiCall={props.pendingApiCallSetOfficial}
+                                             hasChildren>
+                            {
+                                props.isOfficial ?
+                                    <div><i className="fa fa-star" /> Official </div>
+                                    :
+                                    <div><i className="fa fa-star-o" /> Official </div>
+                            }
+                        </ButtonWithProgress>
                     </div>
                 </div>
             </div>
@@ -55,4 +74,4 @@ const TranslatorRateTranslationCard = (props) => {
     )
 }
 
-export default TranslatorRateTranslationCard;
+export default OwnerRateTranslationCard;
