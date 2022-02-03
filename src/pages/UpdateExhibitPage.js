@@ -7,7 +7,6 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import {EXHIBITS_IMAGES_URL, INFO_LABELS_IMAGES_URL} from "../shared/sharedConstants";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import {updateExhibit} from "../apiCalls/apiCalls";
 
 class UpdateExhibitPage extends Component {
 

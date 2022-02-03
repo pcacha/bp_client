@@ -13,6 +13,7 @@ import MyInstitutionExhibitsPage from "./pages/MyInstitutionExhibitsPage";
 import UpdateExhibitPage from "./pages/UpdateExhibitPage";
 import TranslateInstitutionsPage from "./pages/TranslateInstitutionsPage";
 import TranslateExhibitPage from "./pages/TranslateExhibitPage";
+import NewTranslationPage from "./pages/NewTranslationPage";
 
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
           {user.isInstitutionOwner && <Route exact path="/myInstitution/exhibits/:exhibitId" component={UpdateExhibitPage} />}
           {user.isTranslator && <Route exact path="/institutions" component={TranslateInstitutionsPage} />}
           {user.isTranslator && <Route exact path="/institutions/:institutionId" component={TranslateExhibitPage} />}
+          {user.isTranslator && <Route exact path="/institutions/:institutionId/translate/:exhibitId/:languageId" component={NewTranslationPage} />}
           <Redirect to="/"/>
         </Switch>
     );

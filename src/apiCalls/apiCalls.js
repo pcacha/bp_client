@@ -95,3 +95,11 @@ export const getAllInstitutions = () => {
 export const getExhibitsTranslate = institutionId => {
     return axios.get("/exhibits/translate/" + institutionId);
 }
+
+export const getNewTranslation = (exhibitId, languageId) => {
+    return axios.get("/translations/new/" + exhibitId + "/" + languageId);
+}
+
+export const saveNewTranslation = (exhibitId, languageId, translation) => {
+    return axios.post("/translations/new/" + exhibitId + "/" + languageId, translation);
+}
