@@ -103,3 +103,11 @@ export const getNewTranslation = (exhibitId, languageId) => {
 export const saveNewTranslation = (exhibitId, languageId, translation) => {
     return axios.post("/translations/new/" + exhibitId + "/" + languageId, translation);
 }
+
+export const getRateOverview = (exhibitId, languageId) => {
+    return axios.get("/translations/rate/" + exhibitId + "/" + languageId);
+}
+
+export const setLike = (translationId, value) => {
+    return axios.put("/translations/like/" + translationId, value);
+}

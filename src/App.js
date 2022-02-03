@@ -14,6 +14,7 @@ import UpdateExhibitPage from "./pages/UpdateExhibitPage";
 import TranslateInstitutionsPage from "./pages/TranslateInstitutionsPage";
 import TranslateExhibitPage from "./pages/TranslateExhibitPage";
 import NewTranslationPage from "./pages/NewTranslationPage";
+import TranslatorRatePage from "./pages/TranslatorRatePage";
 
 
 class App extends Component {
@@ -35,6 +36,7 @@ class App extends Component {
           {user.isTranslator && <Route exact path="/institutions" component={TranslateInstitutionsPage} />}
           {user.isTranslator && <Route exact path="/institutions/:institutionId" component={TranslateExhibitPage} />}
           {user.isTranslator && <Route exact path="/institutions/:institutionId/translate/:exhibitId/:languageId" component={NewTranslationPage} />}
+          {user.isTranslator && <Route exact path="/institutions/:institutionId/rate/:exhibitId/:languageId" component={TranslatorRatePage} />}
           <Redirect to="/"/>
         </Switch>
     );
