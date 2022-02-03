@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
-import MyExhibitCard from "../components/MyExhibitCard";
+import MyTranslationSequenceCard from "../components/MyTranslationSequenceCard";
 
-class MyInstitutionExhibitsPage extends Component {
+class MyTranslationsPage extends Component {
 
     state = {
-        exhibits: [],
+        sequences: [],
         pendingApiCall: false,
     }
 
-    onClickDelete = (exhibitId) => {
-        if(window.confirm("Do you really want to delete this exhibit?")) {
+    onClickDelete = (exhibitId, languageId) => {
+        if(window.confirm("Do you really want to delete this translation sequence?")) {
             let newExhibits = [];
             const {exhibits} = this.state;
             for (let ex of exhibits) {
@@ -38,13 +38,13 @@ class MyInstitutionExhibitsPage extends Component {
 
     componentDidMount() {
         this.setState({pendingApiCall: true})
-        apiCalls.getAllExhibitsOfMyInstitution().then(response => {
-            const exhibits = response.data;
-            for(let ex of exhibits) {
-                ex.pendingApiCall = false;
-                ex.onClickDelete = this.onClickDelete;
+        apiCalls.getMyTranslationSequences().then(response => {
+            const sequences = response.data;
+            for(let s of sequences) {
+                s.pendingApiCall = false;
+                s.onClickDelete = this.onClickDelete;
             }
-            this.setState({exhibits, pendingApiCall: false});
+            this.setState({sequences, pendingApiCall: false});
         }).catch(error => {
             return handleError(error);
         });
@@ -52,22 +52,22 @@ class MyInstitutionExhibitsPage extends Component {
 
     render() {
 
-        const exhibits = this.state.exhibits.map(ex =>
-            <MyExhibitCard key={ex.exhibitId} {...ex} />
+        const sequences = this.state.sequences.map((s, index) =>
+            <MyTranslationSequenceCard key={index} {...s} />
         );
 
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
-            content = this.state.exhibits.length === 0 ? <h4>There are no exhibits</h4> : exhibits;
+            content = this.state.sequences.length === 0 ? <h4>There are no translation sequences</h4> : sequences;
         }
 
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
-                <h2 className="mb-5 font-weight-bold">Institution Exhibits</h2>
+                <h2 className="mb-5 font-weight-bold">Translation Sequences</h2>
                 {content}
             </div>
         );
     }
 }
 
-export default MyInstitutionExhibitsPage;
+export default MyTranslationsPage;

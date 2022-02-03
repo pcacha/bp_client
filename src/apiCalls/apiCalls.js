@@ -119,3 +119,7 @@ export const getExhibitsApproveTranslations = () => {
 export const setOfficial = (translationId, value) => {
     return axios.put("/translations/official/" + translationId, value);
 }
+
+export const getMyTranslationSequences = () => {
+    return axios.get("/translations/sequences");
+}

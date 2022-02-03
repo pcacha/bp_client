@@ -35,6 +35,12 @@ class Navigation extends Component {
                                             </a>
 
                                             <div className="my-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                                {
+                                                    user.isTranslator &&
+                                                    <NavLink className="dropdown-item" to="/myTranslations">
+                                                        <i className="fa fa-globe" /> My Translations
+                                                    </NavLink>
+                                                }
                                                 <NavLink className="dropdown-item" to="/myInstitution">
                                                     <i className="fa fa-home" /> My Institution
                                                 </NavLink>
