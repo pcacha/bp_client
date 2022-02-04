@@ -26,7 +26,7 @@ class MyInstitutionExhibitsPage extends Component {
             this.setState({exhibits: newExhibits});
 
             apiCalls.deleteExhibit(exhibitId).then(response => {
-                newExhibits = [...exhibits];
+                newExhibits = [...this.state.exhibits];
                 newExhibits = newExhibits.filter(ex => ex.exhibitId !== exhibitId);
 
                 this.setState({exhibits: newExhibits});

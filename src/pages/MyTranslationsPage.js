@@ -13,23 +13,23 @@ class MyTranslationsPage extends Component {
 
     onClickDelete = (exhibitId, languageId) => {
         if(window.confirm("Do you really want to delete this translation sequence?")) {
-            let newExhibits = [];
-            const {exhibits} = this.state;
-            for (let ex of exhibits) {
-                if(ex.exhibitId === exhibitId) {
-                    newExhibits.push({...ex, pendingApiCall: true});
+            let newSequences = [];
+            const {sequences} = this.state;
+            for (let s of sequences) {
+                if(s.exhibitId === exhibitId && s.languageId === languageId) {
+                    newSequences.push({...s, pendingApiCall: true});
                 }
                 else {
-                    newExhibits.push({...ex});
+                    newSequences.push(s);
                 }
             }
-            this.setState({exhibits: newExhibits});
+            this.setState({sequences: newSequences});
 
-            apiCalls.deleteExhibit(exhibitId).then(response => {
-                newExhibits = [...exhibits];
-                newExhibits = newExhibits.filter(ex => ex.exhibitId !== exhibitId);
+            apiCalls.deleteSequence(exhibitId, languageId).then(response => {
+                newSequences = [...this.state.sequences];
+                newSequences = newSequences.filter(s => s.exhibitId !== exhibitId || s.languageId !== languageId);
 
-                this.setState({exhibits: newExhibits});
+                this.setState({sequences: newSequences});
             }).catch(error => {
                 return handleError(error);
             });

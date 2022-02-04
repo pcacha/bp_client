@@ -123,3 +123,7 @@ export const setOfficial = (translationId, value) => {
 export const getMyTranslationSequences = () => {
     return axios.get("/translations/sequences");
 }
+
+export const deleteSequence = (exhibitId, languageId) => {
+    return axios.delete("/translations/sequences/" + exhibitId + "/" + languageId);
+}
