@@ -127,3 +127,11 @@ export const getMyTranslationSequences = () => {
 export const deleteSequence = (exhibitId, languageId) => {
     return axios.delete("/translations/sequences/" + exhibitId + "/" + languageId);
 }
+
+export const getMyTranslationSequence = (exhibitId, languageId) => {
+    return axios.get("/translations/sequence/" + exhibitId + "/" + languageId);
+}
+
+export const rollbackTranslation = translationId => {
+    return axios.delete("/translations/sequence/" + translationId);
+}
