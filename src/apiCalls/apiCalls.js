@@ -135,3 +135,31 @@ export const getMyTranslationSequence = (exhibitId, languageId) => {
 export const rollbackTranslation = translationId => {
     return axios.delete("/translations/sequence/" + translationId);
 }
+
+export const getUsers = () => {
+    return axios.get("/admin/users");
+}
+
+export const getUser = userId => {
+    return axios.get("/admin/users/" + userId);
+}
+
+export const adminUpdateUsername = (userId, username) => {
+    return axios.put("/admin/users/" + userId + "/updateUsername", username);
+}
+
+export const adminChangePassword = userId => {
+    return axios.put("/admin/users/" + userId + "/updatePassword");
+}
+
+export const adminChangeTranslator = (userId, value) => {
+    return axios.put("/admin/users/" + userId + "/updateTranslator", value);
+}
+
+export const adminChangeBan = (userId, value) => {
+    return axios.put("/admin/users/" + userId + "/updateBan", value);
+}
+
+export const adminRemoveInstitution = userId => {
+    return axios.put("/admin/users/" + userId + "/removeInstitution");
+}

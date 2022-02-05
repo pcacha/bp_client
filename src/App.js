@@ -19,6 +19,8 @@ import ApproveExhibitPage from "./pages/ApproveExhibitPage";
 import OwnerRatePage from "./pages/OwnerRatePage";
 import MyTranslationsPage from "./pages/MyTranslationsPage";
 import TranslationSequencePage from "./pages/TranslationSequencePage";
+import UserManagerPage from "./pages/UserManagerPage";
+import UserDetailPage from "./pages/UserDetailPage";
 
 
 class App extends Component {
@@ -45,6 +47,8 @@ class App extends Component {
           {user.isTranslator && <Route exact path="/institutions/:institutionId/rate/:exhibitId/:languageId" component={TranslatorRatePage} />}
           {user.isTranslator && <Route exact path="/myTranslations" component={MyTranslationsPage} />}
           {user.isTranslator && <Route exact path="/myTranslations/:exhibitId/:languageId" component={TranslationSequencePage} />}
+          {user.isAdmin && <Route exact path="/users" component={UserManagerPage} />}
+          {user.isAdmin && <Route exact path="/users/:userId" component={UserDetailPage} />}
           <Redirect to="/"/>
         </Switch>
     );

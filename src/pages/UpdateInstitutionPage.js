@@ -271,21 +271,21 @@ class UpdateInstitutionPage extends Component {
 
                 <Link exact to="/myInstitution/addLanguages" >
                     <button type="button" className="btn btn-lg mt-3 btn-success">
-                        <i className="fa fa-plus-circle" /> {" Add languages"}
+                        <i className="fa fa-plus-circle" /> Add languages
                     </button>
                 </Link>
 
                 <br />
                 <Link exact to="/myInstitution/addExhibit" >
                     <button type="button" className="btn btn-lg mt-3 btn-success">
-                        <i className="fa fa-plus-circle" /> {" Add exhibit"}
+                        <i className="fa fa-plus-circle" /> Add exhibit
                     </button>
                 </Link>
 
                 <br />
                 <Link exact to="/myInstitution/exhibits" >
                     <button type="button" className="btn btn-lg mt-3 btn-info">
-                        <i className="fa fa-bars" /> {" View exhibits"}
+                        <i className="fa fa-bars" /> View exhibits
                     </button>
                 </Link>
 
