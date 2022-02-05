@@ -39,7 +39,7 @@ const OwnerRateTranslationCard = (props) => {
                         </div>
                     </div>
 
-                    <div className="col-md-2">
+                    <div className="col-md-2 mt-md-0 mt-3">
                         <div className="d-flex justify-content-between">
                             <div className="text-info mt-1">
                                 <i className="fa fa-thumbs-up" /> {props.likesCount + "x"}

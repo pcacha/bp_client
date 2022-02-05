@@ -31,7 +31,7 @@ const MyTranslationSequenceCard = (props) => (
                     </div>
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-md-3 mt-3 mt-md-0">
                     <Link exact to={"/myTranslations/" + props.exhibitId + "/" + props.languageId} >
                         <button type="button" className="btn btn-info w-100">
                             <i className="fa fa-bars" /> Open

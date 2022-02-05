@@ -52,26 +52,28 @@ class UserManagerPage extends Component {
                         </div>
                     </div>
 
-                    <table className="table table-dark table-striped table-bordered table-hover">
-                        <thead className="thead-light">
-                        <tr>
-                            <th scope="col">Username</th>
-                            <th scope="col">Register date</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Detail</th>
-                        </tr>
-                        </thead>
+                    <div className="table-responsive">
+                        <table className="table table-dark table-striped table-bordered table-hover">
+                            <thead className="thead-light">
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Register date</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Detail</th>
+                            </tr>
+                            </thead>
 
-                        <tbody>
-                        {filtered.map(u => <UserManagerRow {...u} />)}
-                        </tbody>
-                    </table>;
+                            <tbody>
+                            {filtered.map(u => <UserManagerRow {...u} />)}
+                            </tbody>
+                        </table>
+                    </div>
                 </>
 
         }
 
         return (
-            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background">
+            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
                 <h2 className="mb-5">User Manager</h2>
                 {content}
             </div>

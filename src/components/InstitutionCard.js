@@ -11,7 +11,7 @@ const InstitutinCard = (props) => (
                 </div>
 
                 <div className="col-md-6">
-                    <h3 className="card-title">
+                    <h3 className="card-title mt-3 mt-md-0">
                         {props.name}
                     </h3>
 
@@ -23,7 +23,7 @@ const InstitutinCard = (props) => (
 
                 <div className="col-md-3">
                     <Link exact to={"/institutions/" + props.institutionId}>
-                        <button type="button" className="btn btn-info btn-lg w-100">
+                        <button type="button" className="btn btn-info btn-lg w-100 mt-3 mt-md-0">
                             <i className="fa fa-bars" /> Exhibits
                         </button>
                     </Link>

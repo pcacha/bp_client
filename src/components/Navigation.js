@@ -13,7 +13,7 @@ class Navigation extends Component {
             <div className="position-fixed w-100 fixed-header">
                 <nav className="blue-nav navbar navbar-expand-lg navbar-light" id="blue-nav">
                     <div className="container">
-                        <Link className="navbar-brand" to="/">Community Translation System</Link>
+                        <Link className="navbar-brand" to="/">CTS</Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">

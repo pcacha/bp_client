@@ -3,7 +3,6 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import MyExhibitCard from "../components/MyExhibitCard";
-import {getQRCode} from "../apiCalls/apiCalls";
 
 class MyInstitutionExhibitsPage extends Component {
 

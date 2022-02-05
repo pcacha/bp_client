@@ -46,7 +46,7 @@ const MyExhibitCard = (props) => (
                     }
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-md-3 mt-md-0 mt-3">
                     <Link exact to={"/myInstitution/exhibits/" + props.exhibitId} >
                         <button type="button" className="btn btn-info w-100">
                             <i className="fa fa-pencil" /> Detail

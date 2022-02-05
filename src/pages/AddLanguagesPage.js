@@ -117,7 +117,7 @@ class AddLanguagesPage extends Component {
                             chosen.length === 0 ?
                                 <h4>No selected languages</h4>
                                 :
-                                <div className="card">
+                                <div className="card mt-md-0 mt-2">
                                     <ul className="list-group list-group-flush">
                                         { chosen.map(lan =>
                                             <li key={lan.languageId} className="list-group-item">{lan.name}</li>
