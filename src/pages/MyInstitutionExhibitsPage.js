@@ -3,6 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import MyExhibitCard from "../components/MyExhibitCard";
+import {getQRCode} from "../apiCalls/apiCalls";
 
 class MyInstitutionExhibitsPage extends Component {
 
@@ -50,10 +51,22 @@ class MyInstitutionExhibitsPage extends Component {
         });
     }
 
+    onClickDownloadQRCode = exhibitId => {
+        apiCalls.getQRCode(exhibitId).then(response => {
+            let encodedImage = response.data;
+            let a = document.createElement("a"); //Create <a>
+            a.href = "data:image/png;base64," + encodedImage; //Image Base64 Goes here
+            a.download = exhibitId + ".png"; //File name Here
+            a.click(); //Downloaded file
+        }).catch(error => {
+            return handleError(error);
+        });
+    }
+
     render() {
 
         const exhibits = this.state.exhibits.map(ex =>
-            <MyExhibitCard key={ex.exhibitId} {...ex} />
+            <MyExhibitCard key={ex.exhibitId} {...ex} onClickDownloadQRCode={this.onClickDownloadQRCode} />
         );
 
         let content = <Spinner/>;

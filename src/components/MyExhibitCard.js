@@ -54,6 +54,11 @@ const MyExhibitCard = (props) => (
                     </Link>
                     <br />
 
+                    <button type="button" className="btn btn-secondary w-100 mt-2" onClick={() => props.onClickDownloadQRCode(props.exhibitId)}>
+                        <i className="fa fa-qrcode" /> QR Code
+                    </button>
+                    <br />
+
                     <ButtonWithProgress  onClick={() => props.onClickDelete(props.exhibitId)}
                                          className="btn btn-danger w-100 mt-2"
                                          disabled={props.pendingApiCall}

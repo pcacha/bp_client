@@ -163,3 +163,7 @@ export const adminChangeBan = (userId, value) => {
 export const adminRemoveInstitution = userId => {
     return axios.put("/admin/users/" + userId + "/removeInstitution");
 }
+
+export const getQRCode = exhibitId => {
+    return axios.get("/exhibits/" + exhibitId + "/qrcode");
+}
