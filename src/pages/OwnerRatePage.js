@@ -106,7 +106,7 @@ class OwnerRatePage extends Component {
                     newTranslations.push({...t, isOfficial: false});
                 }
                 else {
-                    newTranslations.push({...t, pendingApiCallSetOfficial: false, isOfficial: true});
+                    newTranslations.push({...t, pendingApiCallSetOfficial: false, isOfficial: newValue});
                 }
             }
             // set new state of official translation
