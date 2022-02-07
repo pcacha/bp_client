@@ -2,6 +2,10 @@ import React from 'react';
 import parse from "html-react-parser";
 import ButtonWithProgress from "./ButtonWithProgress";
 
+/**
+ * card for listing translations to rate and set official
+ * @param props props
+ */
 const OwnerRateTranslationCard = (props) => {
     let cardStyle = "card mb-4"
     if(props.isOfficial) {

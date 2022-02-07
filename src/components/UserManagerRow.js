@@ -1,6 +1,10 @@
 import React from 'react';
 import Link from "react-router-dom/es/Link";
 
+/**
+ * one row in table representing system user
+ * @param props props
+ */
 function UserManagerRow(props) {
     return (
         <tr>

@@ -8,8 +8,14 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Link from "react-router-dom/es/Link";
 
+/**
+ * page for updating institution
+ */
 class UpdateInstitutionPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         name: this.props.institution.name,
         address: this.props.institution.address,
@@ -30,7 +36,12 @@ class UpdateInstitutionPage extends Component {
         errors: {},
     }
 
+    /**
+     * called when new institution image is selected
+     * @param event input event
+     */
     onImageSelect = (event) => {
+        // delete errors and update value in state
         const errors = {...this.state.errors};
         delete errors["encodedImage"];
         this.setState({errors, [event.target.name]: event.target.value, imageUpdated: false});
@@ -38,26 +49,38 @@ class UpdateInstitutionPage extends Component {
             return;
         }
 
+        // read selected image if exists
         const file = event.target.files[0];
         let reader = new FileReader();
         reader.onloadend = () => {
+            // set base64 encoded image to tate
             this.setState({encodedImage: reader.result});
         }
         reader.readAsDataURL(file);
     }
 
+    /**
+     * clear image from state
+     */
     clearImage = () => {
+        // delete errors and clear image fields from state
         const errors = {...this.state.errors};
         delete errors["encodedImage"];
         this.setState({errors, encodedImage: null, imageSelect: "",});
     }
 
+    /**
+     * handles error from http request
+     * @param apiError error
+     * @param apiCall api call name
+     */
     handleApiError = (apiError, apiCall) => {
         if (apiError.response.data && apiError.response.data.validationErrors) {
             let errors = {
                 ...this.state.errors,
                 ...apiError.response.data.validationErrors
             };
+            // update input errors and api call state
             this.setState({
                 [apiCall]: false,
                 errors
@@ -65,35 +88,55 @@ class UpdateInstitutionPage extends Component {
         }
     }
 
+    /**
+     * called when user submit institution image update
+     */
     onClickImageUpdate = () => {
         this.setState({pendingApiCallUpdateImage: true});
         const img = { encodedImage: this.state.encodedImage }
 
+        // send request to update image to server
         apiCalls.updateInstitutionImage(img).then(response => {
             this.setState({pendingApiCallUpdateImage: false, image: response.data.message, imageUpdated: true}, () => {
                 this.clearImage();
             });
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // handle errors in input
             this.handleApiError(apiError, "pendingApiCallUpdateImage");
         });
     }
 
+    /**
+     * called when value in text inputs is changed
+     * @param event input event
+     */
     onChange = event => {
+        // delete errors and update value in state
         const errors = {...this.state.errors};
         delete errors[event.target.name];
         this.setState({errors, institutionUpdated: false, [event.target.name]: event.target.value});
     }
 
+    /**
+     * called when value of email text box is changed
+     * @param event input event
+     */
     onEmailChange = event => {
+        // delete errors and set value to state
         const errors = {...this.state.errors};
         delete errors[event.target.name];
         this.setState({errors, managerAdded: false, [event.target.name]: event.target.value});
     }
 
+    /**
+     * called when institution manager wants to update info about institution
+     */
     onClickInstitutionUpdate = () => {
         this.setState({pendingApiCallUpdateInstitution: true});
+        // extract institution from state
         const institution = {
             name: this.state.name,
             address: this.state.address,
@@ -101,44 +144,64 @@ class UpdateInstitutionPage extends Component {
             longitudeString: this.state.longitudeString,
         }
 
+        // sends request to server to update institution information
         apiCalls.updateInstitution(institution).then(response => {
             this.setState({pendingApiCallUpdateInstitution: false, institutionUpdated: true});
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // handle input error
             this.handleApiError(apiError, "pendingApiCallUpdateInstitution");
         });
     }
 
+    /**
+     * called when manager of institution wants to delete it
+     */
     onClickInstitutionDelete = () => {
+        // ask before institution delete
         if (window.confirm("Do you really want to delete your institution?")) {
             this.setState({pendingApiCallDeleteInstitution: true});
 
+            // send request to institution delete to server
             apiCalls.deleteInstitution().then(response => {
                 this.setState({pendingApiCallDeleteInstitution: false}, () => {
                     this.props.setIsInstitutionOwner(false);
                     this.props.redirect("/");
                 });
             }).catch(error => {
+                // handle unauthorized state
                 return handleError(error);
             });
         }
     }
 
+    /**
+     * called when institution manager wants to add new manager
+     */
     onClickManagerAdd = () => {
+        // ask before adding manager
         if (window.confirm("Do you really want to add a new manager to your institution?")) {
             this.setState({pendingApiCallAddManager: true});
 
+            // send request to server to add new manager to institution
             apiCalls.addInstitutionManager({email: this.state.email}).then(response => {
                 this.setState({pendingApiCallAddManager: false, email: ""}, () => this.setState({managerAdded: true}));
             }).catch(error => {
+                // handle unauthorized state
                 return handleError(error);
             }).catch(apiError => {
+                // handle input errors
                 this.handleApiError(apiError, "pendingApiCallAddManager");
             });
         }
     }
 
+    /**
+     * renders institution update page
+     * @returns {JSX.Element} page
+     */
     render() {
         const {
             name,
@@ -160,6 +223,7 @@ class UpdateInstitutionPage extends Component {
             errors,
         } = this.state;
 
+        // render page
         return (
             <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
                 <h2 className="mb-4 font-weight-bold">My Institution</h2>
@@ -327,6 +391,10 @@ class UpdateInstitutionPage extends Component {
     }
 }
 
+/**
+ * maps redux dispatch to state props
+ * @param dispatch redux dispatch
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         setIsInstitutionOwner: (value) => dispatch(authActions.setIsInstitutionOwner(value)),

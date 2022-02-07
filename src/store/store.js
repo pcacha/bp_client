@@ -6,6 +6,7 @@ import * as authActions from "./authActions";
 
 let localStorageData = localStorage.getItem("user");
 
+// init redux state
 let initState = {
     id: 0,
     username: "",
@@ -23,12 +24,15 @@ let validToken = false;
 
 if (localStorageData) {
     try {
+        // try to parse stored redux state
         persistedState = JSON.parse(localStorageData);
         const currentTime = Date.now() / 1000;
         if (persistedState.expiredAt > currentTime) {
+            // if token is not expired use this state
             apiCalls.setAuthorizationHeader(persistedState);
             validToken = true;
         } else {
+            // if token is expired reset state to init state
             persistedState = initState;
         }
     } catch (error) {
@@ -41,6 +45,7 @@ const middleware = [thunk];
 let store;
 
 if (window.navigator.userAgent.includes("Chrome") && reactReduxDevTools) {
+    // create store including redux dev tools
     store = createStore(
         authReducer,
         persistedState,
@@ -50,6 +55,7 @@ if (window.navigator.userAgent.includes("Chrome") && reactReduxDevTools) {
         )
     );
 } else {
+    // create store without redux dev tools
     store = createStore(
         authReducer,
         persistedState,
@@ -57,11 +63,15 @@ if (window.navigator.userAgent.includes("Chrome") && reactReduxDevTools) {
     );
 }
 
+// subscribe to every state change
 store.subscribe(() => {
     const user = store.getState();
+    // save redux state
     localStorage.setItem("user", JSON.stringify(user));
+    // set new authorization header
     apiCalls.setAuthorizationHeader(user);
 
+    // get fresh token before current one expire
     setTimeout(() => {
         if (user.id === store.getState().id) {
             store.dispatch(authActions.getFreshToken());
@@ -69,6 +79,7 @@ store.subscribe(() => {
     }, 600000000);
 })
 
+// get fresh token
 if (validToken) {
     store.dispatch(authActions.getFreshToken());
 }

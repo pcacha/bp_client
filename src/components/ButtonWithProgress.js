@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * button with progress spinner
+ * @param props props
+ */
 const ButtonWithProgress = (props) => {
     return (
         <button disabled={props.disabled}

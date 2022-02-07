@@ -1,6 +1,10 @@
 import React from 'react';
 import parse from "html-react-parser";
 
+/**
+ * card for listing translations to rate
+ * @param props props
+ */
 const TranslatorRateTranslationCard = (props) => {
     let cardStyle = "card mb-4"
     if(props.isOfficial) {

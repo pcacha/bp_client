@@ -5,8 +5,14 @@ import Spinner from "../components/Spinner";
 import Input from "../components/Input";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 
+/**
+ * page for viewing details about user
+ */
 class UserDetailPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         userId: this.props.match.params.userId,
         username: "",
@@ -26,8 +32,12 @@ class UserDetailPage extends Component {
         errors: {},
     }
 
+    /**
+     * called when page is mounted
+     */
     componentDidMount() {
         this.setState({pendingApiCall: true})
+        // get user details from server
         apiCalls.getUser(this.state.userId).then(response => {
             const {
                 username,
@@ -41,18 +51,30 @@ class UserDetailPage extends Component {
 
             this.setState({username, email, createdAt, isBanned, isTranslator, isInstitutionOwner, institutionName, pendingApiCall: false});
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         })
     }
 
+    /**
+     * called when text inputs are changed
+     * @param event
+     */
     onChange = (event) => {
+        // delete errors and set new value
         const errors = {...this.state.errors};
         delete errors[event.target.name];
         this.setState({errors, usernameUpdated: false, [event.target.name]: event.target.value});
     }
 
+    /**
+     * handles error from http request
+     * @param apiError error
+     * @param apiCall api call name
+     */
     handleApiError = (apiError, apiCall) => {
         if (apiError.response.data && apiError.response.data.validationErrors) {
+            // add errors
             let errors = {
                 ...this.state.errors,
                 ...apiError.response.data.validationErrors
@@ -64,62 +86,91 @@ class UserDetailPage extends Component {
         }
     }
 
+    /**
+     * called when admin updates username
+     */
     onClickUsernameUpdate = () => {
         this.setState({pendingApiCallUsernameUpdate: true});
 
+        // send request to server to update username
         apiCalls.adminUpdateUsername(this.state.userId, {username: this.state.username}).then(response => {
             this.setState({pendingApiCallUsernameUpdate: false, usernameUpdated: true});
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // handle input errors
             this.handleApiError(apiError, "pendingApiCallUsernameUpdate");
         });
     }
 
+    /**
+     * called when admin wants to change user's password by sending it to mail
+     */
     onPasswordChange = () => {
         const {username, email} = this.state;
+        // ask before changing password
         if(window.confirm("Do you really want to generate new password for user " + username + " and send it to mail: " + email)) {
             this.setState({pendingApiCallChangePassword: true});
 
+            // send request to change password by sending new password to user's mail
             apiCalls.adminChangePassword(this.state.userId).then(response => {
                 this.setState({pendingApiCallChangePassword: false});
             }).catch(error => {
+                // handle unauthorized state
                 return handleError(error);
             });
         }
     }
 
+    /**
+     * called when admin wants to change user's rights to translate
+     */
     onTranslatorChange = () => {
         const {userId, isTranslator} = this.state;
+        // ask before changing rights
         if(window.confirm("Do you really want to change translator rights?")) {
             this.setState({pendingApiCallTranslator: true});
 
+            // send request to server to change user's translator rights
             apiCalls.adminChangeTranslator(userId, {value: !isTranslator}).then(response => {
                 this.setState({pendingApiCallTranslator: false, isTranslator: !isTranslator});
             }).catch(error => {
+                // handle unauthorized state
                 return handleError(error);
             });
         }
     }
 
+    /**
+     * called when admin wants to change user's ban
+     */
     onBanChange = () => {
         const {userId, isBanned} = this.state;
+        // ask before changing ban
         if(window.confirm("Do you really want to change access rights?")) {
             this.setState({pendingApiCallBan: true});
 
+            // send request to change ban of user to server
             apiCalls.adminChangeBan(userId, {value: !isBanned}).then(response => {
                 this.setState({pendingApiCallBan: false, isBanned: !isBanned});
             }).catch(error => {
+                // handle unauthorized state
                 return handleError(error);
             });
         }
     }
 
+    /**
+     * called when admin wants to remove institution from user
+     */
     onInstitutionRemove = () => {
+        // ask before removing institution
         const {userId, institutionName} = this.state;
         if(window.confirm("Do you really want to remove managerial rights? It may cause deletion of institution: " + institutionName)) {
             this.setState({pendingApiCallRemoveInstitution: true});
 
+            // send request to server to remove institution management to server
             apiCalls.adminRemoveInstitution(userId).then(response => {
                 this.setState({pendingApiCallRemoveInstitution: false, isInstitutionOwner: false, institutionName: ""});
             }).catch(error => {
@@ -128,6 +179,10 @@ class UserDetailPage extends Component {
         }
     }
 
+    /**
+     * renders user details page
+     * @returns {JSX.Element} page
+     */
     render() {
         const {
             username,
@@ -147,6 +202,7 @@ class UserDetailPage extends Component {
             errors
         } = this.state;
 
+        // define content
         let content = <Spinner/>;
         if (!pendingApiCall) {
             content =
@@ -230,6 +286,7 @@ class UserDetailPage extends Component {
                 </div>
         }
 
+        // render page
         return (
             <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
                 <h2 className="mb-5">User Details</h2>

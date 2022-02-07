@@ -3,6 +3,10 @@ import {Link} from "react-router-dom";
 import {EXHIBITS_IMAGES_URL} from "../shared/sharedConstants";
 import ButtonWithProgress from "./ButtonWithProgress";
 
+/**
+ * card for listing user's translation sequences
+ * @param props props
+ */
 const MyTranslationSequenceCard = (props) => (
     <div className="card mb-4">
         <div className="card-body">

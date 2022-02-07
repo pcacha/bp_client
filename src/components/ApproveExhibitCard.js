@@ -2,6 +2,10 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {EXHIBITS_IMAGES_URL} from "../shared/sharedConstants";
 
+/**
+ * card for listing exhibits to approve
+ * @param props props
+ */
 const ApproveExhibitCard = (props) => (
     <div className="card mb-4">
         <div className="card-body">

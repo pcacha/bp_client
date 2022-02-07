@@ -2,6 +2,10 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {EXHIBITS_IMAGES_URL, INSTITUTIONS_IMAGES_URL} from "../shared/sharedConstants";
 
+/**
+ * card for listing exhibits for translating
+ * @param props props
+ */
 const TranslateExhibitCard = (props) => (
     <div className="card mb-4">
         <div className="card-body">

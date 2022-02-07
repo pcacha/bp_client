@@ -2,6 +2,10 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {INSTITUTIONS_IMAGES_URL} from "../shared/sharedConstants";
 
+/**
+ * card for listing institutions
+ * @param props props
+ */
 const InstitutinCard = (props) => (
     <div className="card mb-4">
         <div className="card-body">

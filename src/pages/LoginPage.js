@@ -5,8 +5,14 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import * as authActions from "../store/authActions";
 import Input from "../components/Input";
 
+/**
+ * page for logging in to the system
+ */
 class LoginPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         username: "",
         password: "",
@@ -14,31 +20,48 @@ class LoginPage extends Component {
         pendingApiCall: false
     }
 
+    /**
+     * called on input text change
+     * @param event input event
+     */
     onChange = (event) => {
+        // update new value in state
         this.setState({[event.target.name]: event.target.value, apiError: {}});
     }
 
+    /**
+     * called when user submit login
+     */
     onClickLogin = () => {
+        // extract credentials from state
         const body = {
             username: this.state.username,
             password: this.state.password,
         }
         this.setState({pendingApiCall: true});
 
+        // send credentials to server
         this.props.login(body)
             .then(response => {
+                // set new state and redirect
                 this.setState({pendingApiCall: false}, () => {
                     this.props.history.push("/");
                 });
             })
             .catch(error => {
+                // handle errors in user input
                 if (error.response) {
                     this.setState({apiError: error.response.data, pendingApiCall: false});
                 }
             });
     }
 
+    /**
+     * Renders login page
+     * @returns {JSX.Element} login page
+     */
     render() {
+        // defines whether submit button is enabled
         let disabledSubmit = false;
         if (this.state.username === "" || this.state.password === "") {
             disabledSubmit = true;
@@ -80,6 +103,10 @@ class LoginPage extends Component {
 }
 
 
+/**
+ * maps redux state to page props
+ * @param dispatch redux dispatch
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (body) => dispatch(authActions.login(body)),

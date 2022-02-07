@@ -8,8 +8,14 @@ import {EXHIBITS_IMAGES_URL, INFO_LABELS_IMAGES_URL} from "../shared/sharedConst
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
+/**
+ * page for updating exhibit
+ */
 class UpdateExhibitPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         exhibitId: 0,
         name: "",
@@ -34,18 +40,30 @@ class UpdateExhibitPage extends Component {
         errors: {},
     }
 
+    /**
+     * called when page is mounted
+     */
     componentDidMount() {
         this.setState({pendingApiCallGetInstitution: true})
+        // get exhibit info from server
         apiCalls.getExhibit(this.props.match.params.exhibitId).then(response => {
             this.setState({...response.data, pendingApiCallGetInstitution: false});
         }).catch(error => {
+            // handle unauthenticated state
             return handleError(error);
         });
     }
 
+    /**
+     * called when image is selected
+     * @param event input event
+     * @param encoded encoded image prop name
+     * @param updated updated prop name
+     */
     onImageSelect = (event, encoded, updated) => {
         const errors = {...this.state.errors};
         delete errors[encoded];
+        // update value in state and remove errors
         this.setState({errors, [event.target.name]: event.target.value, [updated]: false});
         if (event.target.files.length === 0) {
             return;
@@ -54,38 +72,59 @@ class UpdateExhibitPage extends Component {
         const file = event.target.files[0];
         let reader = new FileReader();
         reader.onloadend = () => {
+            // set base64 encoded image to state
             this.setState({[encoded]: reader.result});
         }
+        // read image
         reader.readAsDataURL(file);
     }
 
+    /**
+     * clears image from state
+     * @param encode encoded image prop name
+     * @param select select image prop name
+     */
     clearImage = (encode, select) => {
         const errors = {...this.state.errors};
         delete errors[encode];
+        // clear image fields and delete errors
         this.setState({errors, [encode]: null, [select]: ""});
     }
 
+    /**
+     * called when user submit exhibit image to be updated
+     */
     onClickImageUpdate = () => {
         this.setState({pendingApiCallUpdateImage: true});
         const img = { encodedImage: this.state.encodedImage }
 
+        // send request to server to update exhibit image
         apiCalls.updateExhibitImage(this.state.exhibitId, img).then(response => {
             this.setState({pendingApiCallUpdateImage: false, image: response.data.message, imageUpdated: true}, () => {
                 this.clearImage("encodedImage", "imageSelect");
             });
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // handle user input errors
             this.handleApiError(apiError, "pendingApiCallUpdateImage");
         });
     }
 
+    /**
+     * handles error from http requests
+     * @param apiError error from request
+     * @param apiCall name of api call
+     */
     handleApiError = (apiError, apiCall) => {
         if (apiError.response.data && apiError.response.data.validationErrors) {
+            // define new page errors
             let errors = {
                 ...this.state.errors,
                 ...apiError.response.data.validationErrors
             };
+            // set errors in state
             this.setState({
                 [apiCall]: false,
                 errors
@@ -93,17 +132,23 @@ class UpdateExhibitPage extends Component {
         }
     }
 
+    /**
+     * called when user submits new exhibit info label image
+     */
     onClickInfoImageUpdate = () => {
         this.setState({pendingApiCallUpdateInfoLabel: true});
         const img = { encodedImage: this.state.encodedInfoLabel }
 
+        // send updated info label to server
         apiCalls.updateExhibitInfoLabelImage(this.state.exhibitId, img).then(response => {
             this.setState({pendingApiCallUpdateInfoLabel: false, infoLabel: response.data.message, infoLabelUpdated: true}, () => {
                 this.clearImage("encodedInfoLabel", "infoLabelSelect");
             });
         }).catch(error => {
+            // handles unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // handle error from user input
             if (apiError.response.data && apiError.response.data.validationErrors) {
                 let errors = {
                     ...this.state.errors,
@@ -114,20 +159,35 @@ class UpdateExhibitPage extends Component {
         });
     }
 
+    /**
+     * called when text input is changed
+     * @param event input event
+     */
     onChange = (event) => {
+        // set deleted errors and set value
         const errors = {...this.state.errors};
         delete errors[event.target.name];
         this.setState({errors, [event.target.name]: event.target.value, exhibitUpdated: false});
     }
 
+    /**
+     * called when value in info text editor is changed
+     * @param event input event
+     * @param editor ck editor
+     */
     onInfoLabelTextChange = (event, editor) => {
+        // change value and delete errors
         const errors = {...this.state.errors};
         delete errors["infoLabelText"];
         this.setState({infoLabelText: editor.getData(), exhibitUpdated: false, errors});
     }
 
+    /**
+     * called when user wants to update info abou exhibit
+     */
     onClickExhibitUpdate = () => {
         this.setState({pendingApiCallUpdateInstitution: true});
+        // extract exhibit from state
         const exhibit = {
             name: this.state.name,
             infoLabelText: this.state.infoLabelText,
@@ -136,15 +196,22 @@ class UpdateExhibitPage extends Component {
             showcase: this.state.showcase,
         }
 
+        // send update exhibit request to server
         apiCalls.updateExhibit(this.state.exhibitId, exhibit).then(response => {
             this.setState({exhibitUpdated: true, pendingApiCallUpdateInstitution: false});
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // handle error in user input
             this.handleApiError(apiError, "pendingApiCallUpdateInstitution");
         });
     }
 
+    /**
+     * renders exhibit update page
+     * @returns {JSX.Element} page
+     */
     render() {
         const {
             name,
@@ -168,6 +235,7 @@ class UpdateExhibitPage extends Component {
             errors,
         } = this.state;
 
+        // define content
         let content = <Spinner />;
         if(!pendingApiCallGetInstitution) {
             content = (
@@ -327,6 +395,7 @@ class UpdateExhibitPage extends Component {
             )
         }
 
+        // render page
         return (
             <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
                 <h2 className="mb-4 font-weight-bold">Exhibit</h2>

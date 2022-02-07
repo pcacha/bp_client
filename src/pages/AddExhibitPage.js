@@ -6,8 +6,14 @@ import handleError from "../shared/failureHandler";
 import Input from "../components/Input";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 
+/**
+ * Page where institution manager can add new exhibits
+ */
 class AddExhibitPage extends Component {
 
+    /**
+     * initial state of page
+     */
     initState = {
         name: "",
         infoLabelText: "",
@@ -23,18 +29,32 @@ class AddExhibitPage extends Component {
         errors: {},
     }
 
+    /**
+     * page state
+     */
     state = this.initState;
 
+    /**
+     * Called on text input values change
+     * @param event input event
+     */
     onChange = (event) => {
+        // delete error to given field
         const errors = {...this.state.errors};
         delete errors[event.target.name];
+        // update state
         this.setState({errors, [event.target.name]: event.target.value, created: false});
     }
 
+    /**
+     * Called when new image is selected
+     * @param event input event
+     */
     onImageSelect = (event) => {
         const errors = {...this.state.errors};
         const name = event.target.name;
 
+        // delete input error message
         if(name === "imageSelect") {
             delete errors["encodedImage"];
         }
@@ -42,14 +62,17 @@ class AddExhibitPage extends Component {
             delete errors["encodedInfoLabel"];
         }
 
+        // update state with new errors and close alert that new exhibit was created
         this.setState({errors, [name]: event.target.value, created: false});
         if (event.target.files.length === 0) {
             return;
         }
 
+        // if user chose file
         const file = event.target.files[0];
         let reader = new FileReader();
         reader.onloadend = () => {
+            // update state with new base64 encoded selected image
             if(name === "imageSelect") {
                 this.setState({encodedImage: reader.result});
             }
@@ -57,29 +80,46 @@ class AddExhibitPage extends Component {
                 this.setState({encodedInfoLabel: reader.result});
             }
         }
+        // read image
         reader.readAsDataURL(file);
     }
 
+    /**
+     * Clears image from state
+     * @param name img name
+     */
     clearImage = (name) => {
         const errors = {...this.state.errors};
         if(name === "imageSelect") {
+            // delete errors of image input and its fields in state
             delete errors["encodedImage"];
             this.setState({errors, encodedImage: null, imageSelect: "",});
         }
         else {
+            // delete errors of image input and its fields in state
             delete errors["encodedInfoLabel"];
             this.setState({errors, encodedInfoLabel: null, infoLabelSelect: "",});
         }
     }
 
+    /**
+     * Called when info label text is chagned
+     * @param event input event
+     * @param editor input editor
+     */
     onInfoLabelTextChange = (event, editor) => {
         const errors = {...this.state.errors};
         delete errors["infoLabelText"];
+        // update state with new value, no errors and closed alert of created exhibit
         this.setState({infoLabelText: editor.getData(), created: false, errors});
     }
 
+    /**
+     * Called when new exhibit is created
+     */
     onClickCreate = () => {
         this.setState({pendingApiCall: true});
+        // extract exhibit from state
         const exhibit = {
             name: this.state.name,
             infoLabelText: this.state.infoLabelText,
@@ -90,11 +130,14 @@ class AddExhibitPage extends Component {
             encodedInfoLabel: this.state.encodedInfoLabel,
         }
 
+        // send new exhibit to server
         apiCalls.addExhibit(exhibit).then(response => {
             this.setState({...this.initState}, () => this.setState({created: true}));
         }).catch(error => {
+            // react on unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // react on errors in user input
             let errors = {...this.state.errors};
             if (apiError.response.data && apiError.response.data.validationErrors) {
                 errors = {...apiError.response.data.validationErrors}
@@ -103,6 +146,10 @@ class AddExhibitPage extends Component {
         });
     }
 
+    /**
+     * renders page
+     * @returns {JSX.Element} page
+     */
     render() {
         const {
             name,
@@ -119,11 +166,13 @@ class AddExhibitPage extends Component {
             errors,
         } = this.state;
 
+        // define disable submit value
         let disabledSubmit = false;
         if (name === "" || encodedInfoLabel === null) {
             disabledSubmit = true;
         }
 
+        // return page
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
                 <form>

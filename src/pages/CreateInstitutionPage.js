@@ -6,8 +6,14 @@ import handleError from "../shared/failureHandler";
 import * as authActions from "../store/authActions";
 import {connect} from "react-redux";
 
+/**
+ * page for creating new institution
+ */
 class CreateInstitutionPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         name: "",
         address: "",
@@ -19,13 +25,24 @@ class CreateInstitutionPage extends Component {
         errors: {},
     }
 
+    /**
+     * called when text input is changed
+     * @param event input event
+     */
     onChange = (event) => {
+        // delete errors for given input
         const errors = {...this.state.errors};
         delete errors[event.target.name];
+        // update state
         this.setState({errors, [event.target.name]: event.target.value});
     }
 
+    /**
+     * called when new image is selected
+     * @param event input event
+     */
     onImageSelect = (event) => {
+        // update state with no errors and new value
         const errors = {...this.state.errors};
         delete errors["encodedImage"];
         this.setState({errors, [event.target.name]: event.target.value});
@@ -33,22 +50,32 @@ class CreateInstitutionPage extends Component {
             return;
         }
 
+        // if file is picked load it
         const file = event.target.files[0];
         let reader = new FileReader();
         reader.onloadend = () => {
+            // set base64 encoded image to state
             this.setState({encodedImage: reader.result});
         }
         reader.readAsDataURL(file);
     }
 
+    /**
+     * clears image
+     */
     clearImage = () => {
         const errors = {...this.state.errors};
         delete errors["encodedImage"];
+        // set state with no errors for img input and reset image properties
         this.setState({errors, encodedImage: null, imageSelect: "",});
     }
 
+    /**
+     * called when user click on create institution button
+     */
     onClickCreate = () => {
         this.setState({pendingApiCall: true});
+        // extract institution from state
         const institution = {
             name: this.state.name,
             address: this.state.address,
@@ -57,28 +84,39 @@ class CreateInstitutionPage extends Component {
             encodedImage: this.state.encodedImage,
         }
 
+        // send new institution to server
         apiCalls.saveMyInstitution(institution).then(response => {
             this.setState({pendingApiCall: false}, () => {
+                // set that logged in user is isntituiton owner and redirect
                 this.props.setIsInstitutionOwner(true);
                 this.props.redirect("/myInstitution/addLanguages");
             });
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // handle state when user input contains errors
             let errors = {...this.state.errors};
             if (apiError.response.data && apiError.response.data.validationErrors) {
                 errors = {...apiError.response.data.validationErrors}
             }
+            // set new state with fetched errors
             this.setState({pendingApiCall: false, errors});
         });
     }
 
+    /**
+     * renders create institution page
+     * @returns {JSX.Element} page
+     */
     render() {
+        // determines if submit button is enabled
         let disabledSubmit = false;
         if (this.state.name === "" || this.state.address === "" || this.state.latitudeString === "" || this.state.longitudeString === "") {
             disabledSubmit = true;
         }
 
+        // renders page
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
                 <form>
@@ -157,6 +195,10 @@ class CreateInstitutionPage extends Component {
     }
 }
 
+/**
+ * maps redux state to page properties
+ * @param dispatch redux dispatch
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         setIsInstitutionOwner: value => dispatch(authActions.setIsInstitutionOwner(value)),

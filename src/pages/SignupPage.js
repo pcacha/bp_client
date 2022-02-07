@@ -4,8 +4,14 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import * as authActions from "../store/authActions";
 import Input from "../components/Input";
 
+/**
+ * page for user registration
+ */
 class SignupPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         username: "",
         email: "",
@@ -16,16 +22,24 @@ class SignupPage extends Component {
         passwordRepeatConfirmed: true,
     }
 
+    /**
+     * called when is some text input changed
+     * @param event input event
+     */
     onChange = (event) => {
         if (event.target.name === "passwordRepeat") {
+            // for password repeat
             const value = event.target.value;
+            // check if passwords are the same
             const passwordRepeatConfirmed = this.state.password === value;
             const errors = {...this.state.errors};
             errors.passwordRepeat = passwordRepeatConfirmed ? "" : "Passwords do not match";
             this.setState({passwordRepeatConfirmed, errors});
         }
         else if (event.target.name === "password") {
+            // for password
             const value = event.target.value;
+            // check if passwords are the same
             const passwordRepeatConfirmed = this.state.passwordRepeat === value;
             const errors = {...this.state.errors};
             errors.passwordRepeat = passwordRepeatConfirmed ? "" : "Passwords do not match";
@@ -33,14 +47,20 @@ class SignupPage extends Component {
             this.setState({passwordRepeatConfirmed, errors});
         }
         else {
+            // for other fields
             const errors = {...this.state.errors};
             delete errors[event.target.name];
             this.setState({errors});
         }
+        // update value
         this.setState({[event.target.name]: event.target.value});
     }
 
+    /**
+     * called when user clicks on sign up button
+     */
     onClickSignup = () => {
+        // extract user from state
         const user = {
             username: this.state.username,
             email: this.state.email,
@@ -48,9 +68,11 @@ class SignupPage extends Component {
         }
         this.setState({pendingApiCall: true});
 
+        // send user sing up to server
         this.props.signup(user).then(response => {
             this.setState({pendingApiCall: false}, () => this.props.history.push("/"));
         }).catch(apiError => {
+                // react on errors in user input
                 let errors = {...this.state.errors};
                 if (apiError.response.data && apiError.response.data.validationErrors) {
                     errors = {...apiError.response.data.validationErrors}
@@ -64,12 +86,18 @@ class SignupPage extends Component {
         );
     }
 
+    /**
+     * renders singup page
+     * @returns {JSX.Element} page
+     */
     render() {
+        // defines if sing up btn is enabled
         let disabledSubmit = false;
         if (this.state.username === "" || this.state.email === "" || this.state.password === "" || this.state.passwordRepeat === "") {
             disabledSubmit = true;
         }
 
+        // render page
         return (
             <div className="mx-auto bg-white mt-5 border rounded p-2 p-md-5 container auth-div gray-noise-background mb-3">
                 <form>
@@ -124,6 +152,10 @@ class SignupPage extends Component {
     }
 }
 
+/**
+ * maps redux dispatch to page props
+ * @param dispatch redux dispatch
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         signup: (user) => dispatch(authActions.signup(user)),

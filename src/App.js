@@ -23,11 +23,15 @@ import UserManagerPage from "./pages/UserManagerPage";
 import UserDetailPage from "./pages/UserDetailPage";
 
 
+/**
+ * high level component representing whole app
+ */
 class App extends Component {
 
   render() {
     const {user} = this.props;
 
+    // all routes available in app with its authorization
     let routes = (
         <Switch>
           <Route exact path="/" component={HomePage}/>
@@ -53,6 +57,7 @@ class App extends Component {
         </Switch>
     );
 
+    // renders app
     return (
         <Layout>
           {routes}
@@ -62,6 +67,10 @@ class App extends Component {
 }
 
 
+/**
+ * maps redux state to props
+ * @param state redux state
+ */
 const mapStateToProps = (state) => {
   return {
     user: state,

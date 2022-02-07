@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * spinner used for showing loading
+ */
 const Spinner = () => {
     return (
         <div className="d-flex">

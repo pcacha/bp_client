@@ -4,20 +4,31 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import ApproveExhibitCard from "../components/ApproveExhibitCard";
 
+/**
+ * Page for rendering exhibits where official text can be set
+ */
 class ApproveExhibitPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         languages: [],
         exhibits: [],
         pendingApiCall: false,
     }
 
+    /**
+     * Called when page is mounted
+     */
     componentDidMount() {
         this.setState({pendingApiCall: true})
+        // get exhibits to approve from server
         apiCalls.getExhibitsApproveTranslations().then(response => {
             let languages = response.data.languages;
             languages.unshift({languageId: -1, name: "Select language"});
 
+            // set default props to fetched exhibits
             let exhibits = response.data.exhibits;
             for(let ex of exhibits) {
                 ex.buttonDisabled = true;
@@ -27,10 +38,16 @@ class ApproveExhibitPage extends Component {
 
             this.setState({languages, exhibits, pendingApiCall: false});
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         });
     }
 
+    /**
+     * called when language is selected
+     * @param exhibitId exhibit id
+     * @param languageId language id
+     */
     selectLang = (exhibitId, languageId) => {
         let exhibits = [];
         for(let ex of this.state.exhibits) {
@@ -38,24 +55,33 @@ class ApproveExhibitPage extends Component {
                 exhibits.push(ex);
             }
             else {
+                // set language for exhibit
                 const buttonDisabled = languageId === "-1";
                 exhibits.push({...ex, lang: languageId, buttonDisabled});
             }
         }
+        // update state
         this.setState({exhibits});
     }
 
+    /**
+     * renders page with exhibits where official text can be set
+     * @returns {JSX.Element} page
+     */
     render() {
 
+        // map exhibits to its view cards
         const exhibits = this.state.exhibits.map(ex =>
             <ApproveExhibitCard key={ex.exhibitId} {...ex} languages={this.state.languages} />
         );
 
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
+            // if fetching data ended show fetched exhibits or message that there are none
             content = this.state.exhibits.length === 0 ? <h4>There are no exhibits</h4> : exhibits;
         }
 
+        // render page
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
                 <h2 className="mb-5 font-weight-bold">Exhibits</h2>

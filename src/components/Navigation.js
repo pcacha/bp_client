@@ -4,11 +4,16 @@ import NavigationItem from "../components/NavigationItem";
 import {connect} from "react-redux";
 import * as authActions from "../store/authActions";
 
+/**
+ * web navigation
+ */
 class Navigation extends Component {
 
+    // renders navigation in the top of webpage
     render() {
         const {user} = this.props;
 
+        // render navigation
         return (
             <div className="position-fixed w-100 fixed-header">
                 <nav className="blue-nav navbar navbar-expand-lg navbar-light" id="blue-nav">
@@ -69,12 +74,20 @@ class Navigation extends Component {
     }
 }
 
+/**
+ * maps redux state to props
+ * @param state redux state
+ */
 const mapStateToProps = (state) => {
     return {
         user: state,
     };
 }
 
+/**
+ * maps redux dispatch to props
+ * @param dispatch redux dispatch
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         logout: () => dispatch(authActions.logout()),

@@ -8,8 +8,14 @@ import parse from 'html-react-parser';
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
+/**
+ * page for creating new translations
+ */
 class NewTranslationPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         institutionId: this.props.match.params.institutionId,
         exhibitId: this.props.match.params.exhibitId,
@@ -24,24 +30,36 @@ class NewTranslationPage extends Component {
         errors: {},
     }
 
+    /**
+     * called when page is mounted
+     */
     componentDidMount() {
         this.setState({pendingApiCallGetNewTranslation: true})
+        // fetch translation details from the server
         apiCalls.getNewTranslation(this.state.exhibitId, this.state.languageId).then(response => {
+            // set fetched details to page state
             const {exhibitName, infoLabelText, infoLabel, text, languageName} = response.data;
             this.setState({exhibitName, infoLabelText, infoLabel, text, languageName, pendingApiCallGetNewTranslation: false});
         }).catch(error => {
+            // handles unauthorized state
             return handleError(error);
         });
     }
 
+    /**
+     * called when translation is submitted
+     */
     onTranslationCreate = () => {
         this.setState({pendingApiCallCreateTranslation: true});
 
+        // send translation to server
         apiCalls.saveNewTranslation(this.state.exhibitId, this.state.languageId, {text: this.state.text}).then(response => {
             this.setState({pendingApiCallCreateTranslation: false}, () => this.props.history.push("/institutions/" + this.state.institutionId));
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         }).catch(apiError => {
+            // handle errors in user input
             let errors = {...this.state.errors};
             if (apiError.response.data && apiError.response.data.validationErrors) {
                 errors = {...apiError.response.data.validationErrors}
@@ -50,12 +68,22 @@ class NewTranslationPage extends Component {
         });
     }
 
+    /**
+     * called on value change in text editor
+     * @param event event
+     * @param editor ck editor
+     */
     onTextChange = (event, editor) => {
+        // set value from editor to state
         const errors = {...this.state.errors};
         delete errors["text"];
         this.setState({text: editor.getData(), errors});
     }
 
+    /**
+     * render new translation page
+     * @returns {JSX.Element} page
+     */
     render() {
         const {
             exhibitName,
@@ -68,6 +96,7 @@ class NewTranslationPage extends Component {
             errors,
         } = this.state;
 
+        // return spinner if api call is processing
         if (pendingApiCallGetNewTranslation) {
             return (
                 <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
@@ -76,6 +105,7 @@ class NewTranslationPage extends Component {
             );
         }
 
+        // render page
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
                 <h2 className="mb-5 font-weight-bold">New Translation</h2>

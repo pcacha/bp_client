@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * homepage jumbotron
+ * @param props props
+ */
 const jumbotron = (props) => (
     <div className="intro">
         <div className="jumbotron jumbotron-fluid bg-transparent">

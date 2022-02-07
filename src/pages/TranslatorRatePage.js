@@ -6,8 +6,14 @@ import {INFO_LABELS_IMAGES_URL} from "../shared/sharedConstants";
 import parse from "html-react-parser";
 import TranslatorRateTranslationCard from "../components/TranslatorRateTranslationCard";
 
+/**
+ * page for translators to rate translations of pair exhibit-language
+ */
 class TranslatorRatePage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         exhibitId: this.props.match.params.exhibitId,
         languageId: this.props.match.params.languageId,
@@ -17,15 +23,24 @@ class TranslatorRatePage extends Component {
         pendingApiCall: true,
     }
 
+    /**
+     * called when page is mounted
+     */
     componentDidMount() {
         this.setState({pendingApiCall: true})
+        // fetch translations from server
         apiCalls.getRateOverview(this.state.exhibitId, this.state.languageId).then(response => {
             this.setState({exhibit: response.data.exhibit, language: response.data.language, translations: response.data.translations, pendingApiCall: false});
         }).catch(error => {
+            // handle unauthenticated state
             return handleError(error);
         });
     }
 
+    /**
+     * called when suer likes/unlikes translation
+     * @param translationId translation id
+     */
     onLikeChange = translationId => {
         let newTranslations = [];
         const {translations} = this.state;
@@ -35,28 +50,39 @@ class TranslatorRatePage extends Component {
                 newTranslations.push(t);
             }
             else {
+                // set new like value
                 newValue = !t.liked;
                 if(newValue) {
+                    // if value is true increase count likes
                     newTranslations.push({...t, liked: newValue, likesCount: t.likesCount + 1})
                 }
                 else {
+                    // if value is negative decrease count likes
                     newTranslations.push({...t, liked: newValue, likesCount: t.likesCount - 1})
                 }
             }
         }
         this.setState({translations: newTranslations});
 
+        // send request to set like/unlike to server
         apiCalls.setLike(translationId, {value: newValue}).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         });
     }
 
+    /**
+     * renders page for translators to rate translations of pair exhibit-language
+     * @returns {JSX.Element} page
+     */
     render() {
 
+        // map translations to translation rate cards
         const translations = this.state.translations.map(t =>
             <TranslatorRateTranslationCard key={t.translationId} {...t} onLikeChange={this.onLikeChange}/>
         );
 
+        // define content
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
             const {name, infoLabel, infoLabelText} = this.state.exhibit;
@@ -93,6 +119,7 @@ class TranslatorRatePage extends Component {
             );
         }
 
+        // render page
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
                 <h2 className="mb-5 font-weight-bold">Rate Translations</h2>

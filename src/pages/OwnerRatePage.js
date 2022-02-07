@@ -6,8 +6,14 @@ import {INFO_LABELS_IMAGES_URL} from "../shared/sharedConstants";
 import parse from "html-react-parser";
 import OwnerRateTranslationCard from "../components/OwnerRateTranslationCard";
 
+/**
+ * page for institution owner to pick official translation and like translations
+ */
 class OwnerRatePage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         exhibitId: this.props.match.params.exhibitId,
         languageId: this.props.match.params.languageId,
@@ -17,24 +23,35 @@ class OwnerRatePage extends Component {
         pendingApiCall: true,
     }
 
+    /**
+     * called when component is mounted
+     */
     componentDidMount() {
         this.setState({pendingApiCall: true})
+        // fetch translation from server
         apiCalls.getRateOverview(this.state.exhibitId, this.state.languageId).then(response => {
             let translations = response.data.translations;
             for(let t of translations) {
                 t.pendingApiCallSetOfficial = false;
             }
 
+            // update page state with fetched translations
             this.setState({exhibit: response.data.exhibit, language: response.data.language, translations, pendingApiCall: false});
         }).catch(error => {
+            // handle unauthorized state
             return handleError(error);
         });
     }
 
+    /**
+     * called when user likes/unlikes translation
+     * @param translationId translation id
+     */
     onLikeChange = translationId => {
         let newTranslations = [];
         const {translations} = this.state;
         let newValue;
+        // set new likes counts and if it is liked for translation that caused the call
         for(let t of translations) {
             if(t.translationId !== translationId) {
                 newTranslations.push(t);
@@ -49,17 +66,25 @@ class OwnerRatePage extends Component {
                 }
             }
         }
+        // update likes state
         this.setState({translations: newTranslations});
 
+        // sends request to like/unlike translation to the server
         apiCalls.setLike(translationId, {value: newValue}).catch(error => {
+            // handles unauthorized state
             return handleError(error);
         });
     }
 
+    /**
+     * called when official translation is changed
+     * @param translationId
+     */
     onOfficialChange = translationId => {
         let newTranslations = [];
         const {translations} = this.state;
         let newValue;
+        // update pending api call for translation that caused this
         for(let t of translations) {
             if(t.translationId !== translationId) {
                 newTranslations.push(t);
@@ -71,7 +96,9 @@ class OwnerRatePage extends Component {
         }
         this.setState({translations: newTranslations});
 
+        // send new value of official translation to server
         apiCalls.setOfficial(translationId, {value: newValue}).then(response => {
+            // update official translation view
             newTranslations = [];
             const {translations} = this.state;
             for(let t of translations) {
@@ -82,20 +109,28 @@ class OwnerRatePage extends Component {
                     newTranslations.push({...t, pendingApiCallSetOfficial: false, isOfficial: true});
                 }
             }
+            // set new state of official translation
             this.setState({translations: newTranslations});
         })
         .catch(error => {
+            // handle unauthorized state
             return handleError(error);
         });
     }
 
+    /**
+     * renders owner rate and select official translation page
+     * @returns {JSX.Element} page
+     */
     render() {
 
+        // map translations to rate translation cards
         const translations = this.state.translations.map(t =>
             <OwnerRateTranslationCard key={t.translationId} {...t} onLikeChange={this.onLikeChange} onOfficialChange={this.onOfficialChange}/>
         );
 
         let content = <Spinner/>;
+        // if there is no pending api call print translations
         if (!this.state.pendingApiCall) {
             const {name, infoLabel, infoLabelText} = this.state.exhibit;
 
@@ -131,6 +166,7 @@ class OwnerRatePage extends Component {
             );
         }
 
+        // render page
         return (
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
                 <h2 className="mb-5 font-weight-bold">Approve Translations</h2>

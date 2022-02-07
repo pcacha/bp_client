@@ -2,6 +2,11 @@ import React from "react";
 import Jumbotron from "../components/Jumbotron";
 import ThemesCard from "../components/ThemesCard";
 
+/**
+ * home page definition
+ * @param props page props
+ * @returns {JSX.Element} home page
+ */
 const home = (props) => (
     <div className="bg-white">
         <Jumbotron/>

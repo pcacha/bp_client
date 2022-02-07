@@ -1,5 +1,6 @@
 import * as actions from "./actionsTypes";
 
+// init redux state
 const initialState = {
     id: 0,
     username: "",
@@ -13,6 +14,11 @@ const initialState = {
     expiredAt: null,
 }
 
+/**
+ * merges redux action outcome with current state
+ * @param state current state
+ * @param action redux action
+ */
 export default function authReducer(state = initialState, action) {
     switch (action.type) {
         case actions.LOGOUT_SUCCESS:

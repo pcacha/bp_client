@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * generic input used in forms
+ * @param props props
+ */
 const Input = (props) => {
     let inputClassName = "form-control";
 

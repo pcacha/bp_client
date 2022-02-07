@@ -4,8 +4,14 @@ import Spinner from "../components/Spinner";
 import UserManagerRow from "../components/UserManagerRow";
 import handleError from "../shared/failureHandler";
 
+/**
+ * page for managing users
+ */
 class UserManagerPage extends Component {
 
+    /**
+     * current page state
+     */
     state = {
         users: [],
         filtered: [],
@@ -13,30 +19,46 @@ class UserManagerPage extends Component {
         search: "",
     };
 
+    /**
+     * called when page is mounted
+     */
     componentDidMount() {
         this.setState({pendingApiCall: true})
+        // fetch users from server
         apiCalls.getUsers().then(response => {
             this.setState({users: response.data, filtered: response.data, pendingApiCall: false});
         }).catch(error => {
+            // handle unauthenticated state
             return handleError(error);
         })
     }
 
+    /**
+     * Called when user changes value in search field
+     * @param event input event
+     */
     onSearchChange = (event) => {
         const value = event.target.value;
         if(this.state.search === "") {
+            // if search filed is empty show all users
             let filtered = [...this.state.users];
             this.setState({filtered, search: value});
         }
         else {
+            // if search field has text filter users
             let filtered = this.state.users.filter(u => u.username.includes(value) || u.email.includes(value));
             this.setState({filtered, search: value});
         }
     }
 
+    /**
+     * renders page for user management
+     * @returns {JSX.Element}
+     */
     render() {
         const {users, pendingApiCall, search, filtered} = this.state;
 
+        // define content
         let content = <Spinner/>;
         if (!pendingApiCall) {
             content = users.length === 0 ?
@@ -72,6 +94,7 @@ class UserManagerPage extends Component {
 
         }
 
+        // render page
         return (
             <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
                 <h2 className="mb-5">User Manager</h2>

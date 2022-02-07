@@ -2,6 +2,10 @@ import React from 'react';
 import parse from "html-react-parser";
 import ButtonWithProgress from "./ButtonWithProgress";
 
+/**
+ * card for listing sequence translations
+ * @param props props
+ */
 const MyTranslationCard = (props) => {
     let cardStyle = "card mb-4"
     if(props.isOfficial) {
