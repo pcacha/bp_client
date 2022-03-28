@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {EXHIBITS_IMAGES_URL, INSTITUTIONS_IMAGES_URL} from "../shared/sharedConstants";
+import {EXHIBITS_IMAGES_URL} from "../shared/sharedConstants";
 
 /**
  * card for listing exhibits for translating
