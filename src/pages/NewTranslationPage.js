@@ -49,7 +49,9 @@ class NewTranslationPage extends Component {
     /**
      * called when translation is submitted
      */
-    onTranslationCreate = () => {
+    onTranslationCreate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCallCreateTranslation: true});
 
         // send translation to server
@@ -139,7 +141,7 @@ class NewTranslationPage extends Component {
                         }
                     </div>
 
-                    <ButtonWithProgress  onClick={this.onTranslationCreate}
+                    <ButtonWithProgress  onClick={(e) => this.onTranslationCreate(e)}
                                          className="btn btn-primary w-100 my-2"
                                          disabled={pendingApiCallCreateTranslation || text === ""}
                                          pendingApiCall={pendingApiCallCreateTranslation}

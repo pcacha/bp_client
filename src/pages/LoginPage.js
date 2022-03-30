@@ -32,7 +32,9 @@ class LoginPage extends Component {
     /**
      * called when user submit login
      */
-    onClickLogin = () => {
+    onClickLogin = (e) => {
+        e.preventDefault();
+
         // extract credentials from state
         const body = {
             username: this.state.username,
@@ -89,7 +91,7 @@ class LoginPage extends Component {
 
                 <ButtonWithProgress
                     className="btn btn-primary w-100 my-2"
-                    onClick={this.onClickLogin}
+                    onClick={(e) => this.onClickLogin(e)}
                     disabled={disabledSubmit || this.state.pendingApiCall}
                     pendingApiCall={this.state.pendingApiCall}
                     hasChildren>

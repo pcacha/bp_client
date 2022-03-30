@@ -117,7 +117,9 @@ class AddExhibitPage extends Component {
     /**
      * Called when new exhibit is created
      */
-    onClickCreate = () => {
+    onClickCreate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCall: true});
         // extract exhibit from state
         const exhibit = {
@@ -278,7 +280,7 @@ class AddExhibitPage extends Component {
                         />
                     </div>
 
-                    <ButtonWithProgress  onClick={this.onClickCreate}
+                    <ButtonWithProgress  onClick={(e) => this.onClickCreate(e)}
                                          className="btn btn-primary w-100 my-2"
                                          disabled={pendingApiCall || disabledSubmit}
                                          pendingApiCall={pendingApiCall}

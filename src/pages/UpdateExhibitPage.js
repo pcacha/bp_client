@@ -94,7 +94,9 @@ class UpdateExhibitPage extends Component {
     /**
      * called when user submit exhibit image to be updated
      */
-    onClickImageUpdate = () => {
+    onClickImageUpdate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCallUpdateImage: true});
         const img = { encodedImage: this.state.encodedImage }
 
@@ -185,7 +187,9 @@ class UpdateExhibitPage extends Component {
     /**
      * called when user wants to update info abou exhibit
      */
-    onClickExhibitUpdate = () => {
+    onClickExhibitUpdate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCallUpdateInstitution: true});
         // extract exhibit from state
         const exhibit = {
@@ -268,7 +272,7 @@ class UpdateExhibitPage extends Component {
                                         <button className="btn btn-danger btn-lg mt-2" disabled={pendingApiCallUpdateImage} onClick={() => this.clearImage("encodedImage", "imageSelect")}>
                                             <i className="fa fa-times" /> Clear
                                         </button>
-                                        <ButtonWithProgress onClick={this.onClickImageUpdate}
+                                        <ButtonWithProgress onClick={(e) => this.onClickImageUpdate(e)}
                                                             className="btn btn-success btn-lg ml-2 mt-2"
                                                             disabled={pendingApiCallUpdateImage}
                                                             pendingApiCall={pendingApiCallUpdateImage}
@@ -383,7 +387,7 @@ class UpdateExhibitPage extends Component {
                             />
                         </div>
 
-                        <ButtonWithProgress  onClick={this.onClickExhibitUpdate}
+                        <ButtonWithProgress  onClick={(e) => this.onClickExhibitUpdate(e)}
                                              className="btn btn-primary w-100 my-2"
                                              disabled={pendingApiCallUpdateInstitution || name === ""}
                                              pendingApiCall={pendingApiCallUpdateInstitution}

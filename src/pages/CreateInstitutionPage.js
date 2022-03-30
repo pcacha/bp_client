@@ -73,7 +73,9 @@ class CreateInstitutionPage extends Component {
     /**
      * called when user click on create institution button
      */
-    onClickCreate = () => {
+    onClickCreate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCall: true});
         // extract institution from state
         const institution = {
@@ -182,7 +184,7 @@ class CreateInstitutionPage extends Component {
                         />
                     </div>
 
-                    <ButtonWithProgress  onClick={this.onClickCreate}
+                    <ButtonWithProgress  onClick={(e) => this.onClickCreate(e)}
                                          className="btn btn-primary w-100 my-2"
                                          disabled={this.state.pendingApiCall || disabledSubmit}
                                          pendingApiCall={this.state.pendingApiCall}

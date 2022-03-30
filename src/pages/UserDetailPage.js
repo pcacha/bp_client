@@ -89,7 +89,9 @@ class UserDetailPage extends Component {
     /**
      * called when admin updates username
      */
-    onClickUsernameUpdate = () => {
+    onClickUsernameUpdate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCallUsernameUpdate: true});
 
         // send request to server to update username
@@ -230,7 +232,7 @@ class UserDetailPage extends Component {
                             />
                         </div>
 
-                        <ButtonWithProgress  onClick={this.onClickUsernameUpdate}
+                        <ButtonWithProgress  onClick={(e) => this.onClickUsernameUpdate(e)}
                                              className="btn btn-primary w-100 my-2"
                                              disabled={pendingApiCallUsernameUpdate || username === ""}
                                              pendingApiCall={pendingApiCallUsernameUpdate}

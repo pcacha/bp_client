@@ -82,7 +82,9 @@ class ProfilePage extends Component {
     /**
      * called when user submit user info update
      */
-    onClickUserUpdate = () => {
+    onClickUserUpdate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCallUpdateUser: true});
         const {username, email} = this.state;
 
@@ -103,7 +105,9 @@ class ProfilePage extends Component {
     /**
      * called when user submit password update
      */
-    onClickPasswordUpdate = () => {
+    onClickPasswordUpdate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCallUpdatePassword: true});
         const {password} = this.state;
 
@@ -172,7 +176,7 @@ class ProfilePage extends Component {
                                error={errors.email}/>
                     </div>
 
-                    <ButtonWithProgress onClick={this.onClickUserUpdate}
+                    <ButtonWithProgress onClick={(e) => this.onClickUserUpdate(e)}
                                         className="btn btn-primary w-100 my-2"
                                         disabled={pendingApiCallUpdateUser || username === "" || email === ""}
                                         pendingApiCall={pendingApiCallUpdateUser}
@@ -209,7 +213,7 @@ class ProfilePage extends Component {
                         />
                     </div>
 
-                    <ButtonWithProgress onClick={this.onClickPasswordUpdate}
+                    <ButtonWithProgress onClick={(e) => this.onClickPasswordUpdate(e)}
                                         className="btn btn-primary w-100 my-2"
                                         disabled={pendingApiCallUpdatePassword || !passwordRepeatConfirmed || password === "" || passwordRepeat === ""}
                                         pendingApiCall={pendingApiCallUpdatePassword}

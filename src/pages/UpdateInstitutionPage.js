@@ -91,7 +91,9 @@ class UpdateInstitutionPage extends Component {
     /**
      * called when user submit institution image update
      */
-    onClickImageUpdate = () => {
+    onClickImageUpdate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCallUpdateImage: true});
         const img = { encodedImage: this.state.encodedImage }
 
@@ -134,7 +136,9 @@ class UpdateInstitutionPage extends Component {
     /**
      * called when institution manager wants to update info about institution
      */
-    onClickInstitutionUpdate = () => {
+    onClickInstitutionUpdate = (e) => {
+        e.preventDefault();
+
         this.setState({pendingApiCallUpdateInstitution: true});
         // extract institution from state
         const institution = {
@@ -180,7 +184,9 @@ class UpdateInstitutionPage extends Component {
     /**
      * called when institution manager wants to add new manager
      */
-    onClickManagerAdd = () => {
+    onClickManagerAdd = (e) => {
+        e.preventDefault();
+
         // ask before adding manager
         if (window.confirm("Do you really want to add a new manager to your institution?")) {
             this.setState({pendingApiCallAddManager: true});
@@ -261,7 +267,7 @@ class UpdateInstitutionPage extends Component {
                                     <button className="btn btn-danger btn-lg mt-2" disabled={pendingApiCallUpdateImage} onClick={this.clearImage}>
                                         <i className="fa fa-times" /> Clear
                                     </button>
-                                    <ButtonWithProgress onClick={this.onClickImageUpdate}
+                                    <ButtonWithProgress onClick={(e) => this.onClickImageUpdate(e)}
                                                         className="btn btn-success btn-lg ml-2 mt-2"
                                                         disabled={pendingApiCallUpdateImage}
                                                         pendingApiCall={pendingApiCallUpdateImage}
@@ -322,7 +328,7 @@ class UpdateInstitutionPage extends Component {
                         />
                     </div>
 
-                    <ButtonWithProgress  onClick={this.onClickInstitutionUpdate}
+                    <ButtonWithProgress  onClick={(e) => this.onClickInstitutionUpdate(e)}
                                          className="btn btn-primary w-100 my-2"
                                          disabled={pendingApiCallUpdateInstitution || name === "" || address === "" || latitudeString === "" || longitudeString === ""}
                                          pendingApiCall={pendingApiCallUpdateInstitution}
@@ -369,7 +375,7 @@ class UpdateInstitutionPage extends Component {
                         error={errors.email}
                     />
 
-                    <ButtonWithProgress  onClick={this.onClickManagerAdd}
+                    <ButtonWithProgress  onClick={(e) => this.onClickManagerAdd(e)}
                                          className="btn btn-primary w-100 my-2"
                                          disabled={pendingApiCallAddManager || email === ""}
                                          pendingApiCall={pendingApiCallAddManager}

@@ -59,7 +59,9 @@ class SignupPage extends Component {
     /**
      * called when user clicks on sign up button
      */
-    onClickSignup = () => {
+    onClickSignup = (e) => {
+        e.preventDefault();
+
         // extract user from state
         const user = {
             username: this.state.username,
@@ -139,7 +141,7 @@ class SignupPage extends Component {
                         />
                     </div>
 
-                    <ButtonWithProgress  onClick={this.onClickSignup}
+                    <ButtonWithProgress  onClick={(e) => this.onClickSignup(e)}
                                          className="btn btn-primary w-100 my-2"
                                          disabled={this.state.pendingApiCall || !this.state.passwordRepeatConfirmed || disabledSubmit}
                                          pendingApiCall={this.state.pendingApiCall}
