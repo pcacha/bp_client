@@ -19,6 +19,7 @@ class UpdateInstitutionPage extends Component {
     state = {
         name: this.props.institution.name,
         address: this.props.institution.address,
+        description: this.props.institution.description,
         latitudeString: this.props.institution.latitude,
         longitudeString: this.props.institution.longitude,
         image: this.props.institution.image,
@@ -144,6 +145,7 @@ class UpdateInstitutionPage extends Component {
         const institution = {
             name: this.state.name,
             address: this.state.address,
+            description: this.state.description,
             latitudeString: this.state.latitudeString,
             longitudeString: this.state.longitudeString,
         }
@@ -212,6 +214,7 @@ class UpdateInstitutionPage extends Component {
         const {
             name,
             address,
+            description,
             latitudeString,
             longitudeString,
             image,
@@ -311,6 +314,15 @@ class UpdateInstitutionPage extends Component {
                     </div>
                     <div className="form-group">
                         <Input
+                            label="Description" type="textarea"
+                            placeholder="Enter description" name="description" value={description}
+                            onChange={this.onChange}
+                            hasError={errors.description && true}
+                            error={errors.description}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <Input
                             label="Latitude"
                             placeholder="Enter latitude" name="latitudeString" value={latitudeString}
                             onChange={this.onChange}
@@ -330,7 +342,8 @@ class UpdateInstitutionPage extends Component {
 
                     <ButtonWithProgress  onClick={(e) => this.onClickInstitutionUpdate(e)}
                                          className="btn btn-primary w-100 my-2"
-                                         disabled={pendingApiCallUpdateInstitution || name === "" || address === "" || latitudeString === "" || longitudeString === ""}
+                                         disabled={pendingApiCallUpdateInstitution || name === "" || address === "" || description === "" ||
+                                             latitudeString === "" || longitudeString === ""}
                                          pendingApiCall={pendingApiCallUpdateInstitution}
                                          hasChildren>
                         <i className="fa fa-paper-plane" /> Update institution information

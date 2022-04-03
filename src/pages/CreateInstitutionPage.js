@@ -17,6 +17,7 @@ class CreateInstitutionPage extends Component {
     state = {
         name: "",
         address: "",
+        description: "",
         latitudeString: "",
         longitudeString: "",
         encodedImage: null,
@@ -81,6 +82,7 @@ class CreateInstitutionPage extends Component {
         const institution = {
             name: this.state.name,
             address: this.state.address,
+            description: this.state.description,
             latitudeString: this.state.latitudeString,
             longitudeString: this.state.longitudeString,
             encodedImage: this.state.encodedImage,
@@ -114,7 +116,7 @@ class CreateInstitutionPage extends Component {
     render() {
         // determines if submit button is enabled
         let disabledSubmit = false;
-        if (this.state.name === "" || this.state.address === "" || this.state.latitudeString === "" || this.state.longitudeString === "") {
+        if (this.state.name === "" || this.state.address === "" || this.state.description === "" || this.state.latitudeString === "" || this.state.longitudeString === "") {
             disabledSubmit = true;
         }
 
@@ -163,6 +165,15 @@ class CreateInstitutionPage extends Component {
                             onChange={this.onChange}
                             hasError={this.state.errors.address && true}
                             error={this.state.errors.address}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <Input
+                            label="Description" type="textarea"
+                            placeholder="Enter description" name="description" value={this.state.description}
+                            onChange={this.onChange}
+                            hasError={this.state.errors.description && true}
+                            error={this.state.errors.description}
                         />
                     </div>
                     <div className="form-group">

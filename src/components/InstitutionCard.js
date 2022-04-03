@@ -23,6 +23,10 @@ const InstitutinCard = (props) => (
                         <span className="font-weight-bold">Address: </span>
                         {props.address}
                     </div>
+
+                    <div className="mt-2">
+                        {props.description}
+                    </div>
                 </div>
 
                 <div className="col-md-3">
