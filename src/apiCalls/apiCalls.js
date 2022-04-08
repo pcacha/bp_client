@@ -377,3 +377,142 @@ export const adminRemoveInstitution = userId => {
 export const getQRCode = exhibitId => {
     return axios.get("/exhibits/" + exhibitId + "/qrcode");
 }
+
+/**
+ * Gets all buildings of institution
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const getBuildings = () => {
+    return axios.get("/location/buildings");
+}
+
+/**
+ * Saves new building
+ * @param building new building
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const saveBuilding = building => {
+    return axios.post("/location/buildings", building);
+}
+
+/**
+ * Deletes building
+ * @param buildingId building id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const deleteBuilding = buildingId => {
+    return axios.delete("/location/buildings/" + buildingId);
+}
+
+/**
+ * Gets details about building
+ * @param buildingId building id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const getBuilding = buildingId => {
+    return axios.get("/location/buildings/" + buildingId);
+}
+
+/**
+ * Updates building
+ * @param updatedBuilding updated building
+ * @param buildingId building id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const updateBuilding = (updatedBuilding, buildingId) => {
+    return axios.put("/location/buildings/" + buildingId, updatedBuilding);
+}
+
+/**
+ * Deletes room
+ * @param roomId room id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const deleteRoom = roomId => {
+    return axios.delete("/location/rooms/" + roomId);
+}
+
+/**
+ * Gets all rooms for given building
+ * @param buildingId building id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const getRooms = buildingId => {
+    return axios.get("/location/rooms/all/" + buildingId);
+}
+
+/**
+ * Saves new room
+ * @param room new room
+ * @param buildingId building id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const saveRoom = (room, buildingId) => {
+    return axios.post("/location/rooms/" + buildingId, room);
+}
+
+/**
+ * Gets details about room
+ * @param roomId room id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const getRoom = roomId => {
+    return axios.get("/location/rooms/" + roomId);
+}
+
+/**
+ * Updates room
+ * @param updatedRoom updated room
+ * @param roomId room id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const updateRoom = (updatedRoom, roomId) => {
+    return axios.put("/location/rooms/" + roomId, updatedRoom);
+}
+
+/**
+ * Deletes showcase
+ * @param showcaseId showcase id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const deleteShowcase = showcaseId => {
+    return axios.delete("/location/showcases/" + showcaseId);
+}
+
+/**
+ * Gets all showcases for given room
+ * @param roomId room id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const getShowcases = roomId => {
+    return axios.get("/location/showcases/all/" + roomId);
+}
+
+/**
+ * Saves new showcase
+ * @param showcase new showcase
+ * @param roomId room id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const saveShowcase = (showcase, roomId) => {
+    return axios.post("/location/showcases/" + roomId, showcase);
+}
+
+/**
+ * Gets details about showcase
+ * @param showcaseId showcase id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const getShowcase = showcaseId => {
+    return axios.get("/location/showcases/" + showcaseId);
+}
+
+/**
+ * Updates showcase
+ * @param updatedShowcase updated showcase
+ * @param showcaseId showcase id
+ * @returns {Promise<AxiosResponse<any>>} response
+ */
+export const updateShowcase = (updatedShowcase, showcaseId) => {
+    return axios.put("/location/showcases/" + showcaseId, updatedShowcase);
+}

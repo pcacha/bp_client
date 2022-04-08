@@ -372,6 +372,13 @@ class UpdateInstitutionPage extends Component {
                     </button>
                 </Link>
 
+                <br />
+                <Link exact to="/myInstitution/buildings" >
+                    <button type="button" className="btn btn-lg mt-3 btn-secondary">
+                        <i className="fa fa-map-marker" /> Buildings, rooms, show-cases
+                    </button>
+                </Link>
+
                 <form className="mt-4">
                     {
                         managerAdded &&
