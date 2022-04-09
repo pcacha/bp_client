@@ -26,7 +26,6 @@ class ApproveExhibitPage extends Component {
         // get exhibits to approve from server
         apiCalls.getExhibitsApproveTranslations().then(response => {
             let languages = response.data.languages;
-            languages.unshift({languageId: -1, name: "Select language"});
 
             // set default props to fetched exhibits
             let exhibits = response.data.exhibits;
@@ -56,8 +55,7 @@ class ApproveExhibitPage extends Component {
             }
             else {
                 // set language for exhibit
-                const buttonDisabled = languageId === "-1";
-                exhibits.push({...ex, lang: languageId, buttonDisabled});
+                exhibits.push({...ex, lang: languageId, buttonDisabled: false});
             }
         }
         // update state

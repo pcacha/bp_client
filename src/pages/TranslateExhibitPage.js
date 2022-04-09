@@ -26,7 +26,6 @@ class TranslateExhibitPage extends Component {
         // fetch exhibits and languages from server
         apiCalls.getExhibitsTranslate(this.props.match.params.institutionId).then(response => {
             let languages = response.data.languages;
-            languages.unshift({languageId: -1, name: "Select language"});
 
             // add default props to exhibits
             let exhibits = response.data.exhibits;
@@ -57,8 +56,7 @@ class TranslateExhibitPage extends Component {
             }
             else {
                 // change language to value from param
-                const buttonsDisabled = languageId === "-1";
-                exhibits.push({...ex, lang: languageId, buttonsDisabled});
+                exhibits.push({...ex, lang: languageId, buttonsDisabled: false});
             }
         }
         this.setState({exhibits});

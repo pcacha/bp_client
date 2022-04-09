@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {EXHIBITS_IMAGES_URL} from "../shared/sharedConstants";
+import Select from "react-select";
 
 /**
  * card for listing exhibits to approve
@@ -19,15 +20,14 @@ const ApproveExhibitCard = (props) => (
                         {props.name}
                     </h3>
 
-                    <div>
-                        <select className="custom-select custom-select-lg mb-3 mt-2" onChange={(event) => props.selectLang(props.exhibitId, event.target.value)}>
-                            {props.languages.map(lan => <option key={lan.languageId} value={lan.languageId}>{lan.name}</option>)}
-                        </select>
+                    <div className="mb-3 mt-4">
+                        <Select options={props.languages.map(lan => {return {value: lan.languageId, label: lan.name};})}
+                                onChange={(event) => props.selectLang(props.exhibitId, event.value)} />
                     </div>
                 </div>
 
                 <div className="col-md-3">
-                    <Link exact to={"/approve/" + props.exhibitId + "/" + props.lang}>
+                    <Link exact to={"/approve/" + props.exhibitId + "/" + props.lang} className={props.buttonDisabled && "disabled-link"}>
                         <button type="button" disabled={props.buttonDisabled} className="btn btn-primary btn-lg w-100">
                             <i className="fa fa-star"/> Approve
                         </button>
