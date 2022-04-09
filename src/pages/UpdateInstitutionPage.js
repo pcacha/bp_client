@@ -242,7 +242,34 @@ class UpdateInstitutionPage extends Component {
                     {new Date(createdAt).toLocaleDateString("en-US")}
                 </div>
 
-                <form className="mb-4">
+                <Link exact to="/myInstitution/addLanguages" >
+                    <button type="button" className="btn btn-lg btn-success">
+                        <i className="fa fa-plus-circle" /> Add languages
+                    </button>
+                </Link>
+
+                <br />
+                <Link exact to="/myInstitution/addExhibit" >
+                    <button type="button" className="btn btn-lg mt-3 btn-success">
+                        <i className="fa fa-plus-circle" /> Add exhibit
+                    </button>
+                </Link>
+
+                <br />
+                <Link exact to="/myInstitution/exhibits" >
+                    <button type="button" className="btn btn-lg mt-3 btn-info">
+                        <i className="fa fa-bars" /> View exhibits
+                    </button>
+                </Link>
+
+                <br />
+                <Link exact to="/myInstitution/buildings" >
+                    <button type="button" className="btn btn-lg mt-3 btn-secondary">
+                        <i className="fa fa-map-marker" /> Buildings, rooms, show-cases
+                    </button>
+                </Link>
+
+                <form className="mb-4 mt-4">
                     {
                         imageUpdated &&
                         <div className="alert alert-success" role="alert">
@@ -350,34 +377,6 @@ class UpdateInstitutionPage extends Component {
                     </ButtonWithProgress>
 
                 </form>
-
-
-                <Link exact to="/myInstitution/addLanguages" >
-                    <button type="button" className="btn btn-lg mt-3 btn-success">
-                        <i className="fa fa-plus-circle" /> Add languages
-                    </button>
-                </Link>
-
-                <br />
-                <Link exact to="/myInstitution/addExhibit" >
-                    <button type="button" className="btn btn-lg mt-3 btn-success">
-                        <i className="fa fa-plus-circle" /> Add exhibit
-                    </button>
-                </Link>
-
-                <br />
-                <Link exact to="/myInstitution/exhibits" >
-                    <button type="button" className="btn btn-lg mt-3 btn-info">
-                        <i className="fa fa-bars" /> View exhibits
-                    </button>
-                </Link>
-
-                <br />
-                <Link exact to="/myInstitution/buildings" >
-                    <button type="button" className="btn btn-lg mt-3 btn-secondary">
-                        <i className="fa fa-map-marker" /> Buildings, rooms, show-cases
-                    </button>
-                </Link>
 
                 <form className="mt-4">
                     {
