@@ -7,6 +7,7 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import {EXHIBITS_IMAGES_URL, INFO_LABELS_IMAGES_URL} from "../shared/sharedConstants";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import LocationPicker from "../components/LocationPicker";
 
 /**
  * page for updating exhibit
@@ -20,9 +21,9 @@ class UpdateExhibitPage extends Component {
         exhibitId: 0,
         name: "",
         infoLabelText: "",
-        building: "",
-        room: "",
-        showcase: "",
+        buildingId: null,
+        roomId: null,
+        showcaseId: null,
         createdAt: "",
         image: "",
         encodedImage: null,
@@ -47,7 +48,10 @@ class UpdateExhibitPage extends Component {
         this.setState({pendingApiCallGetInstitution: true})
         // get exhibit info from server
         apiCalls.getExhibit(this.props.match.params.exhibitId).then(response => {
-            this.setState({...response.data, pendingApiCallGetInstitution: false});
+            const buildingId = response.data.building ? response.data.building.buildingId : null;
+            const roomId = response.data.room ? response.data.room.roomId : null;
+            const showcaseId = response.data.showcase ? response.data.showcase.showcaseId : null;
+            this.setState({...response.data, pendingApiCallGetInstitution: false, buildingId, roomId, showcaseId});
         }).catch(error => {
             // handle unauthenticated state
             return handleError(error);
@@ -195,9 +199,9 @@ class UpdateExhibitPage extends Component {
         const exhibit = {
             name: this.state.name,
             infoLabelText: this.state.infoLabelText,
-            building: this.state.building,
-            room: this.state.room,
-            showcase: this.state.showcase,
+            buildingId: this.state.buildingId,
+            roomId: this.state.roomId,
+            showcaseId: this.state.showcaseId,
         }
 
         // send update exhibit request to server
@@ -213,6 +217,16 @@ class UpdateExhibitPage extends Component {
     }
 
     /**
+     * updates new info about selected building, room and showcase
+     * @param buildingId building id
+     * @param roomId room id
+     * @param showcaseId showcase id
+     */
+    updateLocation = (buildingId, roomId, showcaseId) => {
+        this.setState({buildingId, roomId, showcaseId});
+    }
+
+    /**
      * renders exhibit update page
      * @returns {JSX.Element} page
      */
@@ -220,9 +234,9 @@ class UpdateExhibitPage extends Component {
         const {
             name,
             infoLabelText,
-            building,
-            room,
-            showcase,
+            buildingId,
+            roomId,
+            showcaseId,
             image,
             encodedImage,
             imageSelect,
@@ -362,31 +376,7 @@ class UpdateExhibitPage extends Component {
                             }
                         </div>
                         <div className="form-group">
-                            <Input
-                                label="Building"
-                                placeholder="Enter building" name="building" value={building}
-                                onChange={this.onChange}
-                                hasError={errors.building && true}
-                                error={errors.building}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <Input
-                                label="Room"
-                                placeholder="Enter room" name="room" value={room}
-                                onChange={this.onChange}
-                                hasError={errors.room && true}
-                                error={errors.room}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <Input
-                                label="Show-case"
-                                placeholder="Enter show-case" name="showcase" value={showcase}
-                                onChange={this.onChange}
-                                hasError={errors.showcase && true}
-                                error={errors.showcase}
-                            />
+                            <LocationPicker update={this.updateLocation} buildingId={buildingId} roomId={roomId} showcaseId={showcaseId} />
                         </div>
 
                         <ButtonWithProgress  onClick={(e) => this.onClickExhibitUpdate(e)}

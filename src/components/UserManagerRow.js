@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from "react-router-dom/es/Link";
+import { Link } from "react-router-dom";
 
 /**
  * one row in table representing system user

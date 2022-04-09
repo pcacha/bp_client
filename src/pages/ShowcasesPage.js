@@ -3,7 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import ShowcaseCard from "../components/ShowcaseCard";
-import Link from "react-router-dom/es/Link";
+import { Link } from "react-router-dom";
 
 /**
  * page with all showcases of a room defined in url

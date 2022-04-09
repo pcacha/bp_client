@@ -3,7 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import BuildingCard from "../components/BuildingCard";
-import Link from "react-router-dom/es/Link";
+import { Link } from "react-router-dom";
 
 /**
  * page with all buildings of an institution that user is managing

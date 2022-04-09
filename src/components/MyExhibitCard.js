@@ -29,7 +29,7 @@ const MyExhibitCard = (props) => (
                         props.building &&
                         <div>
                             <span className="font-weight-bold">Building: </span>
-                            {props.building}
+                            {props.building.name}
                         </div>
                     }
 
@@ -37,7 +37,7 @@ const MyExhibitCard = (props) => (
                         props.room &&
                         <div>
                             <span className="font-weight-bold">Room: </span>
-                            {props.room}
+                            {props.room.name}
                         </div>
                     }
 
@@ -45,7 +45,7 @@ const MyExhibitCard = (props) => (
                         props.showcase &&
                         <div>
                             <span className="font-weight-bold">Show-case: </span>
-                            {props.showcase}
+                            {props.showcase.name}
                         </div>
                     }
                 </div>

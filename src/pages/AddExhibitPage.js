@@ -5,6 +5,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Input from "../components/Input";
 import ButtonWithProgress from "../components/ButtonWithProgress";
+import LocationPicker from "../components/LocationPicker";
 
 /**
  * Page where institution manager can add new exhibits
@@ -17,9 +18,9 @@ class AddExhibitPage extends Component {
     initState = {
         name: "",
         infoLabelText: "",
-        building: "",
-        room: "",
-        showcase: "",
+        buildingId: null,
+        roomId: null,
+        showcaseId: null,
         encodedImage: null,
         imageSelect: "",
         encodedInfoLabel: null,
@@ -125,16 +126,19 @@ class AddExhibitPage extends Component {
         const exhibit = {
             name: this.state.name,
             infoLabelText: this.state.infoLabelText,
-            building: this.state.building,
-            room: this.state.room,
-            showcase: this.state.showcase,
+            buildingId: this.state.buildingId,
+            roomId: this.state.roomId,
+            showcaseId: this.state.showcaseId,
             encodedImage: this.state.encodedImage,
             encodedInfoLabel: this.state.encodedInfoLabel,
         }
 
         // send new exhibit to server
         apiCalls.addExhibit(exhibit).then(response => {
-            this.setState({...this.initState}, () => this.setState({created: true}));
+            let currBuildingId = this.state.buildingId;
+            let currRoomId = this.state.roomId;
+            let currShowcaseId = this.state.showcaseId;
+            this.setState({...this.initState}, () => this.setState({created: true, buildingId: currBuildingId, roomId: currRoomId, showcaseId: currShowcaseId}));
         }).catch(error => {
             // react on unauthorized state
             return handleError(error);
@@ -146,6 +150,16 @@ class AddExhibitPage extends Component {
             }
             this.setState({pendingApiCall: false, errors});
         });
+    }
+
+    /**
+     * updates new info about selected building, room and showcase
+     * @param buildingId building id
+     * @param roomId room id
+     * @param showcaseId showcase id
+     */
+    updateLocation = (buildingId, roomId, showcaseId) => {
+        this.setState({buildingId, roomId, showcaseId});
     }
 
     /**
@@ -255,31 +269,7 @@ class AddExhibitPage extends Component {
                         }
                     </div>
                     <div className="form-group">
-                        <Input
-                            label="Building"
-                            placeholder="Enter building" name="building" value={building}
-                            onChange={this.onChange}
-                            hasError={errors.building && true}
-                            error={errors.building}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <Input
-                            label="Room"
-                            placeholder="Enter room" name="room" value={room}
-                            onChange={this.onChange}
-                            hasError={errors.room && true}
-                            error={errors.room}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <Input
-                            label="Show-case"
-                            placeholder="Enter show-case" name="showcase" value={showcase}
-                            onChange={this.onChange}
-                            hasError={errors.showcase && true}
-                            error={errors.showcase}
-                        />
+                        <LocationPicker update={this.updateLocation} />
                     </div>
 
                     <ButtonWithProgress  onClick={(e) => this.onClickCreate(e)}
