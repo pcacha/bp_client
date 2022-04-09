@@ -244,7 +244,9 @@ class AddExhibitPage extends Component {
                     </div>
                     <div className="form-group">
                         <label>Information label text</label>
-                        <CKEditor editor={ClassicEditor} data={infoLabelText} onChange={this.onInfoLabelTextChange}/>
+                        <CKEditor editor={ClassicEditor}
+                                  config={{removePlugins: ['Table', 'TableToolbar', 'EasyImage', 'MediaEmbed', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']}}
+                                  data={infoLabelText} onChange={this.onInfoLabelTextChange}/>
                         {
                             errors.infoLabelText &&
                             <div className="text-danger">

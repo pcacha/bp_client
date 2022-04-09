@@ -132,7 +132,9 @@ class NewTranslationPage extends Component {
                 <form className="mt-4">
                     <div className="form-group">
                         <label>Translated text</label>
-                        <CKEditor editor={ClassicEditor} data={text} onChange={this.onTextChange}/>
+                        <CKEditor editor={ClassicEditor}
+                                  config={{removePlugins: ['Table', 'TableToolbar', 'EasyImage', 'MediaEmbed', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']}}
+                                  data={text} onChange={this.onTextChange}/>
                         {
                             errors.text &&
                             <div className="text-danger">
