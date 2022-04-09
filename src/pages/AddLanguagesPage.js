@@ -3,6 +3,7 @@ import Spinner from "../components/Spinner";
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
+import {Link} from "react-router-dom";
 
 /**
  * Page for adding languages to institution
@@ -120,8 +121,15 @@ class AddLanguagesPage extends Component {
             <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
                 <h2 className="mb-5 font-weight-bold">Add Languages</h2>
 
+                <Link exact to="/myInstitution" >
+                    <button type="button" className="btn btn-lg mt-3 btn-info mb-4">
+                        <i className="fa fa-search" /> Institution overview
+                    </button>
+                </Link>
+
+
                 <div className="row">
-                    <div className="col-md-6 px-md-5">
+                    <div className="col-md-6 ">
                         <div className="input-group mb-4">
                             <input type="text" className="form-control" placeholder="Search language" name="search" value={search} onChange={this.onSearchChange} />
                             <div className="input-group-append">
