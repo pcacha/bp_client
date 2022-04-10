@@ -170,9 +170,6 @@ class AddExhibitPage extends Component {
         const {
             name,
             infoLabelText,
-            building,
-            room,
-            showcase,
             encodedImage,
             imageSelect,
             encodedInfoLabel,
