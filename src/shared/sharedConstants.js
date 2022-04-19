@@ -1,7 +1,7 @@
 /**
  * server root url
  */
-const SERVER_ROOT_URL = "http://localhost:80/";
+const SERVER_ROOT_URL = "http://localhost:8080/";
 /**
  * institution images url
  */
