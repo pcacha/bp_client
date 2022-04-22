@@ -96,7 +96,7 @@ class TranslatorRatePage extends Component {
                       {this.state.language}
                   </div>
 
-                  <div>
+                  <div className="text-center">
                       <img className="img-fluid mt-2" src={INFO_LABELS_IMAGES_URL + infoLabel} alt="information label image" />
                   </div>
 
