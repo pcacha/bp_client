@@ -106,3 +106,40 @@ img.sizedImg {
   max-width: 180px;
   max-height: 180px;
 }
+
+
+/* user details page cars styles */
+div.thick-top-border {
+  border-top-width: 4px;
+  border-top-color: black;
+}
+
+div.thick-side-borders {
+  border-right-width: 4px;
+  border-right-color: black;
+  border-left-width: 4px;
+  border-left-color: black;
+}
+
+div.thick-bottom-border {
+  border-bottom-width: 4px;
+  border-bottom-color: black;
+}
+
+div.no-rounded {
+  border-radius: 0 !important;
+}
+
+div.my-rounded-top {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+div.my-rounded-bottom {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+div.no-bottom-border {
+  border-bottom-width: 0;
+}

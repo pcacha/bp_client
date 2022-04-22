@@ -224,7 +224,7 @@ class UserDetailPage extends Component {
 
                         <div className="form-group">
                             <Input
-                                label="Name"
+                                label="Username" boldLabel
                                 placeholder="Enter name" name="username" value={username}
                                 onChange={this.onChange}
                                 hasError={errors.username && true}
@@ -241,50 +241,64 @@ class UserDetailPage extends Component {
                         </ButtonWithProgress>
                     </form>
 
-                    <h5>Password Change</h5>
-                    <p>Generate a new password and send it to an e-mail address: <span className="font-weight-bold">{email}</span></p>
-                    <ButtonWithProgress  onClick={this.onPasswordChange}
-                                         className="btn btn-danger btn-lg my-1"
-                                         disabled={pendingApiCallChangePassword}
-                                         pendingApiCall={pendingApiCallChangePassword}
-                                         hasChildren>
-                        <i className="fa fa-key"/> Generate new password
-                    </ButtonWithProgress>
+                    <div className="card thick-top-border border-dark thick-side-borders my-rounded-top no-bottom-border">
+                        <div className="card-body">
+                            <h5>Password Change</h5>
+                            <p>Generate a new password and send it to an e-mail address: <span className="font-weight-bold">{email}</span></p>
+                            <ButtonWithProgress  onClick={this.onPasswordChange}
+                                                 className="btn btn-danger btn-lg my-1"
+                                                 disabled={pendingApiCallChangePassword}
+                                                 pendingApiCall={pendingApiCallChangePassword}
+                                                 hasChildren>
+                                <i className="fa fa-key"/> Generate new password
+                            </ButtonWithProgress>
+                        </div>
+                    </div>
 
-                    <h5 className="mt-4">Translation Rights</h5>
-                    <p>Change user's right to translate</p>
-                    <ButtonWithProgress  onClick={this.onTranslatorChange}
-                                         className={"btn btn-lg my-1 " + (isTranslator ? "btn-primary" : "btn-secondary")}
-                                         disabled={pendingApiCallTranslator}
-                                         pendingApiCall={pendingApiCallTranslator}
-                                         hasChildren>
-                        <i className="fa fa-globe"/> {isTranslator ? "Translation rights on" : "Translation rights off"}
-                    </ButtonWithProgress>
+                    <div className="card thick-side-borders border-dark no-rounded no-bottom-border">
+                        <div className="card-body">
+                            <h5>Translation Rights</h5>
+                            <p>Change user's right to translate</p>
+                            <ButtonWithProgress  onClick={this.onTranslatorChange}
+                                                 className={"btn btn-lg my-1 " + (isTranslator ? "btn-primary" : "btn-secondary")}
+                                                 disabled={pendingApiCallTranslator}
+                                                 pendingApiCall={pendingApiCallTranslator}
+                                                 hasChildren>
+                                <i className="fa fa-globe"/> {isTranslator ? "Translation rights on" : "Translation rights off"}
+                            </ButtonWithProgress>
+                        </div>
+                    </div>
 
                     {
                         isInstitutionOwner &&
-                        <>
-                            <h5 className="mt-4">Institution</h5>
-                            <p>The user is a manager of: <span className="font-weight-bold">{institutionName}</span></p>
-                            <ButtonWithProgress  onClick={this.onInstitutionRemove}
-                                                 className="btn btn-lg my-1 btn-danger"
-                                                 disabled={pendingApiCallRemoveInstitution}
-                                                 pendingApiCall={pendingApiCallRemoveInstitution}
-                                                 hasChildren>
-                                <i className="fa fa-times"/> Remove managerial rights
-                            </ButtonWithProgress>
-                        </>
+                        <div className="card thick-side-borders border-dark no-rounded no-bottom-border">
+                            <div className="card-body">
+                                <h5>Institution</h5>
+                                <p>The user is a manager of: <span className="font-weight-bold">{institutionName}</span></p>
+                                <ButtonWithProgress  onClick={this.onInstitutionRemove}
+                                                     className="btn btn-lg my-1 btn-danger"
+                                                     disabled={pendingApiCallRemoveInstitution}
+                                                     pendingApiCall={pendingApiCallRemoveInstitution}
+                                                     hasChildren>
+                                    <i className="fa fa-times"/> Remove managerial rights
+                                </ButtonWithProgress>
+                            </div>
+                        </div>
                     }
 
-                    <h5 className="mt-4">Ban</h5>
-                    <p>Change user's access to the system</p>
-                    <ButtonWithProgress  onClick={this.onBanChange}
-                                         className={"btn btn-lg my-1 " + (isBanned ? "btn-danger" : "btn-primary")}
-                                         disabled={pendingApiCallBan}
-                                         pendingApiCall={pendingApiCallBan}
-                                         hasChildren>
-                        <i className="fa fa-user"/> {isBanned ? "Banned" : "Access allowed"}
-                    </ButtonWithProgress>
+                    <div className="card thick-side-borders border-dark thick-bottom-border my-rounded-bottom">
+                        <div className="card-body">
+                            <h5>Ban</h5>
+                            <p>Change user's access to the system</p>
+                            <ButtonWithProgress  onClick={this.onBanChange}
+                                                 className={"btn btn-lg my-1 " + (isBanned ? "btn-danger" : "btn-primary")}
+                                                 disabled={pendingApiCallBan}
+                                                 pendingApiCall={pendingApiCallBan}
+                                                 hasChildren>
+                                <i className="fa fa-user"/> {isBanned ? "Banned" : "Access allowed"}
+                            </ButtonWithProgress>
+                        </div>
+                    </div>
                 </div>
         }
 

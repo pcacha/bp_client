@@ -79,7 +79,7 @@ class UserManagerPage extends Component {
                             <thead className="thead-light">
                             <tr>
                                 <th scope="col">Username</th>
-                                <th scope="col">Register date</th>
+                                <th scope="col">Registration date</th>
                                 <th scope="col">E-mail</th>
                                 <th scope="col">Detail</th>
                             </tr>
