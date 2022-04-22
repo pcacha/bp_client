@@ -7,6 +7,7 @@ import {INFO_LABELS_IMAGES_URL} from "../shared/sharedConstants";
 import parse from 'html-react-parser';
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import DOMPurify from 'dompurify';
 
 /**
  * page for creating new translations
@@ -125,7 +126,7 @@ class NewTranslationPage extends Component {
                 {
                     (infoLabelText !== "") &&
                     <div className="mt-4 bg-light border rounded p-2">
-                        {parse(infoLabelText)}
+                        {parse(DOMPurify.sanitize(infoLabelText))}
                     </div>
                 }
 
@@ -133,7 +134,7 @@ class NewTranslationPage extends Component {
                     <div className="form-group">
                         <label>Translated text</label>
                         <CKEditor editor={ClassicEditor}
-                                  config={{removePlugins: ['Table', 'TableToolbar', 'EasyImage', 'MediaEmbed', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']}}
+                                  config={{removePlugins: ['Table', 'CKFinder', 'Link', 'TableToolbar', 'EasyImage', 'MediaEmbed', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']}}
                                   data={text} onChange={this.onTextChange}/>
                         {
                             errors.text &&

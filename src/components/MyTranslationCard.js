@@ -1,6 +1,7 @@
 import React from 'react';
 import parse from "html-react-parser";
 import ButtonWithProgress from "./ButtonWithProgress";
+import DOMPurify from 'dompurify';
 
 /**
  * card for listing sequence translations
@@ -29,7 +30,7 @@ const MyTranslationCard = (props) => {
 
                     <div className="col-md-8">
                         <div className="bg-light border rounded p-2">
-                            {parse(props.translatedText)}
+                            {parse(DOMPurify.sanitize(props.translatedText))}
                         </div>
                     </div>
 

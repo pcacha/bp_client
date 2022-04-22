@@ -366,7 +366,7 @@ class UpdateExhibitPage extends Component {
                         <div className="form-group">
                             <label>Information label text</label>
                             <CKEditor editor={ClassicEditor}
-                                      config={{removePlugins: ['Table', 'TableToolbar', 'EasyImage', 'MediaEmbed', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']}}
+                                      config={{removePlugins: ['Table', 'CKFinder', 'Link', 'TableToolbar', 'EasyImage', 'MediaEmbed', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']}}
                                       data={infoLabelText} onChange={this.onInfoLabelTextChange}/>
                             {
                                 errors.infoLabelText &&

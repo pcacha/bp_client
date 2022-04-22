@@ -5,6 +5,7 @@ import Spinner from "../components/Spinner";
 import {INFO_LABELS_IMAGES_URL} from "../shared/sharedConstants";
 import parse from "html-react-parser";
 import TranslatorRateTranslationCard from "../components/TranslatorRateTranslationCard";
+import DOMPurify from 'dompurify';
 
 /**
  * page for translators to rate translations of pair exhibit-language
@@ -102,7 +103,7 @@ class TranslatorRatePage extends Component {
                   {
                       (infoLabelText !== "") &&
                       <div className="mt-4 bg-light border rounded p-2">
-                          {parse(infoLabelText)}
+                          {parse(DOMPurify.sanitize(infoLabelText))}
                       </div>
                   }
 
