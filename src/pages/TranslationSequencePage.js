@@ -86,7 +86,7 @@ class TranslationSequencePage extends Component {
                 :
                 <>
                     <Link exact to={"/institutions/" + this.state.translations[0].institutionId + "/translate/" + this.state.exhibitId + "/" + this.state.languageId}>
-                        <button type="button" className="btn btn-info mb-4 btn-lg">
+                        <button type="button" className="btn btn-success mb-4 btn-lg">
                             <i className="fa fa-globe" /> Create New Version
                         </button>
                     </Link>
