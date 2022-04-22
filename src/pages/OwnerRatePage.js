@@ -6,6 +6,7 @@ import {INFO_LABELS_IMAGES_URL} from "../shared/sharedConstants";
 import parse from "html-react-parser";
 import OwnerRateTranslationCard from "../components/OwnerRateTranslationCard";
 import DOMPurify from 'dompurify';
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * page for institution owner to pick official translation and like translations
@@ -156,7 +157,7 @@ class OwnerRatePage extends Component {
 
                     {
                         translations.length === 0 ?
-                            <h4 className="mt-5">There are no translations</h4>
+                            <NoContentMessage classes="mt-5" text="There are no translations"/>
                             :
                             <div className="mt-3">
                                 <h3 className="my-5">Translations</h3>

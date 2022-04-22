@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import BuildingCard from "../components/BuildingCard";
 import { Link } from "react-router-dom";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * page with all buildings of an institution that user is managing
@@ -87,7 +88,7 @@ class BuildingsPage extends Component {
         // define page content
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
-            content = this.state.buildings.length === 0 ? <h4>There are no buildings</h4> : buildings;
+            content = this.state.buildings.length === 0 ? <NoContentMessage text="There are no buildings"/> : buildings;
         }
 
         // renders page

@@ -3,6 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import ApproveExhibitCard from "../components/ApproveExhibitCard";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * Page for rendering exhibits where official text can be set
@@ -76,7 +77,7 @@ class ApproveExhibitPage extends Component {
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
             // if fetching data ended show fetched exhibits or message that there are none
-            content = this.state.exhibits.length === 0 ? <h4>There are no exhibits</h4> : exhibits;
+            content = this.state.exhibits.length === 0 ? <NoContentMessage text="There are no exhibits"/> : exhibits;
         }
 
         // render page

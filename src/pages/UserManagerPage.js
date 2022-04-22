@@ -3,6 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import Spinner from "../components/Spinner";
 import UserManagerRow from "../components/UserManagerRow";
 import handleError from "../shared/failureHandler";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * page for managing users
@@ -62,7 +63,7 @@ class UserManagerPage extends Component {
         let content = <Spinner/>;
         if (!pendingApiCall) {
             content = users.length === 0 ?
-                <h3>There are no users</h3>
+                <NoContentMessage text="There are no users"/>
                 :
                 <>
                     <div className="input-group mb-3">

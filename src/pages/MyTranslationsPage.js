@@ -3,6 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import MyTranslationSequenceCard from "../components/MyTranslationSequenceCard";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * page with translator sequences of translation
@@ -87,7 +88,7 @@ class MyTranslationsPage extends Component {
         // define content
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
-            content = this.state.sequences.length === 0 ? <h4>There are no translation sequences</h4> : sequences;
+            content = this.state.sequences.length === 0 ? <NoContentMessage text="There are no translation sequences"/> : sequences;
         }
 
         // render page

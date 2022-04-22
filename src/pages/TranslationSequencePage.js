@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import MyTranslationCard from "../components/MyTranslationCard";
 import {Link} from "react-router-dom";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * page showing translations of one translation sequence
@@ -82,7 +83,7 @@ class TranslationSequencePage extends Component {
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
             content = translationsLength === 0 ?
-                <h4>There are no translations</h4>
+                <NoContentMessage text="There are no translations"/>
                 :
                 <>
                     <Link exact to={"/institutions/" + this.state.translations[0].institutionId + "/translate/" + this.state.exhibitId + "/" + this.state.languageId}>

@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import ShowcaseCard from "../components/ShowcaseCard";
 import { Link } from "react-router-dom";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * page with all showcases of a room defined in url
@@ -87,7 +88,7 @@ class ShowcasePage extends Component {
         // define page content
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
-            content = this.state.showcases.length === 0 ? <h4>There are no show-cases</h4> : showcases;
+            content = this.state.showcases.length === 0 ? <NoContentMessage text="There are no show-cases"/> : showcases;
         }
 
         // renders page

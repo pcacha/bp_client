@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import RoomCard from "../components/RoomCard";
 import { Link } from "react-router-dom";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * page with all rooms of a building defined in url
@@ -88,7 +89,7 @@ class RoomsPage extends Component {
         // define page content
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
-            content = this.state.rooms.length === 0 ? <h4>There are no rooms</h4> : rooms;
+            content = this.state.rooms.length === 0 ? <NoContentMessage text="There are no rooms"/> : rooms;
         }
 
         // renders page

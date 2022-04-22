@@ -4,6 +4,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import {Link} from "react-router-dom";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * Page for adding languages to institution
@@ -156,7 +157,7 @@ class AddLanguagesPage extends Component {
                     <div className="col-md-6 px-md-5">
                         {
                             chosen.length === 0 ?
-                                <h4>No selected languages</h4>
+                                <NoContentMessage text="No selected languages"/>
                                 :
                                 <div className="card mt-md-0 mt-2">
                                     <ul className="list-group list-group-flush">

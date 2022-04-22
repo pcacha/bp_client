@@ -3,6 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import MyExhibitCard from "../components/MyExhibitCard";
+import NoContentMessage from "../components/NoContentMessage";
 
 /**
  * page with all exhibits of an institution that user is managing
@@ -105,7 +106,7 @@ class MyInstitutionExhibitsPage extends Component {
         // define page content
         let content = <Spinner/>;
         if (!this.state.pendingApiCall) {
-            content = this.state.exhibits.length === 0 ? <h4>There are no exhibits</h4> : exhibits;
+            content = this.state.exhibits.length === 0 ? <NoContentMessage text="There are no exhibits"/> : exhibits;
         }
 
         // renders page
