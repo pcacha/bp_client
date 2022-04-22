@@ -6,8 +6,9 @@ import React from 'react';
  */
 function Footer(props) {
     return (
-        <footer className="position-fixed d-flex justify-content-center align-items-center w-100">
-            Community Translation System ©Pavel Čácha
+        <footer className="d-flex justify-content-center align-items-center w-100">
+            <strong>CTS</strong>
+            <span>&nbsp;©Pavel Čácha</span>
         </footer>
     );
 }

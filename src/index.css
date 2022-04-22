@@ -1,7 +1,5 @@
 /* web */
 body {
-  padding-top: 65px;
-  padding-bottom: 45px;
   background: slategray url("./assets/work.jpg") no-repeat fixed;
 }
 
@@ -9,6 +7,10 @@ body {
   background: white url("./assets/gray-noise.png") repeat;
 }
 
+/* layout */
+div.minimal-content-height {
+  min-height: calc(100vh - 55px);
+}
 
 /* navigation */
 .fixed-header {
@@ -50,7 +52,6 @@ body {
   max-width: 600px!important;
 }
 
-
 /* home */
 h3 {
   color: #023d75;
@@ -60,7 +61,6 @@ h3 {
 .bottom-padding {
   padding-bottom: 90px;
 }
-
 
 /* card */
 .my-card {
@@ -88,25 +88,19 @@ h3 {
   margin-bottom: 130px;
 }
 
-
 /* footer */
 footer {
   background-color: #023d75;
-  bottom: 0;
   color: white;
-  height: 45px;
   font-size: 1.15em;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  height: 55px;
 }
-
 
 /* images */
 img.sizedImg {
   max-width: 180px;
   max-height: 180px;
 }
-
 
 /* user details page cars styles */
 div.thick-top-border {

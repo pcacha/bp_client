@@ -15,7 +15,7 @@ class Navigation extends Component {
 
         // render navigation
         return (
-            <div className="position-fixed w-100 fixed-header">
+            <div className="position-sticky w-100 fixed-header">
                 <nav className="blue-nav navbar navbar-expand-lg navbar-light" id="blue-nav">
                     <div className="container">
                         <Link className="navbar-brand" to="/">CTS</Link>

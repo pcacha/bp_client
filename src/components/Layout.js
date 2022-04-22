@@ -8,8 +8,12 @@ import Footer from "./Footer"
  */
 const layout = (props) => (
     <>
-        <Navigation />
-        {props.children}
+        <div className="minimal-content-height">
+            <Navigation />
+            <section>
+                {props.children}
+            </section>
+        </div>
         <Footer />
     </>
 );
