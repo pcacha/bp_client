@@ -112,7 +112,7 @@ class UserDetailPage extends Component {
     onPasswordChange = () => {
         const {username, email} = this.state;
         // ask before changing password
-        if(window.confirm("Do you really want to generate new password for user " + username + " and send it to mail: " + email)) {
+        if(window.confirm("Do you really want to generate a new password for user " + username + " and send it to this e-mail: " + email)) {
             this.setState({pendingApiCallChangePassword: true});
 
             // send request to change password by sending new password to user's mail
@@ -131,10 +131,10 @@ class UserDetailPage extends Component {
     onTranslatorChange = () => {
         const {userId, isTranslator} = this.state;
         // ask before changing rights
-        if(window.confirm("Do you really want to change translator rights?")) {
+        if(window.confirm("Do you really want to change translation rights?")) {
             this.setState({pendingApiCallTranslator: true});
 
-            // send request to server to change user's translator rights
+            // send request to server to change user's translation rights
             apiCalls.adminChangeTranslator(userId, {value: !isTranslator}).then(response => {
                 this.setState({pendingApiCallTranslator: false, isTranslator: !isTranslator});
             }).catch(error => {
@@ -169,7 +169,7 @@ class UserDetailPage extends Component {
     onInstitutionRemove = () => {
         // ask before removing institution
         const {userId, institutionName} = this.state;
-        if(window.confirm("Do you really want to remove managerial rights? It may cause deletion of institution: " + institutionName)) {
+        if(window.confirm("Do you really want to remove managerial rights? It may cause deletion of this institution: " + institutionName)) {
             this.setState({pendingApiCallRemoveInstitution: true});
 
             // send request to server to remove institution management to server
@@ -242,7 +242,7 @@ class UserDetailPage extends Component {
                     </form>
 
                     <h5>Password Change</h5>
-                    <p>Generate new password and send it to email: <span className="font-weight-bold">{email}</span></p>
+                    <p>Generate a new password and send it to an e-mail address: <span className="font-weight-bold">{email}</span></p>
                     <ButtonWithProgress  onClick={this.onPasswordChange}
                                          className="btn btn-danger btn-lg my-1"
                                          disabled={pendingApiCallChangePassword}
@@ -251,21 +251,21 @@ class UserDetailPage extends Component {
                         <i className="fa fa-key"/> Generate new password
                     </ButtonWithProgress>
 
-                    <h5 className="mt-4">Translator Rights</h5>
+                    <h5 className="mt-4">Translation Rights</h5>
                     <p>Change user's right to translate</p>
                     <ButtonWithProgress  onClick={this.onTranslatorChange}
                                          className={"btn btn-lg my-1 " + (isTranslator ? "btn-primary" : "btn-secondary")}
                                          disabled={pendingApiCallTranslator}
                                          pendingApiCall={pendingApiCallTranslator}
                                          hasChildren>
-                        <i className="fa fa-globe"/> {isTranslator ? "Translator rights on" : "Translator rights off"}
+                        <i className="fa fa-globe"/> {isTranslator ? "Translation rights on" : "Translation rights off"}
                     </ButtonWithProgress>
 
                     {
                         isInstitutionOwner &&
                         <>
                             <h5 className="mt-4">Institution</h5>
-                            <p>User is a manager of: <span className="font-weight-bold">{institutionName}</span></p>
+                            <p>The user is a manager of: <span className="font-weight-bold">{institutionName}</span></p>
                             <ButtonWithProgress  onClick={this.onInstitutionRemove}
                                                  className="btn btn-lg my-1 btn-danger"
                                                  disabled={pendingApiCallRemoveInstitution}
