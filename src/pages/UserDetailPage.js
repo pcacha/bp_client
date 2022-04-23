@@ -214,7 +214,7 @@ class UserDetailPage extends Component {
                 <div>
                     <div className="mb-4">
                         <span className="font-weight-bold">Registration date: </span>
-                        {new Date(createdAt).toLocaleDateString("en-US")}
+                        {createdAt}
                     </div>
 
                     <form className="mb-4">

@@ -223,7 +223,6 @@ class UpdateInstitutionPage extends Component {
             image,
             encodedImage,
             imageSelect,
-            createdAt,
             email,
             pendingApiCallUpdateInstitution,
             pendingApiCallUpdateImage,

@@ -157,7 +157,7 @@ class ProfilePage extends Component {
 
                 <div className="mb-4">
                     <span className="font-weight-bold">Registration date: </span>
-                    {new Date(createdAt * 1).toLocaleDateString("en-US")}
+                    {new Date(createdAt * 1).toLocaleDateString("en-UK")}
                 </div>
 
                 <form className="mb-4">

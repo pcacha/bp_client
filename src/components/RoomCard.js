@@ -16,8 +16,8 @@ const RoomCard = (props) => (
                     </h3>
 
                     <div>
-                        <span className="font-weight-bold">Registration date: </span>
-                        {new Date(props.createdAt).toLocaleDateString("en-US")}
+                        <span className="font-weight-bold">Creation date: </span>
+                        {props.createdAt}
                     </div>
 
                     {

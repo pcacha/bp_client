@@ -25,7 +25,7 @@ const TranslatorRateTranslationCard = (props) => {
                         <h5>
                             {props.authorUsername}
                         </h5>
-                        <p>{new Date(props.createdAt).toLocaleDateString("en-US")}</p>
+                        <p>{props.createdAt}</p>
                         {
                             props.isOfficial &&
                             <span className="font-weight-bold">official</span>

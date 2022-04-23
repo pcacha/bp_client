@@ -9,7 +9,7 @@ function UserManagerRow(props) {
     return (
         <tr>
             <td>{props.username}</td>
-            <td>{new Date(props.createdAt).toLocaleDateString("en-US")}</td>
+            <td>{props.createdAt}</td>
             <td>{props.email}</td>
             <td>
                 <Link exact to={"/users/" + props.userId}>

@@ -21,7 +21,7 @@ const MyTranslationCard = (props) => {
                         <h4>
                             {props.order + "."}
                         </h4>
-                        <p>{new Date(props.createdAt).toLocaleDateString("en-US")}</p>
+                        <p>{props.createdAt}</p>
                         {
                             props.isOfficial &&
                             <span className="font-weight-bold">official</span>

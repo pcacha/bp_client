@@ -31,7 +31,7 @@ const MyTranslationSequenceCard = (props) => (
 
                     <div>
                         <span className="font-weight-bold">Latest activity: </span>
-                        {new Date(props.latestTranslationCreatedAt).toLocaleDateString("en-US")}
+                        {props.latestTranslationCreatedAt}
                     </div>
                 </div>
 
