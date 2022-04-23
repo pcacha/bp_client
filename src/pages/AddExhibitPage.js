@@ -226,7 +226,7 @@ class AddExhibitPage extends Component {
                                onlyImage
                                value={infoLabelSelect}
                                name="infoLabelSelect"
-                               label="Information label"
+                               label="Information label*"
                                placeholder="Select information label"
                                onChange={this.onImageSelect}
                                hasError={errors.encodedInfoLabel && true}
@@ -246,7 +246,7 @@ class AddExhibitPage extends Component {
                     </div>
                     <div className="form-group">
                         <Input
-                            label="Name"
+                            label="Name*"
                             placeholder="Enter name" name="name" value={name}
                             onChange={this.onChange}
                             hasError={errors.name && true}

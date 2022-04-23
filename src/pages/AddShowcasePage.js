@@ -82,7 +82,7 @@ class AddShowcasePage extends Component {
                 <form className="mt-4">
                     <div className="form-group">
                         <Input
-                            label="Name"
+                            label="Name*"
                             placeholder="Enter name" name="name" value={name}
                             onChange={this.onChange}
                             hasError={errors.name && true}

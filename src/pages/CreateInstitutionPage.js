@@ -151,7 +151,7 @@ class CreateInstitutionPage extends Component {
                     </div>
                     <div className="form-group">
                         <Input
-                            label="Name"
+                            label="Name*"
                             placeholder="Enter name" name="name" value={this.state.name}
                             onChange={this.onChange}
                             hasError={this.state.errors.name && true}
@@ -160,7 +160,7 @@ class CreateInstitutionPage extends Component {
                     </div>
                     <div className="form-group">
                         <Input
-                            label="Address"
+                            label="Address*"
                             placeholder="Enter address" name="address" value={this.state.address}
                             onChange={this.onChange}
                             hasError={this.state.errors.address && true}
@@ -169,7 +169,7 @@ class CreateInstitutionPage extends Component {
                     </div>
                     <div className="form-group">
                         <Input
-                            label="Description" type="textarea"
+                            label="Description*" type="textarea"
                             placeholder="Enter description" name="description" value={this.state.description}
                             onChange={this.onChange}
                             hasError={this.state.errors.description && true}
@@ -178,7 +178,7 @@ class CreateInstitutionPage extends Component {
                     </div>
                     <div className="form-group">
                         <Input
-                            label="Latitude"
+                            label="Latitude*"
                             placeholder="Enter latitude" name="latitudeString" value={this.state.latitudeString}
                             onChange={this.onChange}
                             hasError={this.state.errors.latitudeString && true}
@@ -187,7 +187,7 @@ class CreateInstitutionPage extends Component {
                     </div>
                     <div className="form-group">
                         <Input
-                            label="Longitude"
+                            label="Longitude*"
                             placeholder="Enter longitude" name="longitudeString" value={this.state.longitudeString}
                             onChange={this.onChange}
                             hasError={this.state.errors.longitudeString && true}
