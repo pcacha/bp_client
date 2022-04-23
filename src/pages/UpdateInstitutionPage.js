@@ -252,7 +252,7 @@ class UpdateInstitutionPage extends Component {
                 <br />
                 <Link exact to="/myInstitution/addExhibit" >
                     <button type="button" className="btn btn-lg mt-3 btn-success">
-                        <i className="fa fa-plus-circle" /> Add exhibit
+                        <i className="fa fa-plus-circle" /> Add exhibits
                     </button>
                 </Link>
 
