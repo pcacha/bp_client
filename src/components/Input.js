@@ -40,7 +40,7 @@ const Input = (props) => {
         <>
             {
                 props.label &&
-                <label className={props.boldLabel && "font-weight-bold"}>{props.label}</label>
+                <label className="font-weight-bold">{props.label}</label>
             }
 
             {renderedInput}

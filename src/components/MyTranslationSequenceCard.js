@@ -12,7 +12,7 @@ const MyTranslationSequenceCard = (props) => (
         <div className="card-body">
             <div className="row">
                 <div className="col-md-3">
-                    <img className="img-fluid sizedImg img-thumbnail" src={EXHIBITS_IMAGES_URL + props.exhibitImage} alt="image" />
+                    <img className="img-fluid sizedImg img-thumbnail" src={EXHIBITS_IMAGES_URL + props.exhibitImage} alt="exhibit" />
                 </div>
 
                 <div className="col-md-6">

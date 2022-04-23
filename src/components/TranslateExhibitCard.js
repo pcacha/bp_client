@@ -12,7 +12,7 @@ const TranslateExhibitCard = (props) => (
         <div className="card-body">
             <div className="row">
                 <div className="col-md-3">
-                    <img className="img-fluid sizedImg img-thumbnail" src={EXHIBITS_IMAGES_URL + props.image} alt="image" />
+                    <img className="img-fluid sizedImg img-thumbnail" src={EXHIBITS_IMAGES_URL + props.image} alt="exhibit" />
                 </div>
 
                 <div className="col-md-6">

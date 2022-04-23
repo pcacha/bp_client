@@ -11,7 +11,7 @@ const InstitutinCard = (props) => (
         <div className="card-body">
             <div className="row">
                 <div className="col-md-3">
-                    <img className="img-fluid sizedImg img-thumbnail" src={INSTITUTIONS_IMAGES_URL + props.image} alt="image" />
+                    <img className="img-fluid sizedImg img-thumbnail" src={INSTITUTIONS_IMAGES_URL + props.image} alt="institution" />
                 </div>
 
                 <div className="col-md-6">

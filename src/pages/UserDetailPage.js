@@ -224,7 +224,7 @@ class UserDetailPage extends Component {
 
                         <div className="form-group">
                             <Input
-                                label="Username" boldLabel
+                                label="Username"
                                 placeholder="Enter name" name="username" value={username}
                                 onChange={this.onChange}
                                 hasError={errors.username && true}

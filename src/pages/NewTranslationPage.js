@@ -120,7 +120,7 @@ class NewTranslationPage extends Component {
                 </div>
 
                 <div className="text-center">
-                    <img className="img-fluid mt-2" src={INFO_LABELS_IMAGES_URL + infoLabel} alt="information label image" />
+                    <img className="img-fluid mt-2" src={INFO_LABELS_IMAGES_URL + infoLabel} alt="information label" />
                 </div>
 
                 {
