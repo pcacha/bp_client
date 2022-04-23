@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import OwnerRateTranslationCard from "../components/OwnerRateTranslationCard";
 import DOMPurify from 'dompurify';
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for institution owner to pick official translation and like translations
@@ -170,10 +171,10 @@ class OwnerRatePage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Approve Translations</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

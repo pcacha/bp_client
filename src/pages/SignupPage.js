@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import * as authActions from "../store/authActions";
 import Input from "../components/Input";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for user registration
@@ -101,7 +102,7 @@ class SignupPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto bg-white mt-5 border rounded p-2 p-md-5 container auth-div gray-noise-background mb-3">
+            <PageContentContainer isAuth>
                 <form>
                     <h2 className="mb-4 font-weight-bold">Sign up</h2>
                     <div className="form-group">
@@ -149,7 +150,7 @@ class SignupPage extends Component {
                         <i className="fa fa-paper-plane" /> Sign up
                     </ButtonWithProgress>
                 </form>
-            </div>
+            </PageContentContainer>
         );
     }
 }

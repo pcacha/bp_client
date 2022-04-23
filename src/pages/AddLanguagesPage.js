@@ -5,6 +5,7 @@ import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import {Link} from "react-router-dom";
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * Page for adding languages to institution
@@ -111,16 +112,16 @@ class AddLanguagesPage extends Component {
         // if languages are loading show spinner
         if (pendingApiCallDownloadLanguages) {
             return (
-                <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+                <PageContentContainer>
                     <Spinner />
-                </div>
+                </PageContentContainer>
             );
         }
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
-                <h2 className="mb-5 font-weight-bold">Add Languages</h2>
+            <PageContentContainer>
+                <h2 className="mb-3 font-weight-bold">Add Languages</h2>
 
                 <Link exact to="/myInstitution" >
                     <button type="button" className="btn btn-lg mt-3 btn-info mb-4">
@@ -169,7 +170,7 @@ class AddLanguagesPage extends Component {
                         }
                     </div>
                 </div>
-            </div>
+            </PageContentContainer>
         );
     }
 }

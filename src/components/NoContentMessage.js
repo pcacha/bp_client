@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * card for listing exhibits to approve
+ * warning showed when no content is available
  * @param props props
  */
 const NoContentMessage = (props) => (

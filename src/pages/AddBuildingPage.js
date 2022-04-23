@@ -3,6 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for creating new buildings
@@ -75,7 +76,7 @@ class AddBuildingPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">New Building</h2>
 
                 <form className="mt-4">
@@ -106,7 +107,7 @@ class AddBuildingPage extends Component {
                         <i className="fa fa-paper-plane" /> Create building
                     </ButtonWithProgress>
                 </form>
-            </div>
+            </PageContentContainer>
         );
     }
 }

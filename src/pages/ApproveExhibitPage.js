@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import ApproveExhibitCard from "../components/ApproveExhibitCard";
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * Page for rendering exhibits where official text can be set
@@ -82,10 +83,10 @@ class ApproveExhibitPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Exhibits</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

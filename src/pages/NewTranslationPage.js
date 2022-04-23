@@ -8,6 +8,7 @@ import parse from 'html-react-parser';
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DOMPurify from 'dompurify';
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for creating new translations
@@ -102,15 +103,15 @@ class NewTranslationPage extends Component {
         // return spinner if api call is processing
         if (pendingApiCallGetNewTranslation) {
             return (
-                <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+                <PageContentContainer>
                     <Spinner />
-                </div>
+                </PageContentContainer>
             );
         }
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">New Translation</h2>
 
                 <h3>{exhibitName}</h3>
@@ -152,7 +153,7 @@ class NewTranslationPage extends Component {
                         <i className="fa fa-paper-plane" /> Create translation
                     </ButtonWithProgress>
                 </form>
-            </div>
+            </PageContentContainer>
         );
     }
 }

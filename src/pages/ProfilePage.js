@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page with user's profile
@@ -146,7 +147,7 @@ class ProfilePage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
+            <PageContentContainer>
                 <h2 className="mb-4 font-weight-bold">My Profile</h2>
 
                 <div className="mb-4">
@@ -221,7 +222,7 @@ class ProfilePage extends Component {
                         <i className="fa fa-paper-plane" /> Change password
                     </ButtonWithProgress>
                 </form>
-            </div>
+            </PageContentContainer>
         );
     }
 }

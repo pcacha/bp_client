@@ -7,6 +7,7 @@ import {INSTITUTIONS_IMAGES_URL} from "../shared/sharedConstants";
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import { Link } from "react-router-dom";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for updating institution
@@ -234,7 +235,7 @@ class UpdateInstitutionPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
+            <PageContentContainer>
                 <h2 className="mb-4 font-weight-bold">My Institution</h2>
 
                 <div className="mb-4">
@@ -411,7 +412,7 @@ class UpdateInstitutionPage extends Component {
                                      hasChildren>
                     <i className="fa fa-times" /> Delete institution
                 </ButtonWithProgress>
-            </div>
+            </PageContentContainer>
         );
     }
 }

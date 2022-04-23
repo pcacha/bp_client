@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import Input from "../components/Input";
 import ButtonWithProgress from "../components/ButtonWithProgress";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for viewing details about user
@@ -304,10 +305,10 @@ class UserDetailPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5">User Details</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

@@ -5,6 +5,7 @@ import Spinner from "../components/Spinner";
 import RoomCard from "../components/RoomCard";
 import { Link } from "react-router-dom";
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page with all rooms of a building defined in url
@@ -94,7 +95,7 @@ class RoomsPage extends Component {
 
         // renders page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Rooms</h2>
                 <Link exact to={"/myInstitution/rooms/" + this.state.buildingId + "/addRoom"} >
                     <button type="button" className="btn btn-lg mt-3 btn-success mb-4">
@@ -103,7 +104,7 @@ class RoomsPage extends Component {
                 </Link>
 
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

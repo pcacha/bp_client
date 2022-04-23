@@ -3,6 +3,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for creating new rooms
@@ -76,7 +77,7 @@ class AddRoomPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">New Room</h2>
 
                 <form className="mt-4">
@@ -107,7 +108,7 @@ class AddRoomPage extends Component {
                         <i className="fa fa-paper-plane" /> Create room
                     </ButtonWithProgress>
                 </form>
-            </div>
+            </PageContentContainer>
         );
     }
 }

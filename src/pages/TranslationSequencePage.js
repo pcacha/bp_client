@@ -5,6 +5,7 @@ import Spinner from "../components/Spinner";
 import MyTranslationCard from "../components/MyTranslationCard";
 import {Link} from "react-router-dom";
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page showing translations of one translation sequence
@@ -97,10 +98,10 @@ class TranslationSequencePage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Translation Sequence</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

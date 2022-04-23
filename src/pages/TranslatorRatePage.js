@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import TranslatorRateTranslationCard from "../components/TranslatorRateTranslationCard";
 import DOMPurify from 'dompurify';
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for translators to rate translations of pair exhibit-language
@@ -123,10 +124,10 @@ class TranslatorRatePage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Rate Translations</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

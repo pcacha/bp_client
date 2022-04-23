@@ -8,6 +8,7 @@ import {EXHIBITS_IMAGES_URL, INFO_LABELS_IMAGES_URL} from "../shared/sharedConst
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import LocationPicker from "../components/LocationPicker";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for updating exhibit
@@ -393,10 +394,10 @@ class UpdateExhibitPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
+            <PageContentContainer>
                 <h2 className="mb-4 font-weight-bold">Exhibit</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import * as authActions from "../store/authActions";
 import Input from "../components/Input";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for logging in to the system
@@ -70,36 +71,38 @@ class LoginPage extends Component {
         }
 
         return (
-            <form className="mx-auto bg-white mt-5 border rounded p-2 p-md-5 container auth-div gray-noise-background mb-3">
-                <h2 className="mb-4 font-weight-bold">Log in</h2>
+            <PageContentContainer isAuth>
+                <form>
+                    <h2 className="mb-4 font-weight-bold">Log in</h2>
 
-                <div className="form-group">
-                    <Input label="Name" name="username" placeholder="Enter name"
-                           value={this.state.username}
-                           onChange={this.onChange}
-                           hasError={this.state.apiError.username && true}
-                           error={this.state.apiError.username} />
-                </div>
+                    <div className="form-group">
+                        <Input label="Name" name="username" placeholder="Enter name"
+                               value={this.state.username}
+                               onChange={this.onChange}
+                               hasError={this.state.apiError.username && true}
+                               error={this.state.apiError.username} />
+                    </div>
 
-                <div className="form-group">
-                    <Input label="Password" name="password" placeholder="Enter password" type="password"
-                           value={this.state.password}
-                           onChange={this.onChange}
-                           hasError={this.state.apiError.password && true}
-                           error={this.state.apiError.password}/>
-                </div>
+                    <div className="form-group">
+                        <Input label="Password" name="password" placeholder="Enter password" type="password"
+                               value={this.state.password}
+                               onChange={this.onChange}
+                               hasError={this.state.apiError.password && true}
+                               error={this.state.apiError.password}/>
+                    </div>
 
-                <ButtonWithProgress
-                    className="btn btn-primary w-100 my-2"
-                    onClick={(e) => this.onClickLogin(e)}
-                    disabled={disabledSubmit || this.state.pendingApiCall}
-                    pendingApiCall={this.state.pendingApiCall}
-                    hasChildren>
-                    <i className="fa fa-paper-plane" /> Log in
-                </ButtonWithProgress>
+                    <ButtonWithProgress
+                        className="btn btn-primary w-100 my-2"
+                        onClick={(e) => this.onClickLogin(e)}
+                        disabled={disabledSubmit || this.state.pendingApiCall}
+                        pendingApiCall={this.state.pendingApiCall}
+                        hasChildren>
+                        <i className="fa fa-paper-plane" /> Log in
+                    </ButtonWithProgress>
 
-                <Link to="/signup">Don't have an account? Sign up</Link>
-            </form>
+                    <Link to="/signup">Don't have an account? Sign up</Link>
+                </form>
+            </PageContentContainer>
         );
     }
 }

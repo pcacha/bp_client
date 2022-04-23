@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import MyExhibitCard from "../components/MyExhibitCard";
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page with all exhibits of an institution that user is managing
@@ -111,10 +112,10 @@ class MyInstitutionExhibitsPage extends Component {
 
         // renders page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Institution Exhibits</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

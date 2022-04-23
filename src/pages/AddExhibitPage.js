@@ -6,6 +6,7 @@ import handleError from "../shared/failureHandler";
 import Input from "../components/Input";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import LocationPicker from "../components/LocationPicker";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * Page where institution manager can add new exhibits
@@ -187,7 +188,7 @@ class AddExhibitPage extends Component {
 
         // return page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <form>
                     <h2 className="mb-4 font-weight-bold">Create Exhibit</h2>
 
@@ -278,7 +279,7 @@ class AddExhibitPage extends Component {
                     </ButtonWithProgress>
 
                 </form>
-            </div>
+            </PageContentContainer>
         );
     }
 }

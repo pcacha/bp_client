@@ -5,6 +5,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import * as authActions from "../store/authActions";
 import {connect} from "react-redux";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for creating new institution
@@ -122,7 +123,7 @@ class CreateInstitutionPage extends Component {
 
         // renders page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <form>
                     <h2 className="mb-4 font-weight-bold">Create Institution</h2>
 
@@ -203,7 +204,7 @@ class CreateInstitutionPage extends Component {
                         <i className="fa fa-paper-plane" /> Create institution
                     </ButtonWithProgress>
                 </form>
-            </div>
+            </PageContentContainer>
         );
     }
 }

@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import MyTranslationSequenceCard from "../components/MyTranslationSequenceCard";
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page with translator sequences of translation
@@ -93,10 +94,10 @@ class MyTranslationsPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Translation Sequences</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

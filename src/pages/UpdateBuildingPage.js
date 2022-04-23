@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
 import Spinner from "../components/Spinner";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for updating buildings
@@ -96,15 +97,15 @@ class UpdateBuildingPage extends Component {
         // return spinner if api call is processing
         if (pendingApiCallGet) {
             return (
-                <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+                <PageContentContainer>
                     <Spinner />
-                </div>
+                </PageContentContainer>
             );
         }
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Update Building</h2>
 
                 <form className="mt-4">
@@ -135,7 +136,7 @@ class UpdateBuildingPage extends Component {
                         <i className="fa fa-paper-plane" /> Update building
                     </ButtonWithProgress>
                 </form>
-            </div>
+            </PageContentContainer>
         );
     }
 }

@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import TranslateExhibitCard from "../components/TranslateExhibitCard";
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page containing exhibits to translate in allowed languages
@@ -82,10 +83,10 @@ class TranslateExhibitPage extends Component {
 
         // render pge
         return (
-            <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2 mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5 font-weight-bold">Exhibits</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }

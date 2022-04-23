@@ -4,6 +4,7 @@ import handleError from "../shared/failureHandler";
 import Spinner from "../components/Spinner";
 import CreateInstitutionPage from "./CreateInstitutionPage";
 import UpdateInstitutionPage from "./UpdateInstitutionPage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * Info page of instituion that is managed by logged in user
@@ -56,9 +57,9 @@ class MyInstitutionPage extends Component {
         // if fetching from server is processing show spinner
         if(pendingApiCall) {
             return (
-                <div className="mx-auto mt-5 border rounded gray-noise-background container p-md-5 p-2">
+                <PageContentContainer>
                     <Spinner/>
-                </div>
+                </PageContentContainer>
             );
         }
         else if(isOwner) {

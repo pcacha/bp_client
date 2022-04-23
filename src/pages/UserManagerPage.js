@@ -4,6 +4,7 @@ import Spinner from "../components/Spinner";
 import UserManagerRow from "../components/UserManagerRow";
 import handleError from "../shared/failureHandler";
 import NoContentMessage from "../components/NoContentMessage";
+import PageContentContainer from "../components/PageContentContainer";
 
 /**
  * page for managing users
@@ -97,10 +98,10 @@ class UserManagerPage extends Component {
 
         // render page
         return (
-            <div className="mx-auto mt-5 border rounded p-md-5 p-2 container gray-noise-background mb-3">
+            <PageContentContainer>
                 <h2 className="mb-5">User Manager</h2>
                 {content}
-            </div>
+            </PageContentContainer>
         );
     }
 }
