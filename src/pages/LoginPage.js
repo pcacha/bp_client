@@ -71,7 +71,7 @@ class LoginPage extends Component {
 
         return (
             <form className="mx-auto bg-white mt-5 border rounded p-2 p-md-5 container auth-div gray-noise-background mb-3">
-                <h4 className="mb-4 font-weight-bold">Log in</h4>
+                <h2 className="mb-4 font-weight-bold">Log in</h2>
 
                 <div className="form-group">
                     <Input label="Name" name="username" placeholder="Enter name"

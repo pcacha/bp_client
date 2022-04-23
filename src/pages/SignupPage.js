@@ -103,7 +103,7 @@ class SignupPage extends Component {
         return (
             <div className="mx-auto bg-white mt-5 border rounded p-2 p-md-5 container auth-div gray-noise-background mb-3">
                 <form>
-                    <h4 className="mb-4 font-weight-bold">Sign up</h4>
+                    <h2 className="mb-4 font-weight-bold">Sign up</h2>
                     <div className="form-group">
                         <Input
                             label="Name"
