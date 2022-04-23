@@ -387,8 +387,8 @@ class UpdateInstitutionPage extends Component {
                     }
 
                     <Input
-                        label="Add new institution manager"
-                        placeholder="Enter new manager's email" name="email" value={email}
+                        label="New institution manager"
+                        placeholder="Enter new manager's e-mail" name="email" value={email}
                         onChange={this.onEmailChange}
                         hasError={errors.email && true}
                         error={errors.email}
