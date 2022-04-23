@@ -4,6 +4,7 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import * as authActions from "../store/authActions";
 import Input from "../components/Input";
 import PageContentContainer from "../components/PageContentContainer";
+import {Link} from "react-router-dom";
 
 /**
  * page for user registration
@@ -149,6 +150,8 @@ class SignupPage extends Component {
                                          hasChildren>
                         <i className="fa fa-paper-plane" /> Sign up
                     </ButtonWithProgress>
+
+                    <Link to="/info">New here? Read instructions</Link>
                 </form>
             </PageContentContainer>
         );

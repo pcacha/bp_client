@@ -30,6 +30,7 @@ import UpdateRoomPage from "./pages/UpdateRoomPage";
 import ShowcasesPage from "./pages/ShowcasesPage";
 import AddShowcasePage from "./pages/AddShowcasePage";
 import UpdateShowcasePage from "./pages/UpdateShowcasePage";
+import InfoPage from "./pages/InfoPage";
 
 
 /**
@@ -44,6 +45,7 @@ class App extends Component {
     let routes = (
         <Switch>
           <Route exact path="/" component={HomePage}/>
+          <Route exact path="/info" component={InfoPage}/>
           <Route exact path="/login" component={LoginPage}/>
           <Route exact path="/signup" component={SignupPage}/>
           {user.isLoggedIn && <Route exact path="/profile" component={ProfilePage} />}
