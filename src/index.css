@@ -125,13 +125,13 @@ div.no-rounded {
 }
 
 div.my-rounded-top {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 20px!important;
+  border-top-right-radius: 20px!important;
 }
 
 div.my-rounded-bottom {
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px!important;
+  border-bottom-right-radius: 20px!important;
 }
 
 div.no-bottom-border {

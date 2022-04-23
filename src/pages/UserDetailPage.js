@@ -242,7 +242,7 @@ class UserDetailPage extends Component {
                         </ButtonWithProgress>
                     </form>
 
-                    <div className="card thick-top-border border-dark thick-side-borders my-rounded-top no-bottom-border">
+                    <div className="card thick-top-border border-dark no-rounded thick-side-borders my-rounded-top no-bottom-border">
                         <div className="card-body">
                             <h5>Password Change</h5>
                             <p>Generate a new password and send it to an e-mail address: <span className="font-weight-bold">{email}</span></p>
@@ -287,7 +287,7 @@ class UserDetailPage extends Component {
                         </div>
                     }
 
-                    <div className="card thick-side-borders border-dark thick-bottom-border my-rounded-bottom">
+                    <div className="card thick-side-borders border-dark no-rounded thick-bottom-border my-rounded-bottom">
                         <div className="card-body">
                             <h5>Ban</h5>
                             <p>Change user's access to the system</p>
