@@ -59,7 +59,7 @@ class UpdateShowcasePage extends Component {
 
         // send updated showcase to server
         apiCalls.updateShowcase({name: this.state.name, description: showcaseDescription}, this.state.showcaseId).then(response => {
-            this.setState({pendingApiCallUpdate: false}, () => this.props.history.push("/myInstitution/showcases/" + this.state.roomId));
+            this.setState({pendingApiCallUpdate: false}, () => this.props.history.push("/myInstitution/showcases/" + this.state.buildingId + "/" + this.state.roomId));
         }).catch(error => {
             // handle unauthorized state
             return handleError(error);

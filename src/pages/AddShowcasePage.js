@@ -40,7 +40,7 @@ class AddShowcasePage extends Component {
 
         // send showcase to server
         apiCalls.saveShowcase({name: this.state.name, description: showcaseDescription}, this.state.roomId).then(response => {
-            this.setState({pendingApiCall: false}, () => this.props.history.push("/myInstitution/showcases/" + this.state.roomId));
+            this.setState({pendingApiCall: false}, () => this.props.history.push("/myInstitution/showcases/" + this.state.buildingId + "/" + this.state.roomId));
         }).catch(error => {
             // handle unauthorized state
             return handleError(error);
