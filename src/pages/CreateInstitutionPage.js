@@ -7,6 +7,7 @@ import * as authActions from "../store/authActions";
 import {connect} from "react-redux";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for creating new institution
@@ -129,9 +130,9 @@ class CreateInstitutionPage extends Component {
                     <li className="breadcrumb-item active">Create Institution</li>
                 </Breadcrumbs>
 
-                <form>
-                    <h2 className="mb-4 font-weight-bold">Create Institution</h2>
+                <PageInfo name="Create Institution">Create a cultural institution and become its administrator</PageInfo>
 
+                <form>
                     <div className="form-group">
                         <Input type="file"
                                onlyImage

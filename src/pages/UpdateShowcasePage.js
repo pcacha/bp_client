@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for updating showcases
@@ -118,7 +119,7 @@ class UpdateShowcasePage extends Component {
                     <li className="breadcrumb-item active">Update Show-cases</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Update Show-case</h2>
+                <PageInfo name="Update Show-case">Update information of selected show-case</PageInfo>
 
                 <form className="mt-4">
                     <div className="form-group">

@@ -6,6 +6,7 @@ import ApproveExhibitCard from "../components/ApproveExhibitCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * Page for rendering exhibits where official text can be set
@@ -89,7 +90,7 @@ class ApproveExhibitPage extends Component {
                     <li className="breadcrumb-item active">Approve - Exhibits</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Exhibits</h2>
+                <PageInfo name="Exhibits">After selecting an exhibit and a language, you will be able to select an official translation that will be displayed in the mobile application</PageInfo>
                 {content}
             </PageContentContainer>
         );

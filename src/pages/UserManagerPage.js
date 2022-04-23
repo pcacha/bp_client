@@ -6,6 +6,7 @@ import handleError from "../shared/failureHandler";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for managing users
@@ -104,7 +105,7 @@ class UserManagerPage extends Component {
                     <li className="breadcrumb-item active">User Manager</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5">User Manager</h2>
+                <PageInfo name="User Manager">Here you can manage users of the translation system</PageInfo>
                 {content}
             </PageContentContainer>
         );

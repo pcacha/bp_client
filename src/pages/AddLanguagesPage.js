@@ -8,6 +8,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * Page for adding languages to institution
@@ -128,7 +129,7 @@ class AddLanguagesPage extends Component {
                     <li className="breadcrumb-item active">Add Languages</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-3 font-weight-bold">Add Languages</h2>
+                <PageInfo name="Add Languages">Add the languages you want for your visitors and the translators will translate informational labels into them. After you can add your exhibits from institution overview</PageInfo>
 
                 <Link exact to="/myInstitution" >
                     <button type="button" className="btn btn-lg mt-3 btn-info mb-4">

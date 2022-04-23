@@ -9,6 +9,7 @@ import handleError from "../shared/failureHandler";
 import { Link } from "react-router-dom";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for updating institution
@@ -240,7 +241,7 @@ class UpdateInstitutionPage extends Component {
                     <li className="breadcrumb-item active">My Institution</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">My Institution</h2>
+                <PageInfo name="My Institution">Here you can manage your institution</PageInfo>
 
                 <div className="row d-flex justify-content-between">
                     <div className="col-lg col-sm-6 col-md-6 text-center">

@@ -6,6 +6,7 @@ import Input from "../components/Input";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for creating new rooms
@@ -87,7 +88,7 @@ class AddRoomPage extends Component {
                     <li className="breadcrumb-item active">New Room</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">New Room</h2>
+                <PageInfo name="New Room">Add a new room belonging to your institution</PageInfo>
 
                 <form className="mt-4">
                     <div className="form-group">

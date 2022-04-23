@@ -7,6 +7,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page with all exhibits of an institution that user is managing
@@ -120,7 +121,7 @@ class MyInstitutionExhibitsPage extends Component {
                     <li className="breadcrumb-item active">Exhibits</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Exhibits</h2>
+                <PageInfo name="Exhibits">Here you can manage exhibits and obtain their QR codes, which you can place in the exhibition</PageInfo>
                 {content}
             </PageContentContainer>
         );

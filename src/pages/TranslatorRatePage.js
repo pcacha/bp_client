@@ -10,6 +10,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for translators to rate translations of pair exhibit-language
@@ -134,7 +135,7 @@ class TranslatorRatePage extends Component {
                     <li className="breadcrumb-item active">Rate Translations</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Rate Translations</h2>
+                <PageInfo name="Rate Translations">Here you can give likes to translations that you like best</PageInfo>
                 {content}
             </PageContentContainer>
         );

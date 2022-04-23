@@ -6,6 +6,7 @@ import Input from "../components/Input";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for creating new buildings
@@ -85,7 +86,7 @@ class AddBuildingPage extends Component {
                     <li className="breadcrumb-item active">New Building</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">New Building</h2>
+                <PageInfo name="New Building">Add a new building belonging to your institution</PageInfo>
 
                 <form className="mt-4">
                     <div className="form-group">

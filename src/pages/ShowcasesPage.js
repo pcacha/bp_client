@@ -8,6 +8,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page with all showcases of a room defined in url
@@ -105,7 +106,7 @@ class ShowcasePage extends Component {
                     <li className="breadcrumb-item active">Show-cases</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Show-cases</h2>
+                <PageInfo name="Show-cases">Here you can manage the institution's show-cases to help visitors navigate</PageInfo>
                 <Link exact to={"/myInstitution/showcases/" + this.state.buildingId + "/" + this.state.roomId + "/addShowcase"} >
                     <button type="button" className="btn btn-lg mt-3 btn-success mb-4">
                         <i className="fa fa-plus-circle" /> Add new show-case

@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for updating buildings
@@ -114,7 +115,7 @@ class UpdateBuildingPage extends Component {
                     <li className="breadcrumb-item active">Update Building</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Update Building</h2>
+                <PageInfo name="Update Building">Update information of selected building</PageInfo>
 
                 <form className="mt-4">
                     <div className="form-group">

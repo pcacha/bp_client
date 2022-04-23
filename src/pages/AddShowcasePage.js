@@ -6,6 +6,7 @@ import Input from "../components/Input";
 import PageContentContainer from "../components/PageContentContainer";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for creating new showcases
@@ -89,7 +90,7 @@ class AddShowcasePage extends Component {
                     <li className="breadcrumb-item active">New Show-case</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">New Show-case</h2>
+                <PageInfo name="New Show-case">Add a new show-case belonging to your institution</PageInfo>
 
                 <form className="mt-4">
                     <div className="form-group">

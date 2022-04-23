@@ -10,6 +10,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for institution owner to pick official translation and like translations
@@ -179,7 +180,7 @@ class OwnerRatePage extends Component {
                     <li className="breadcrumb-item active">Approve Translations</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Approve Translations</h2>
+                <PageInfo name="Approve Translations">Here you can rate translations and select one that will be displayed in the mobile application (official translation)</PageInfo>
                 {content}
             </PageContentContainer>
         );

@@ -6,6 +6,7 @@ import MyTranslationSequenceCard from "../components/MyTranslationSequenceCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page with translator sequences of translation
@@ -100,7 +101,7 @@ class MyTranslationsPage extends Component {
                     <li className="breadcrumb-item active">Translation Sequences</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Translation Sequences</h2>
+                <PageInfo name="Translation Sequences">Here you can manage sequences of translation versions for a given exhibit and language</PageInfo>
                 {content}
             </PageContentContainer>
         );

@@ -7,6 +7,7 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for viewing details about user
@@ -313,7 +314,7 @@ class UserDetailPage extends Component {
                     <li className="breadcrumb-item active">User Details</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5">User Details</h2>
+                <PageInfo name="User Details">Here you can manage users and set their rights</PageInfo>
                 {content}
             </PageContentContainer>
         );

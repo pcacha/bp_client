@@ -7,6 +7,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page containing exhibits to translate in allowed languages
@@ -91,7 +92,7 @@ class TranslateExhibitPage extends Component {
                     <li className="breadcrumb-item active">Exhibits</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Exhibits</h2>
+                <PageInfo name="Exhibits">After selecting an exhibit and a language, you can start translating or rating translations</PageInfo>
                 {content}
             </PageContentContainer>
         );

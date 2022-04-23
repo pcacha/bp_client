@@ -11,6 +11,7 @@ import LocationPicker from "../components/LocationPicker";
 import PageContentContainer from "../components/PageContentContainer";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for updating exhibit
@@ -403,7 +404,7 @@ class UpdateExhibitPage extends Component {
                     <li className="breadcrumb-item active">Exhibit</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-4 font-weight-bold">Exhibit</h2>
+                <PageInfo name="Exhibit">Here you can view and update the selected exhibit</PageInfo>
                 {content}
             </PageContentContainer>
         );

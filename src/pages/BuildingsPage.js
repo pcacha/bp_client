@@ -8,6 +8,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page with all buildings of an institution that user is managing
@@ -102,7 +103,7 @@ class BuildingsPage extends Component {
                     <li className="breadcrumb-item active">Buildings</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Buildings</h2>
+                <PageInfo name="Buildings">Here you can manage the institution's buildings to help visitors navigate</PageInfo>
                 <Link exact to="/myInstitution/buildings/addBuilding">
                     <button type="button" className="btn btn-lg mt-3 btn-success mb-4">
                         <i className="fa fa-plus-circle" /> Add new building

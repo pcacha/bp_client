@@ -8,6 +8,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page showing translations of one translation sequence
@@ -106,7 +107,7 @@ class TranslationSequencePage extends Component {
                     <li className="breadcrumb-item active">Translation Sequence</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Translation Sequence</h2>
+                <PageInfo name="Translation Sequence">Here you can view the translation history and also return your active translation to previous versions (rollback)</PageInfo>
                 {content}
             </PageContentContainer>
         );

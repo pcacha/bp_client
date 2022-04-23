@@ -8,6 +8,7 @@ import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page with all rooms of a building defined in url
@@ -104,7 +105,7 @@ class RoomsPage extends Component {
                     <li className="breadcrumb-item active">Rooms</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Rooms</h2>
+                <PageInfo name="Rooms">Here you can manage the institution's rooms to help visitors navigate</PageInfo>
                 <Link exact to={"/myInstitution/rooms/" + this.state.buildingId + "/addRoom"} >
                     <button type="button" className="btn btn-lg mt-3 btn-success mb-4">
                         <i className="fa fa-plus-circle" /> Add new room

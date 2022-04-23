@@ -11,6 +11,7 @@ import DOMPurify from 'dompurify';
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for creating new translations
@@ -121,7 +122,7 @@ class NewTranslationPage extends Component {
                     <li className="breadcrumb-item active">New Translation</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">New Translation</h2>
+                <PageInfo name="New Translation">Create a new translation based on the information label</PageInfo>
 
                 <h3>{exhibitName}</h3>
                 <div className="mb-4">

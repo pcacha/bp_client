@@ -9,6 +9,7 @@ import LocationPicker from "../components/LocationPicker";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
 
 /**
  * Page where institution manager can add new exhibits
@@ -196,8 +197,9 @@ class AddExhibitPage extends Component {
                     <li className="breadcrumb-item active">New Exhibit</li>
                 </Breadcrumbs>
 
+                <PageInfo name="New Exhibit">Add a new exhibit with an information label for translation</PageInfo>
+
                 <form>
-                    <h2 className="mb-4 font-weight-bold">New Exhibit</h2>
 
                     {
                         created &&

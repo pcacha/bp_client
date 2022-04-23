@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 import PageContentContainer from "../components/PageContentContainer";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page for updating rooms
@@ -116,7 +117,7 @@ class UpdateRoomPage extends Component {
                     <li className="breadcrumb-item active">Update Room</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Update Room</h2>
+                <PageInfo name="Update Room">Update information of selected room</PageInfo>
 
                 <form className="mt-4">
                     <div className="form-group">

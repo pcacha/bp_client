@@ -7,6 +7,7 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page with user's profile
@@ -153,7 +154,7 @@ class ProfilePage extends Component {
                     <li className="breadcrumb-item active">My Profile</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-4 font-weight-bold">My Profile</h2>
+                <PageInfo name="My Profile">Edit your profile information</PageInfo>
 
                 <div className="mb-4">
                     <span className="font-weight-bold">Registration date: </span>

@@ -6,6 +6,7 @@ import InstitutionCard from "../components/InstitutionCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
 
 /**
  * page of all registered institutions for translators to choose
@@ -57,7 +58,7 @@ class TranslateInstitutionsPage extends Component {
                     <li className="breadcrumb-item active">Translate - Institutions</li>
                 </Breadcrumbs>
 
-                <h2 className="mb-5 font-weight-bold">Institutions</h2>
+                <PageInfo name="Institutions">Choose the institution whose information labels you want to translate</PageInfo>
                 {content}
             </PageContentContainer>
         );
