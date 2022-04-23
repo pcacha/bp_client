@@ -30,7 +30,9 @@ class Navigation extends Component {
                                 <NavigationItem exact to="/">Home</NavigationItem>
                                 {user.isAdmin && <NavigationItem to="/users">Users</NavigationItem>}
                                 {user.isTranslator && <NavigationItem to="/institutions">Translate</NavigationItem>}
+                                {user.isTranslator && <NavigationItem to="/myTranslations">My Translations</NavigationItem>}
                                 {user.isInstitutionOwner && <NavigationItem to="/approve">Approve</NavigationItem>}
+                                {user.isLoggedIn && <NavigationItem to="/myInstitution">My Institution</NavigationItem>}
                                 {
                                     user.isLoggedIn ?
                                         <li className="nav-item dropdown">
@@ -41,15 +43,6 @@ class Navigation extends Component {
                                             </a>
 
                                             <div className="my-dropdown dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                {
-                                                    user.isTranslator &&
-                                                    <NavLink className="dropdown-item" to="/myTranslations">
-                                                        <i className="fa fa-globe" /> My Translations
-                                                    </NavLink>
-                                                }
-                                                <NavLink className="dropdown-item" to="/myInstitution">
-                                                    <i className="fa fa-home" /> My Institution
-                                                </NavLink>
                                                 <NavLink className="dropdown-item" to="/profile">
                                                     <i className="fa fa-user" /> My Profile
                                                 </NavLink>
