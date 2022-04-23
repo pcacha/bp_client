@@ -254,7 +254,7 @@ class AddExhibitPage extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label>Information label text</label>
+                        <label className="font-weight-bold">Information label text</label>
                         <CKEditor editor={ClassicEditor}
                                   config={{removePlugins: ['Table', 'CKFinder', 'Link', 'TableToolbar', 'EasyImage', 'MediaEmbed', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']}}
                                   data={infoLabelText} onChange={this.onInfoLabelTextChange}/>

@@ -76,7 +76,7 @@ class LocationPickerSelect extends Component {
 
         return (
             <div className="mt-2">
-                <label>{this.props.label}</label>
+                <label className="font-weight-bold">{this.props.label}</label>
                 <Select options={fetchedObjects} onChange={this.onChange} isClearable value={{value: selectedId, label: selectedLabel}} />
             </div>
         );
