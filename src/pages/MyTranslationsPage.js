@@ -6,7 +6,6 @@ import MyTranslationSequenceCard from "../components/MyTranslationSequenceCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
-import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page with translator sequences of translation

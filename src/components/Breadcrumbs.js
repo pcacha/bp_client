@@ -11,7 +11,7 @@ function Breadcrumbs(props) {
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link exact to="/">
-                        <a><span className="fa fa-home"/></a>
+                        <button className="button-link"><span className="fa fa-home"/></button>
                     </Link>
                 </li>
                 {props.children}

@@ -9,7 +9,7 @@ function BreadcrumbsLink(props) {
     return (
         <li className="breadcrumb-item">
             <Link exact to={props.to}>
-                <a>{props.name}</a>
+                <button className="button-link">{props.name}</button>
             </Link>
         </li>
     );

@@ -6,7 +6,6 @@ import InstitutionCard from "../components/InstitutionCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
-import {Link} from "react-router-dom";
 
 /**
  * page of all registered institutions for translators to choose

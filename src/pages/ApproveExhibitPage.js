@@ -6,7 +6,6 @@ import ApproveExhibitCard from "../components/ApproveExhibitCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
-import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * Page for rendering exhibits where official text can be set

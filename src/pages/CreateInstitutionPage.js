@@ -7,7 +7,6 @@ import * as authActions from "../store/authActions";
 import {connect} from "react-redux";
 import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
-import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for creating new institution
