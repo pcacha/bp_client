@@ -137,3 +137,9 @@ div.my-rounded-bottom {
 div.no-bottom-border {
   border-bottom-width: 0;
 }
+
+/* my institution navigation card */
+button.institution-nav {
+  height: 215px;
+  width: 238px;
+}

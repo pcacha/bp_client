@@ -236,39 +236,53 @@ class UpdateInstitutionPage extends Component {
         // render page
         return (
             <PageContentContainer>
-                <h2 className="mb-4 font-weight-bold">My Institution</h2>
+                <h2 className="mb-5 font-weight-bold">My Institution</h2>
 
-                <div className="mb-4">
-                    <span className="font-weight-bold">Registration date: </span>
-                    {new Date(createdAt).toLocaleDateString("en-US")}
+                <div className="row d-flex justify-content-between">
+                    <div className="col-lg col-sm-6 col-md-6 text-center">
+                        <Link exact to="/myInstitution/addLanguages" >
+                            <button type="button" className="btn btn-lg btn-primary mb-3 institution-nav">
+                                <div className="card-body">
+                                    <h5 className="card-title">Languages</h5>
+                                    <p className="card-text">Add languages that translators will be able to translate</p>
+                                </div>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div className="col-lg col-sm-6 col-md-6 text-center">
+                        <Link exact to="/myInstitution/addExhibit" >
+                            <button type="button" className="btn btn-lg btn-success mb-3 institution-nav">
+                                <div className="card-body">
+                                    <h5 className="card-title">New Exhibits</h5>
+                                    <p className="card-text">Add new exhibits with their information labels to your institution</p>
+                                </div>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div className="col-lg col-sm-6 col-md-6 text-center">
+                        <Link exact to="/myInstitution/exhibits" >
+                            <button type="button" className="btn btn-lg btn-info mb-3 institution-nav">
+                                <div className="card-body">
+                                    <h5 className="card-title">View Exhibits</h5>
+                                    <p className="card-text">Get QR codes and manage your institution's exhibits</p>
+                                </div>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div className="col-lg col-sm-6 col-md-6 text-center">
+                        <Link exact to="/myInstitution/buildings" >
+                            <button type="button" className="btn btn-lg btn-secondary mb-3 institution-nav">
+                                <div className="card-body">
+                                    <h5 className="card-title">Navigation</h5>
+                                    <p className="card-text">Add and edit buildings, rooms and showcases for visitor navigation</p>
+                                </div>
+                            </button>
+                        </Link>
+                    </div>
                 </div>
-
-                <Link exact to="/myInstitution/addLanguages" >
-                    <button type="button" className="btn btn-lg btn-success">
-                        <i className="fa fa-plus-circle" /> Add languages
-                    </button>
-                </Link>
-
-                <br />
-                <Link exact to="/myInstitution/addExhibit" >
-                    <button type="button" className="btn btn-lg mt-3 btn-success">
-                        <i className="fa fa-plus-circle" /> Add exhibits
-                    </button>
-                </Link>
-
-                <br />
-                <Link exact to="/myInstitution/exhibits" >
-                    <button type="button" className="btn btn-lg mt-3 btn-info">
-                        <i className="fa fa-bars" /> View exhibits
-                    </button>
-                </Link>
-
-                <br />
-                <Link exact to="/myInstitution/buildings" >
-                    <button type="button" className="btn btn-lg mt-3 btn-secondary">
-                        <i className="fa fa-map-marker" /> Buildings, rooms, show-cases
-                    </button>
-                </Link>
 
                 <form className="mb-4 mt-4">
                     {
