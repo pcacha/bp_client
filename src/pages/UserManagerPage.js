@@ -5,6 +5,7 @@ import UserManagerRow from "../components/UserManagerRow";
 import handleError from "../shared/failureHandler";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 /**
  * page for managing users
@@ -99,6 +100,10 @@ class UserManagerPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <li className="breadcrumb-item active">User Manager</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5">User Manager</h2>
                 {content}
             </PageContentContainer>

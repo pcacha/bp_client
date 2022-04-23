@@ -5,6 +5,8 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
 import Spinner from "../components/Spinner";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for updating showcases
@@ -15,6 +17,7 @@ class UpdateShowcasePage extends Component {
      * current page state
      */
     state = {
+        buildingId: this.props.match.params.buildingId,
         roomId: this.props.match.params.roomId,
         showcaseId: this.props.match.params.showcaseId,
         name: "",
@@ -107,6 +110,14 @@ class UpdateShowcasePage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <BreadcrumbsLink to="/myInstitution/buildings/" name="Buildings"/>
+                    <BreadcrumbsLink to={"/myInstitution/rooms/" + this.state.buildingId} name="Rooms"/>
+                    <BreadcrumbsLink to={"/myInstitution/showcases/" + this.state.buildingId + "/" + this.state.roomId} name="Show-cases"/>
+                    <li className="breadcrumb-item active">Update Show-cases</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Update Show-case</h2>
 
                 <form className="mt-4">

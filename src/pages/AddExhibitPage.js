@@ -7,6 +7,8 @@ import Input from "../components/Input";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import LocationPicker from "../components/LocationPicker";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * Page where institution manager can add new exhibits
@@ -189,8 +191,13 @@ class AddExhibitPage extends Component {
         // return page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <li className="breadcrumb-item active">New Exhibit</li>
+                </Breadcrumbs>
+
                 <form>
-                    <h2 className="mb-4 font-weight-bold">Create Exhibit</h2>
+                    <h2 className="mb-4 font-weight-bold">New Exhibit</h2>
 
                     {
                         created &&
@@ -275,7 +282,7 @@ class AddExhibitPage extends Component {
                                          disabled={pendingApiCall || disabledSubmit}
                                          pendingApiCall={pendingApiCall}
                                          hasChildren>
-                        <i className="fa fa-paper-plane" /> Create exhibit
+                        <i className="fa fa-paper-plane" /> New exhibit
                     </ButtonWithProgress>
 
                 </form>

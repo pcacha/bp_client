@@ -8,6 +8,8 @@ import TranslatorRateTranslationCard from "../components/TranslatorRateTranslati
 import DOMPurify from 'dompurify';
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for translators to rate translations of pair exhibit-language
@@ -18,6 +20,7 @@ class TranslatorRatePage extends Component {
      * current page state
      */
     state = {
+        institutionId: this.props.match.params.institutionId,
         exhibitId: this.props.match.params.exhibitId,
         languageId: this.props.match.params.languageId,
         exhibit: null,
@@ -125,6 +128,12 @@ class TranslatorRatePage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/institutions" name="Translate - Institutions"/>
+                    <BreadcrumbsLink to={"/institutions/" + this.state.institutionId} name="Exhibits"/>
+                    <li className="breadcrumb-item active">Rate Translations</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Rate Translations</h2>
                 {content}
             </PageContentContainer>

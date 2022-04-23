@@ -6,6 +6,8 @@ import MyTranslationCard from "../components/MyTranslationCard";
 import {Link} from "react-router-dom";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page showing translations of one translation sequence
@@ -99,6 +101,11 @@ class TranslationSequencePage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myTranslations" name="Translation Sequences"/>
+                    <li className="breadcrumb-item active">Translation Sequence</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Translation Sequence</h2>
                 {content}
             </PageContentContainer>

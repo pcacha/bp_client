@@ -8,6 +8,8 @@ import OwnerRateTranslationCard from "../components/OwnerRateTranslationCard";
 import DOMPurify from 'dompurify';
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for institution owner to pick official translation and like translations
@@ -172,6 +174,11 @@ class OwnerRatePage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/approve" name="Approve - Exhibits"/>
+                    <li className="breadcrumb-item active">Approve Translations</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Approve Translations</h2>
                 {content}
             </PageContentContainer>

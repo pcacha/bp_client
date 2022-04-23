@@ -60,9 +60,9 @@ class App extends Component {
           {user.isInstitutionOwner && <Route exact path="/myInstitution/rooms/:buildingId" component={RoomsPage} />}
           {user.isInstitutionOwner && <Route exact path="/myInstitution/rooms/:buildingId/addRoom" component={AddRoomPage} />}
           {user.isInstitutionOwner && <Route exact path="/myInstitution/rooms/:buildingId/:roomId" component={UpdateRoomPage} />}
-          {user.isInstitutionOwner && <Route exact path="/myInstitution/showcases/:roomId" component={ShowcasesPage} />}
-          {user.isInstitutionOwner && <Route exact path="/myInstitution/showcases/:roomId/addShowcase" component={AddShowcasePage} />}
-          {user.isInstitutionOwner && <Route exact path="/myInstitution/showcases/:roomId/:showcaseId" component={UpdateShowcasePage} />}
+          {user.isInstitutionOwner && <Route exact path="/myInstitution/showcases/:buildingId/:roomId" component={ShowcasesPage} />}
+          {user.isInstitutionOwner && <Route exact path="/myInstitution/showcases/:buildingId/:roomId/addShowcase" component={AddShowcasePage} />}
+          {user.isInstitutionOwner && <Route exact path="/myInstitution/showcases/:buildingId/:roomId/:showcaseId" component={UpdateShowcasePage} />}
           {user.isTranslator && <Route exact path="/institutions" component={TranslateInstitutionsPage} />}
           {user.isTranslator && <Route exact path="/institutions/:institutionId" component={TranslateExhibitPage} />}
           {user.isTranslator && <Route exact path="/institutions/:institutionId/translate/:exhibitId/:languageId" component={NewTranslationPage} />}

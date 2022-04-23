@@ -6,6 +6,8 @@ import BuildingCard from "../components/BuildingCard";
 import { Link } from "react-router-dom";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page with all buildings of an institution that user is managing
@@ -95,7 +97,12 @@ class BuildingsPage extends Component {
         // renders page
         return (
             <PageContentContainer>
-                <h2 className="mb-5 font-weight-bold">Institution Buildings</h2>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <li className="breadcrumb-item active">Buildings</li>
+                </Breadcrumbs>
+
+                <h2 className="mb-5 font-weight-bold">Buildings</h2>
                 <Link exact to="/myInstitution/buildings/addBuilding">
                     <button type="button" className="btn btn-lg mt-3 btn-success mb-4">
                         <i className="fa fa-plus-circle" /> Add new building

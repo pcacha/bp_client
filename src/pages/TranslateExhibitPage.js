@@ -5,6 +5,8 @@ import Spinner from "../components/Spinner";
 import TranslateExhibitCard from "../components/TranslateExhibitCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page containing exhibits to translate in allowed languages
@@ -84,6 +86,11 @@ class TranslateExhibitPage extends Component {
         // render pge
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/institutions" name="Translate - Institutions"/>
+                    <li className="breadcrumb-item active">Exhibits</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Exhibits</h2>
                 {content}
             </PageContentContainer>

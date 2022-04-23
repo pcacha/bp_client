@@ -5,6 +5,8 @@ import Spinner from "../components/Spinner";
 import MyExhibitCard from "../components/MyExhibitCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 /**
  * page with all exhibits of an institution that user is managing
@@ -113,7 +115,12 @@ class MyInstitutionExhibitsPage extends Component {
         // renders page
         return (
             <PageContentContainer>
-                <h2 className="mb-5 font-weight-bold">Institution Exhibits</h2>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <li className="breadcrumb-item active">Exhibits</li>
+                </Breadcrumbs>
+
+                <h2 className="mb-5 font-weight-bold">Exhibits</h2>
                 {content}
             </PageContentContainer>
         );

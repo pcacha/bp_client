@@ -6,6 +6,8 @@ import RoomCard from "../components/RoomCard";
 import { Link } from "react-router-dom";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page with all rooms of a building defined in url
@@ -96,6 +98,12 @@ class RoomsPage extends Component {
         // renders page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <BreadcrumbsLink to="/myInstitution/buildings/" name="Buildings"/>
+                    <li className="breadcrumb-item active">Rooms</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Rooms</h2>
                 <Link exact to={"/myInstitution/rooms/" + this.state.buildingId + "/addRoom"} >
                     <button type="button" className="btn btn-lg mt-3 btn-success mb-4">

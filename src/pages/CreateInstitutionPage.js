@@ -6,6 +6,8 @@ import handleError from "../shared/failureHandler";
 import * as authActions from "../store/authActions";
 import {connect} from "react-redux";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for creating new institution
@@ -124,6 +126,10 @@ class CreateInstitutionPage extends Component {
         // renders page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <li className="breadcrumb-item active">Create Institution</li>
+                </Breadcrumbs>
+
                 <form>
                     <h2 className="mb-4 font-weight-bold">Create Institution</h2>
 

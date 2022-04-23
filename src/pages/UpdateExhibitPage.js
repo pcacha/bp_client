@@ -9,6 +9,8 @@ import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import LocationPicker from "../components/LocationPicker";
 import PageContentContainer from "../components/PageContentContainer";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 /**
  * page for updating exhibit
@@ -395,6 +397,12 @@ class UpdateExhibitPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <BreadcrumbsLink to="/myInstitution/exhibits" name="Exhibits"/>
+                    <li className="breadcrumb-item active">Exhibit</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-4 font-weight-bold">Exhibit</h2>
                 {content}
             </PageContentContainer>

@@ -5,6 +5,8 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
 import Spinner from "../components/Spinner";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for updating buildings
@@ -106,6 +108,12 @@ class UpdateBuildingPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <BreadcrumbsLink to="/myInstitution/buildings" name="Buildings"/>
+                    <li className="breadcrumb-item active">Update Building</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Update Building</h2>
 
                 <form className="mt-4">

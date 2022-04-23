@@ -6,6 +6,7 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 /**
  * page with user's profile
@@ -148,6 +149,10 @@ class ProfilePage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <li className="breadcrumb-item active">My Profile</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-4 font-weight-bold">My Profile</h2>
 
                 <div className="mb-4">

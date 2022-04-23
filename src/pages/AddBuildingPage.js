@@ -4,6 +4,8 @@ import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for creating new buildings
@@ -77,6 +79,12 @@ class AddBuildingPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <BreadcrumbsLink to="/myInstitution/buildings" name="Buildings"/>
+                    <li className="breadcrumb-item active">New Building</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">New Building</h2>
 
                 <form className="mt-4">

@@ -8,6 +8,8 @@ import * as apiCalls from "../apiCalls/apiCalls";
 import handleError from "../shared/failureHandler";
 import { Link } from "react-router-dom";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for updating institution
@@ -236,6 +238,10 @@ class UpdateInstitutionPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <li className="breadcrumb-item active">My Institution</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">My Institution</h2>
 
                 <div className="row d-flex justify-content-between">

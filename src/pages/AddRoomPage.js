@@ -4,6 +4,8 @@ import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for creating new rooms
@@ -78,6 +80,13 @@ class AddRoomPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <BreadcrumbsLink to="/myInstitution/buildings/" name="Buildings"/>
+                    <BreadcrumbsLink to={"/myInstitution/rooms/" + this.state.buildingId} name="Rooms"/>
+                    <li className="breadcrumb-item active">New Room</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">New Room</h2>
 
                 <form className="mt-4">

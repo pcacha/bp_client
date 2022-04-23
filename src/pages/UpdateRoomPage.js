@@ -5,6 +5,8 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
 import Spinner from "../components/Spinner";
 import PageContentContainer from "../components/PageContentContainer";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 /**
  * page for updating rooms
@@ -107,6 +109,13 @@ class UpdateRoomPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <BreadcrumbsLink to="/myInstitution/buildings" name="Buildings"/>
+                    <BreadcrumbsLink to={"/myInstitution/rooms/" + this.state.buildingId} name="Rooms"/>
+                    <li className="breadcrumb-item active">Update Room</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Update Room</h2>
 
                 <form className="mt-4">

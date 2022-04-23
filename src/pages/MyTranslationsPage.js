@@ -5,6 +5,8 @@ import Spinner from "../components/Spinner";
 import MyTranslationSequenceCard from "../components/MyTranslationSequenceCard";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page with translator sequences of translation
@@ -95,6 +97,10 @@ class MyTranslationsPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <li className="breadcrumb-item active">Translation Sequences</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">Translation Sequences</h2>
                 {content}
             </PageContentContainer>

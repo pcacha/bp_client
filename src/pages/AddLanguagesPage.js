@@ -6,6 +6,8 @@ import ButtonWithProgress from "../components/ButtonWithProgress";
 import {Link} from "react-router-dom";
 import NoContentMessage from "../components/NoContentMessage";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * Page for adding languages to institution
@@ -121,6 +123,11 @@ class AddLanguagesPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <li className="breadcrumb-item active">Add Languages</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-3 font-weight-bold">Add Languages</h2>
 
                 <Link exact to="/myInstitution" >

@@ -5,6 +5,8 @@ import Spinner from "../components/Spinner";
 import Input from "../components/Input";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for viewing details about user
@@ -306,6 +308,11 @@ class UserDetailPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/users" name="User Manager"/>
+                    <li className="breadcrumb-item active">User Details</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5">User Details</h2>
                 {content}
             </PageContentContainer>

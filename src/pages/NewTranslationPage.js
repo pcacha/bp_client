@@ -9,6 +9,8 @@ import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DOMPurify from 'dompurify';
 import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
 
 /**
  * page for creating new translations
@@ -90,6 +92,7 @@ class NewTranslationPage extends Component {
      */
     render() {
         const {
+            institutionId,
             exhibitName,
             languageName,
             infoLabelText,
@@ -112,6 +115,12 @@ class NewTranslationPage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/institutions" name="Translate - Institutions"/>
+                    <BreadcrumbsLink to={"/institutions/" + institutionId} name="Exhibits"/>
+                    <li className="breadcrumb-item active">New Translation</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">New Translation</h2>
 
                 <h3>{exhibitName}</h3>

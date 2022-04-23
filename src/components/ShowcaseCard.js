@@ -30,7 +30,7 @@ const ShowcaseCard = (props) => (
                 </div>
 
                 <div className="col-md-3 mt-md-0 mt-3">
-                    <Link exact to={"/myInstitution/showcases/" + props.roomId + "/" + props.showcaseId}>
+                    <Link exact to={"/myInstitution/showcases/" + props.buildingId + "/" + props.roomId + "/" + props.showcaseId}>
                         <button type="button" className="btn btn-info w-100">
                             <i className="fa fa-pencil" /> Detail
                         </button>

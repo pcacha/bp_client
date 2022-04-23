@@ -4,6 +4,8 @@ import handleError from "../shared/failureHandler";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import Input from "../components/Input";
 import PageContentContainer from "../components/PageContentContainer";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 /**
  * page for creating new showcases
@@ -14,6 +16,7 @@ class AddShowcasePage extends Component {
      * current page state
      */
     state = {
+        buildingId: this.props.match.params.buildingId,
         roomId: this.props.match.params.roomId,
         name: "",
         description: "",
@@ -78,6 +81,14 @@ class AddShowcasePage extends Component {
         // render page
         return (
             <PageContentContainer>
+                <Breadcrumbs>
+                    <BreadcrumbsLink to="/myInstitution" name="My Institution"/>
+                    <BreadcrumbsLink to="/myInstitution/buildings/" name="Buildings"/>
+                    <BreadcrumbsLink to={"/myInstitution/rooms/" + this.state.buildingId} name="Rooms"/>
+                    <BreadcrumbsLink to={"/myInstitution/showcases/" + this.state.buildingId + "/" + this.state.roomId} name="Show-cases"/>
+                    <li className="breadcrumb-item active">New Show-case</li>
+                </Breadcrumbs>
+
                 <h2 className="mb-5 font-weight-bold">New Show-case</h2>
 
                 <form className="mt-4">
