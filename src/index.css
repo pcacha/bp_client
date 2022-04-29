@@ -169,3 +169,14 @@ div.translations-heading {
   color: white;
   width: 100%;
 }
+
+/* info page */
+div.info-page-div {
+  background: url("assets/table-background.png") no-repeat bottom;
+  height: 284px;
+}
+
+img.info-icon {
+  height: 250px;
+  width: 300px;
+}
