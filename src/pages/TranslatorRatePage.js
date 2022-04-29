@@ -11,6 +11,7 @@ import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
 import PageInfo from "../components/PageInfo";
+import ExhibitLanguageCard from "../components/ExhibitLanguageCard";
 
 /**
  * page for translators to rate translations of pair exhibit-language
@@ -96,11 +97,7 @@ class TranslatorRatePage extends Component {
 
             content = (
               <div>
-                  <h3>{name}</h3>
-                  <div className="mb-4">
-                      <span className="font-weight-bold">Selected language: </span>
-                      {this.state.language}
-                  </div>
+                  <ExhibitLanguageCard exhibitName={name} languageName={this.state.language} />
 
                   <div className="text-center">
                       <img className="img-fluid mt-2" src={INFO_LABELS_IMAGES_URL + infoLabel} alt="information label" />
@@ -118,7 +115,9 @@ class TranslatorRatePage extends Component {
                           <NoContentMessage classes="mt-5" text="There are no translations"/>
                           :
                           <div className="mt-3">
-                              <h3 className="my-5">Translations</h3>
+                              <div className="text-center mt-5 mb-4 translations-heading py-3 px-5 d-flex flex-column-reverse justify-content-center border rounded">
+                                  <h2>Translations</h2>
+                              </div>
                               {translations}
                           </div>
                   }

@@ -12,6 +12,7 @@ import PageContentContainer from "../components/PageContentContainer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbsLink from "../components/BreadcrumbsLink";
 import PageInfo from "../components/PageInfo";
+import ExhibitLanguageCard from "../components/ExhibitLanguageCard";
 
 /**
  * page for creating new translations
@@ -123,12 +124,7 @@ class NewTranslationPage extends Component {
                 </Breadcrumbs>
 
                 <PageInfo name="New Translation">Create a new translation based on the information label</PageInfo>
-
-                <h3>{exhibitName}</h3>
-                <div className="mb-4">
-                    <span className="font-weight-bold">Selected language: </span>
-                    {languageName}
-                </div>
+                <ExhibitLanguageCard exhibitName={exhibitName} languageName={languageName} />
 
                 <div className="text-center">
                     <img className="img-fluid mt-2" src={INFO_LABELS_IMAGES_URL + infoLabel} alt="information label" />
