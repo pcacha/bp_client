@@ -11,11 +11,11 @@ const MyExhibitCard = (props) => (
     <div className="card mb-4">
         <div className="card-body">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-12 col-xl-3">
                     <img className="img-fluid sizedImg img-thumbnail" src={EXHIBITS_IMAGES_URL + props.image} alt="exhibit" />
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-12 col-md-8 col-xl-6 mt-3 mt-xl-0">
                     <h3 className="card-title">
                         {props.name}
                     </h3>
@@ -50,7 +50,7 @@ const MyExhibitCard = (props) => (
                     }
                 </div>
 
-                <div className="col-md-3 mt-md-0 mt-3">
+                <div className="col-12 col-md-4 col-xl-3 mt-3 mt-xl-0">
                     <Link exact to={"/myInstitution/exhibits/" + props.exhibitId} >
                         <button type="button" className="btn btn-info w-100">
                             <i className="fa fa-pencil" /> Detail

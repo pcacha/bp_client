@@ -10,12 +10,12 @@ const InstitutinCard = (props) => (
     <div className="card mb-4">
         <div className="card-body">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-12 col-xl-3">
                     <img className="img-fluid sizedImg img-thumbnail" src={INSTITUTIONS_IMAGES_URL + props.image} alt="institution" />
                 </div>
 
-                <div className="col-md-6">
-                    <h3 className="card-title mt-3 mt-md-0">
+                <div className="col-12 col-md-8 col-xl-6">
+                    <h3 className="card-title mt-3 mt-xl-0">
                         {props.name}
                     </h3>
 
@@ -29,9 +29,9 @@ const InstitutinCard = (props) => (
                     </div>
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-12 col-md-4 col-xl-3">
                     <Link exact to={"/institutions/" + props.institutionId}>
-                        <button type="button" className="btn btn-info btn-lg w-100 mt-3 mt-md-0">
+                        <button type="button" className="btn btn-info btn-lg w-100 mt-3 mt-xl-0">
                             <i className="fa fa-bars" /> Exhibits
                         </button>
                     </Link>
