@@ -68,17 +68,17 @@ function InfoPage(props) {
                                     </li>
                                     <li>
                                         <p className="h5">
-                                            When you view all the exhibits of your cultural institution, you can download an image with a <span className="font-weight-bold">QR code</span>, which you can then place in the exhibition
+                                            In the <span className="font-weight-bold">Approve</span> tab you can select an exhibit and a language and then choose the best translation that is available. It will be then displayed to visitors in the mobile application.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p className="h5">
+                                            When you view all the exhibits of your cultural institution, you can download images with <span className="font-weight-bold">QR codes</span>, which you can then place in the exhibition. Visitors then scan them and see official translations
                                         </p>
                                     </li>
                                     <li>
                                         <p className="h5">
                                             From the <span className="font-weight-bold">My Institution</span> tab, you can also add buildings, rooms and show-cases of your institution after clicking <span className="font-weight-bold">Navigation</span> button. It will help visitors to orientate
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p className="h5">
-                                            In the <span className="font-weight-bold">Approve</span> tab you can select an exhibit and a language and then choose the best translation that is available. It will be then displayed to visitors in the mobile application.
                                         </p>
                                     </li>
                                 </ul>
