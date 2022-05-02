@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/UserDetailPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/UserDetailPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {Component} from 'react';
+import * as apiCalls from "../apiCalls/apiCalls";
+import handleError from "../shared/failureHandler";
+import Spinner from "../components/Spinner";
+import Input from "../components/Input";
+import ButtonWithProgress from "../components/ButtonWithProgress";
+import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import BreadcrumbsLink from "../components/BreadcrumbsLink";
+import PageInfo from "../components/PageInfo";
+
+/**
+ * page for viewing details about user
+ */
+class UserDetailPage extends Component {
+
+    /**
+     * current page state
+     */
+    state = {
+        userId: this.props.match.params.userId,
+        username: "",
+        email: "",
+        createdAt: null,
+        isBanned: false,
+        isTranslator: true,
+        isInstitutionOwner: false,
+        institutionName: "",
+        pendingApiCall: true,
+        pendingApiCallUsernameUpdate: false,
+        pendingApiCallChangePassword: false,
+        pendingApiCallTranslator: false,
+        pendingApiCallBan: false,
+        pendingApiCallRemoveInstitution: false,
+        usernameUpdated: false,
+        errors: {},
+    }
+
+    /**
+     * called when page is mounted
+     */
+    componentDidMount() {
+        this.setState({pendingApiCall: true})
+        // get user details from server
+        apiCalls.getUser(this.state.userId).then(response => {
+            const {
+                username,
+                email,
+                createdAt,
+                isBanned,
+                isTranslator,
+                isInstitutionOwner,
+                institutionName
+            } = response.data;
+
+            this.setState({username, email, createdAt, isBanned, isTranslator, isInstitutionOwner, institutionName, pendingApiCall: false});
+        }).catch(error => {
+            // handle unauthorized state
+            return handleError(error);
+        })
+    }
+
+    /**
+     * called when text inputs are changed
+     * @param event
+     */
+    onChange = (event) => {
+        // delete errors and set new value
+        const errors = {...this.state.errors};
+        delete errors[event.target.name];
+        this.setState({errors, usernameUpdated: false, [event.target.name]: event.target.value});
+    }
+
+    /**
+     * handles error from http request
+     * @param apiError error
+     * @param apiCall api call name
+     */
+    handleApiError = (apiError, apiCall) => {
+        if (apiError.response.data &amp;&amp; apiError.response.data.validationErrors) {
+            // add errors
+            let errors = {
+                ...this.state.errors,
+                ...apiError.response.data.validationErrors
+            };
+            this.setState({
+                [apiCall]: false,
+                errors
+            });
+        }
+    }
+
+    /**
+     * called when admin updates username
+     */
+    onClickUsernameUpdate = (e) => {
+        e.preventDefault();
+
+        this.setState({pendingApiCallUsernameUpdate: true});
+
+        // send request to server to update username
+        apiCalls.adminUpdateUsername(this.state.userId, {username: this.state.username}).then(response => {
+            this.setState({pendingApiCallUsernameUpdate: false, usernameUpdated: true});
+        }).catch(error => {
+            // handle unauthorized state
+            return handleError(error);
+        }).catch(apiError => {
+            // handle input errors
+            this.handleApiError(apiError, "pendingApiCallUsernameUpdate");
+        });
+    }
+
+    /**
+     * called when admin wants to change user's password by sending it to mail
+     */
+    onPasswordChange = () => {
+        const {username, email} = this.state;
+        // ask before changing password
+        if(window.confirm("Do you really want to generate a new password for user " + username + " and send it to this e-mail: " + email)) {
+            this.setState({pendingApiCallChangePassword: true});
+
+            // send request to change password by sending new password to user's mail
+            apiCalls.adminChangePassword(this.state.userId).then(response => {
+                this.setState({pendingApiCallChangePassword: false});
+            }).catch(error => {
+                // handle unauthorized state
+                return handleError(error);
+            });
+        }
+    }
+
+    /**
+     * called when admin wants to change user's rights to translate
+     */
+    onTranslatorChange = () => {
+        const {userId, isTranslator} = this.state;
+        // ask before changing rights
+        if(window.confirm("Do you really want to change translation rights?")) {
+            this.setState({pendingApiCallTranslator: true});
+
+            // send request to server to change user's translation rights
+            apiCalls.adminChangeTranslator(userId, {value: !isTranslator}).then(response => {
+                this.setState({pendingApiCallTranslator: false, isTranslator: !isTranslator});
+            }).catch(error => {
+                // handle unauthorized state
+                return handleError(error);
+            });
+        }
+    }
+
+    /**
+     * called when admin wants to change user's ban
+     */
+    onBanChange = () => {
+        const {userId, isBanned} = this.state;
+        // ask before changing ban
+        if(window.confirm("Do you really want to change access rights?")) {
+            this.setState({pendingApiCallBan: true});
+
+            // send request to change ban of user to server
+            apiCalls.adminChangeBan(userId, {value: !isBanned}).then(response => {
+                this.setState({pendingApiCallBan: false, isBanned: !isBanned});
+            }).catch(error => {
+                // handle unauthorized state
+                return handleError(error);
+            });
+        }
+    }
+
+    /**
+     * called when admin wants to remove institution from user
+     */
+    onInstitutionRemove = () => {
+        // ask before removing institution
+        const {userId, institutionName} = this.state;
+        if(window.confirm("Do you really want to remove managerial rights? It may cause deletion of this institution: " + institutionName)) {
+            this.setState({pendingApiCallRemoveInstitution: true});
+
+            // send request to server to remove institution management to server
+            apiCalls.adminRemoveInstitution(userId).then(response => {
+                this.setState({pendingApiCallRemoveInstitution: false, isInstitutionOwner: false, institutionName: ""});
+            }).catch(error => {
+                return handleError(error);
+            });
+        }
+    }
+
+    /**
+     * renders user details page
+     * @returns {JSX.Element} page
+     */
+    render() {
+        const {
+            username,
+            email,
+            createdAt,
+            isBanned,
+            isTranslator,
+            isInstitutionOwner,
+            institutionName,
+            pendingApiCall,
+            pendingApiCallUsernameUpdate,
+            pendingApiCallChangePassword,
+            pendingApiCallTranslator,
+            pendingApiCallBan,
+            pendingApiCallRemoveInstitution,
+            usernameUpdated,
+            errors
+        } = this.state;
+
+        // define content
+        let content = &lt;Spinner/>;
+        if (!pendingApiCall) {
+            content =
+                &lt;div>
+                    &lt;div className="mb-4">
+                        &lt;span className="font-weight-bold">Registration date: &lt;/span>
+                        {createdAt}
+                    &lt;/div>
+
+                    &lt;form className="mb-4">
+                        {
+                            usernameUpdated &amp;&amp;
+                            &lt;div className="alert alert-success" role="alert">
+                                Username updated
+                            &lt;/div>
+                        }
+
+                        &lt;div className="form-group">
+                            &lt;Input
+                                label="Username"
+                                placeholder="Enter name" name="username" value={username}
+                                onChange={this.onChange}
+                                hasError={errors.username &amp;&amp; true}
+                                error={errors.username}
+                            />
+                        &lt;/div>
+
+                        &lt;ButtonWithProgress  onClick={(e) => this.onClickUsernameUpdate(e)}
+                                             className="btn btn-primary w-100 my-2"
+                                             disabled={pendingApiCallUsernameUpdate || username === ""}
+                                             pendingApiCall={pendingApiCallUsernameUpdate}
+                                             hasChildren>
+                            &lt;i className="fa fa-paper-plane" /> Update username
+                        &lt;/ButtonWithProgress>
+                    &lt;/form>
+
+                    &lt;div className="card thick-top-border border-dark no-rounded thick-side-borders my-rounded-top no-bottom-border">
+                        &lt;div className="card-body">
+                            &lt;h5>Password Change&lt;/h5>
+                            &lt;p>Generate a new password and send it to an e-mail address: &lt;span className="font-weight-bold">{email}&lt;/span>&lt;/p>
+                            &lt;ButtonWithProgress  onClick={this.onPasswordChange}
+                                                 className="btn btn-danger btn-lg my-1"
+                                                 disabled={pendingApiCallChangePassword}
+                                                 pendingApiCall={pendingApiCallChangePassword}
+                                                 hasChildren>
+                                &lt;i className="fa fa-key"/> Generate new password
+                            &lt;/ButtonWithProgress>
+                        &lt;/div>
+                    &lt;/div>
+
+                    &lt;div className="card thick-side-borders border-dark no-rounded no-bottom-border">
+                        &lt;div className="card-body">
+                            &lt;h5>Translation Rights&lt;/h5>
+                            &lt;p>Change user's right to translate&lt;/p>
+                            &lt;ButtonWithProgress  onClick={this.onTranslatorChange}
+                                                 className={"btn btn-lg my-1 " + (isTranslator ? "btn-primary" : "btn-secondary")}
+                                                 disabled={pendingApiCallTranslator}
+                                                 pendingApiCall={pendingApiCallTranslator}
+                                                 hasChildren>
+                                &lt;i className="fa fa-globe"/> {isTranslator ? "Translation rights on" : "Translation rights off"}
+                            &lt;/ButtonWithProgress>
+                        &lt;/div>
+                    &lt;/div>
+
+                    {
+                        isInstitutionOwner &amp;&amp;
+                        &lt;div className="card thick-side-borders border-dark no-rounded no-bottom-border">
+                            &lt;div className="card-body">
+                                &lt;h5>Institution&lt;/h5>
+                                &lt;p>The user is a manager of: &lt;span className="font-weight-bold">{institutionName}&lt;/span>&lt;/p>
+                                &lt;ButtonWithProgress  onClick={this.onInstitutionRemove}
+                                                     className="btn btn-lg my-1 btn-danger"
+                                                     disabled={pendingApiCallRemoveInstitution}
+                                                     pendingApiCall={pendingApiCallRemoveInstitution}
+                                                     hasChildren>
+                                    &lt;i className="fa fa-times"/> Remove managerial rights
+                                &lt;/ButtonWithProgress>
+                            &lt;/div>
+                        &lt;/div>
+                    }
+
+                    &lt;div className="card thick-side-borders border-dark no-rounded thick-bottom-border my-rounded-bottom">
+                        &lt;div className="card-body">
+                            &lt;h5>Ban&lt;/h5>
+                            &lt;p>Change user's access to the system&lt;/p>
+                            &lt;ButtonWithProgress  onClick={this.onBanChange}
+                                                 className={"btn btn-lg my-1 " + (isBanned ? "btn-danger" : "btn-primary")}
+                                                 disabled={pendingApiCallBan}
+                                                 pendingApiCall={pendingApiCallBan}
+                                                 hasChildren>
+                                &lt;i className="fa fa-user"/> {isBanned ? "Banned" : "Access allowed"}
+                            &lt;/ButtonWithProgress>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+        }
+
+        // render page
+        return (
+            &lt;PageContentContainer>
+                &lt;Breadcrumbs>
+                    &lt;BreadcrumbsLink to="/users" name="User Manager"/>
+                    &lt;li className="breadcrumb-item active">User Details&lt;/li>
+                &lt;/Breadcrumbs>
+
+                &lt;PageInfo name="User Details">Here you can manage users and set their rights&lt;/PageInfo>
+                {content}
+            &lt;/PageContentContainer>
+        );
+    }
+}
+
+export default UserDetailPage;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AddBuildingPage.html">AddBuildingPage</a></li><li><a href="AddExhibitPage.html">AddExhibitPage</a></li><li><a href="AddLanguagesPage.html">AddLanguagesPage</a></li><li><a href="AddRoomPage.html">AddRoomPage</a></li><li><a href="AddShowcasePage.html">AddShowcasePage</a></li><li><a href="App.html">App</a></li><li><a href="ApproveExhibitPage.html">ApproveExhibitPage</a></li><li><a href="BuildingsPage.html">BuildingsPage</a></li><li><a href="CreateInstitutionPage.html">CreateInstitutionPage</a></li><li><a href="LocationPicker.html">LocationPicker</a></li><li><a href="LocationPickerSelect.html">LocationPickerSelect</a></li><li><a href="LoginPage.html">LoginPage</a></li><li><a href="MyInstitutionExhibitsPage.html">MyInstitutionExhibitsPage</a></li><li><a href="MyInstitutionPage.html">MyInstitutionPage</a></li><li><a href="MyTranslationsPage.html">MyTranslationsPage</a></li><li><a href="Navigation.html">Navigation</a></li><li><a href="NewTranslationPage.html">NewTranslationPage</a></li><li><a href="OwnerRatePage.html">OwnerRatePage</a></li><li><a href="ProfilePage.html">ProfilePage</a></li><li><a href="RoomsPage.html">RoomsPage</a></li><li><a href="ShowcasePage.html">ShowcasePage</a></li><li><a href="SignupPage.html">SignupPage</a></li><li><a href="TranslateExhibitPage.html">TranslateExhibitPage</a></li><li><a href="TranslateInstitutionsPage.html">TranslateInstitutionsPage</a></li><li><a href="TranslationSequencePage.html">TranslationSequencePage</a></li><li><a href="TranslatorRatePage.html">TranslatorRatePage</a></li><li><a href="UpdateBuildingPage.html">UpdateBuildingPage</a></li><li><a href="UpdateExhibitPage.html">UpdateExhibitPage</a></li><li><a href="UpdateInstitutionPage.html">UpdateInstitutionPage</a></li><li><a href="UpdateRoomPage.html">UpdateRoomPage</a></li><li><a href="UpdateShowcasePage.html">UpdateShowcasePage</a></li><li><a href="UserDetailPage.html">UserDetailPage</a></li><li><a href="UserManagerPage.html">UserManagerPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addExhibit">addExhibit</a></li><li><a href="global.html#addInstitutionLanguage">addInstitutionLanguage</a></li><li><a href="global.html#addInstitutionManager">addInstitutionManager</a></li><li><a href="global.html#adminChangeBan">adminChangeBan</a></li><li><a href="global.html#adminChangePassword">adminChangePassword</a></li><li><a href="global.html#adminChangeTranslator">adminChangeTranslator</a></li><li><a href="global.html#adminRemoveInstitution">adminRemoveInstitution</a></li><li><a href="global.html#adminUpdateUsername">adminUpdateUsername</a></li><li><a href="global.html#ApproveExhibitCard">ApproveExhibitCard</a></li><li><a href="global.html#Breadcrumbs">Breadcrumbs</a></li><li><a href="global.html#BreadcrumbsLink">BreadcrumbsLink</a></li><li><a href="global.html#BuildingCard">BuildingCard</a></li><li><a href="global.html#ButtonWithProgress">ButtonWithProgress</a></li><li><a href="global.html#deleteBuilding">deleteBuilding</a></li><li><a href="global.html#deleteExhibit">deleteExhibit</a></li><li><a href="global.html#deleteInstitution">deleteInstitution</a></li><li><a href="global.html#deleteRoom">deleteRoom</a></li><li><a href="global.html#deleteSequence">deleteSequence</a></li><li><a href="global.html#deleteShowcase">deleteShowcase</a></li><li><a href="global.html#ExhibitLanguageCard">ExhibitLanguageCard</a></li><li><a href="global.html#EXHIBITS_IMAGES_URL">EXHIBITS_IMAGES_URL</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#getAllExhibitsOfMyInstitution">getAllExhibitsOfMyInstitution</a></li><li><a href="global.html#getAllInstitutions">getAllInstitutions</a></li><li><a href="global.html#getBuilding">getBuilding</a></li><li><a href="global.html#getBuildings">getBuildings</a></li><li><a href="global.html#getExhibit">getExhibit</a></li><li><a href="global.html#getExhibitsApproveTranslations">getExhibitsApproveTranslations</a></li><li><a href="global.html#getExhibitsTranslate">getExhibitsTranslate</a></li><li><a href="global.html#getFreshToken">getFreshToken</a></li><li><a href="global.html#getMyInstitution">getMyInstitution</a></li><li><a href="global.html#getMyInstitutionLanguages">getMyInstitutionLanguages</a></li><li><a href="global.html#getMyTranslationSequence">getMyTranslationSequence</a></li><li><a href="global.html#getMyTranslationSequences">getMyTranslationSequences</a></li><li><a href="global.html#getNewTranslation">getNewTranslation</a></li><li><a href="global.html#getQRCode">getQRCode</a></li><li><a href="global.html#getRateOverview">getRateOverview</a></li><li><a href="global.html#getRoom">getRoom</a></li><li><a href="global.html#getRooms">getRooms</a></li><li><a href="global.html#getShowcase">getShowcase</a></li><li><a href="global.html#getShowcases">getShowcases</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#home">home</a></li><li><a href="global.html#INFO_LABELS_IMAGES_URL">INFO_LABELS_IMAGES_URL</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#InstitutinCard">InstitutinCard</a></li><li><a href="global.html#INSTITUTIONS_IMAGES_URL">INSTITUTIONS_IMAGES_URL</a></li><li><a href="global.html#jumbotron">jumbotron</a></li><li><a href="global.html#layout">layout</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#LOGIN_SUCCESS">LOGIN_SUCCESS</a></li><li><a href="global.html#loginSuccess">loginSuccess</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#LOGOUT_SUCCESS">LOGOUT_SUCCESS</a></li><li><a href="global.html#mapDispatchToProps">mapDispatchToProps</a></li><li><a href="global.html#mapStateToProps">mapStateToProps</a></li><li><a href="global.html#MyExhibitCard">MyExhibitCard</a></li><li><a href="global.html#MyTranslationCard">MyTranslationCard</a></li><li><a href="global.html#MyTranslationSequenceCard">MyTranslationSequenceCard</a></li><li><a href="global.html#navigationItem">navigationItem</a></li><li><a href="global.html#NoContentMessage">NoContentMessage</a></li><li><a href="global.html#NOTHING_SELECTED_LABEL">NOTHING_SELECTED_LABEL</a></li><li><a href="global.html#OwnerRateTranslationCard">OwnerRateTranslationCard</a></li><li><a href="global.html#PageContentContainer">PageContentContainer</a></li><li><a href="global.html#PageInfo">PageInfo</a></li><li><a href="global.html#rollbackTranslation">rollbackTranslation</a></li><li><a href="global.html#RoomCard">RoomCard</a></li><li><a href="global.html#saveBuilding">saveBuilding</a></li><li><a href="global.html#saveMyInstitution">saveMyInstitution</a></li><li><a href="global.html#saveNewTranslation">saveNewTranslation</a></li><li><a href="global.html#saveRoom">saveRoom</a></li><li><a href="global.html#saveShowcase">saveShowcase</a></li><li><a href="global.html#SERVER_ROOT_URL">SERVER_ROOT_URL</a></li><li><a href="global.html#SET_EMAIL">SET_EMAIL</a></li><li><a href="global.html#SET_IS_INSTITUTION_OWNER">SET_IS_INSTITUTION_OWNER</a></li><li><a href="global.html#SET_USERNAME">SET_USERNAME</a></li><li><a href="global.html#setAuthorizationHeader">setAuthorizationHeader</a></li><li><a href="global.html#setEmail">setEmail</a></li><li><a href="global.html#setIsInstitutionOwner">setIsInstitutionOwner</a></li><li><a href="global.html#setLike">setLike</a></li><li><a href="global.html#setOfficial">setOfficial</a></li><li><a href="global.html#setUsername">setUsername</a></li><li><a href="global.html#ShowcaseCard">ShowcaseCard</a></li><li><a href="global.html#signup">signup</a></li><li><a href="global.html#Spinner">Spinner</a></li><li><a href="global.html#themesCard">themesCard</a></li><li><a href="global.html#TranslateExhibitCard">TranslateExhibitCard</a></li><li><a href="global.html#TranslatorRateTranslationCard">TranslatorRateTranslationCard</a></li><li><a href="global.html#updateBuilding">updateBuilding</a></li><li><a href="global.html#updateExhibit">updateExhibit</a></li><li><a href="global.html#updateExhibitImage">updateExhibitImage</a></li><li><a href="global.html#updateExhibitInfoLabelImage">updateExhibitInfoLabelImage</a></li><li><a href="global.html#updateInstitution">updateInstitution</a></li><li><a href="global.html#updateInstitutionImage">updateInstitutionImage</a></li><li><a href="global.html#updatePassword">updatePassword</a></li><li><a href="global.html#updateRoom">updateRoom</a></li><li><a href="global.html#updateShowcase">updateShowcase</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#UserManagerRow">UserManagerRow</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Mon May 02 2022 14:32:45 GMT+0200 (Středoevropský letní čas)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

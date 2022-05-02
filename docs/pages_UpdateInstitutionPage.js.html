@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/UpdateInstitutionPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/UpdateInstitutionPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {Component} from 'react';
+import * as authActions from "../store/authActions";
+import {connect} from "react-redux";
+import Input from "../components/Input";
+import ButtonWithProgress from "../components/ButtonWithProgress";
+import {INSTITUTIONS_IMAGES_URL} from "../shared/sharedConstants";
+import * as apiCalls from "../apiCalls/apiCalls";
+import handleError from "../shared/failureHandler";
+import { Link } from "react-router-dom";
+import PageContentContainer from "../components/PageContentContainer";
+import Breadcrumbs from "../components/Breadcrumbs";
+import PageInfo from "../components/PageInfo";
+
+/**
+ * page for updating institution
+ */
+class UpdateInstitutionPage extends Component {
+
+    /**
+     * current page state
+     */
+    state = {
+        name: this.props.institution.name,
+        address: this.props.institution.address,
+        description: this.props.institution.description,
+        latitudeString: this.props.institution.latitude,
+        longitudeString: this.props.institution.longitude,
+        image: this.props.institution.image,
+        encodedImage: null,
+        imageSelect: "",
+        createdAt: this.props.institution.createdAt,
+        email: "",
+        pendingApiCallUpdateInstitution: false,
+        pendingApiCallUpdateImage: false,
+        pendingApiCallDeleteInstitution: false,
+        pendingApiCallAddManager: false,
+        institutionUpdated: false,
+        imageUpdated: false,
+        managerAdded: false,
+        errors: {},
+    }
+
+    /**
+     * called when new institution image is selected
+     * @param event input event
+     */
+    onImageSelect = (event) => {
+        // delete errors and update value in state
+        const errors = {...this.state.errors};
+        delete errors["encodedImage"];
+        this.setState({errors, [event.target.name]: event.target.value, imageUpdated: false});
+        if (event.target.files.length === 0) {
+            return;
+        }
+
+        // read selected image if exists
+        const file = event.target.files[0];
+        let reader = new FileReader();
+        reader.onloadend = () => {
+            // set base64 encoded image to tate
+            this.setState({encodedImage: reader.result});
+        }
+        reader.readAsDataURL(file);
+    }
+
+    /**
+     * clear image from state
+     */
+    clearImage = () => {
+        // delete errors and clear image fields from state
+        const errors = {...this.state.errors};
+        delete errors["encodedImage"];
+        this.setState({errors, encodedImage: null, imageSelect: "",});
+    }
+
+    /**
+     * handles error from http request
+     * @param apiError error
+     * @param apiCall api call name
+     */
+    handleApiError = (apiError, apiCall) => {
+        if (apiError.response.data &amp;&amp; apiError.response.data.validationErrors) {
+            let errors = {
+                ...this.state.errors,
+                ...apiError.response.data.validationErrors
+            };
+            // update input errors and api call state
+            this.setState({
+                [apiCall]: false,
+                errors
+            });
+        }
+    }
+
+    /**
+     * called when user submit institution image update
+     */
+    onClickImageUpdate = (e) => {
+        e.preventDefault();
+
+        this.setState({pendingApiCallUpdateImage: true});
+        const img = { encodedImage: this.state.encodedImage }
+
+        // send request to update image to server
+        apiCalls.updateInstitutionImage(img).then(response => {
+            this.setState({pendingApiCallUpdateImage: false, image: response.data.message, imageUpdated: true}, () => {
+                this.clearImage();
+            });
+        }).catch(error => {
+            // handle unauthorized state
+            return handleError(error);
+        }).catch(apiError => {
+            // handle errors in input
+            this.handleApiError(apiError, "pendingApiCallUpdateImage");
+        });
+    }
+
+    /**
+     * called when value in text inputs is changed
+     * @param event input event
+     */
+    onChange = event => {
+        // delete errors and update value in state
+        const errors = {...this.state.errors};
+        delete errors[event.target.name];
+        this.setState({errors, institutionUpdated: false, [event.target.name]: event.target.value});
+    }
+
+    /**
+     * called when value of email text box is changed
+     * @param event input event
+     */
+    onEmailChange = event => {
+        // delete errors and set value to state
+        const errors = {...this.state.errors};
+        delete errors[event.target.name];
+        this.setState({errors, managerAdded: false, [event.target.name]: event.target.value});
+    }
+
+    /**
+     * called when institution manager wants to update info about institution
+     */
+    onClickInstitutionUpdate = (e) => {
+        e.preventDefault();
+
+        this.setState({pendingApiCallUpdateInstitution: true});
+        // extract institution from state
+        const institution = {
+            name: this.state.name,
+            address: this.state.address,
+            description: this.state.description,
+            latitudeString: this.state.latitudeString,
+            longitudeString: this.state.longitudeString,
+        }
+
+        // sends request to server to update institution information
+        apiCalls.updateInstitution(institution).then(response => {
+            this.setState({pendingApiCallUpdateInstitution: false, institutionUpdated: true});
+        }).catch(error => {
+            // handle unauthorized state
+            return handleError(error);
+        }).catch(apiError => {
+            // handle input error
+            this.handleApiError(apiError, "pendingApiCallUpdateInstitution");
+        });
+    }
+
+    /**
+     * called when manager of institution wants to delete it
+     */
+    onClickInstitutionDelete = () => {
+        // ask before institution delete
+        if (window.confirm("Do you really want to delete your institution?")) {
+            this.setState({pendingApiCallDeleteInstitution: true});
+
+            // send request to institution delete to server
+            apiCalls.deleteInstitution().then(response => {
+                this.setState({pendingApiCallDeleteInstitution: false}, () => {
+                    this.props.setIsInstitutionOwner(false);
+                    this.props.redirect("/");
+                });
+            }).catch(error => {
+                // handle unauthorized state
+                return handleError(error);
+            });
+        }
+    }
+
+    /**
+     * called when institution manager wants to add new manager
+     */
+    onClickManagerAdd = (e) => {
+        e.preventDefault();
+
+        // ask before adding manager
+        if (window.confirm("Do you really want to add a new manager to your institution?")) {
+            this.setState({pendingApiCallAddManager: true});
+
+            // send request to server to add new manager to institution
+            apiCalls.addInstitutionManager({email: this.state.email}).then(response => {
+                this.setState({pendingApiCallAddManager: false, email: ""}, () => this.setState({managerAdded: true}));
+            }).catch(error => {
+                // handle unauthorized state
+                return handleError(error);
+            }).catch(apiError => {
+                // handle input errors
+                this.handleApiError(apiError, "pendingApiCallAddManager");
+            });
+        }
+    }
+
+    /**
+     * renders institution update page
+     * @returns {JSX.Element} page
+     */
+    render() {
+        const {
+            name,
+            address,
+            description,
+            latitudeString,
+            longitudeString,
+            image,
+            encodedImage,
+            imageSelect,
+            email,
+            pendingApiCallUpdateInstitution,
+            pendingApiCallUpdateImage,
+            pendingApiCallDeleteInstitution,
+            pendingApiCallAddManager,
+            institutionUpdated,
+            imageUpdated,
+            managerAdded,
+            errors,
+        } = this.state;
+
+        // render page
+        return (
+            &lt;PageContentContainer>
+                &lt;Breadcrumbs>
+                    &lt;li className="breadcrumb-item active">My Institution&lt;/li>
+                &lt;/Breadcrumbs>
+
+                &lt;PageInfo name="My Institution">Here you can manage your institution&lt;/PageInfo>
+
+                &lt;div className="row d-flex justify-content-between">
+                    &lt;div className="col-lg col-sm-6 col-md-6 text-center">
+                        &lt;Link exact to="/myInstitution/addLanguages" >
+                            &lt;button type="button" className="btn btn-lg btn-primary mb-3 institution-nav">
+                                &lt;div className="card-body">
+                                    &lt;h5 className="card-title">Languages&lt;/h5>
+                                    &lt;p className="card-text">Add languages that translators will be able to translate&lt;/p>
+                                &lt;/div>
+                            &lt;/button>
+                        &lt;/Link>
+                    &lt;/div>
+
+                    &lt;div className="col-lg col-sm-6 col-md-6 text-center">
+                        &lt;Link exact to="/myInstitution/addExhibit" >
+                            &lt;button type="button" className="btn btn-lg btn-success mb-3 institution-nav">
+                                &lt;div className="card-body">
+                                    &lt;h5 className="card-title">New Exhibits&lt;/h5>
+                                    &lt;p className="card-text">Add new exhibits with their information labels to your institution&lt;/p>
+                                &lt;/div>
+                            &lt;/button>
+                        &lt;/Link>
+                    &lt;/div>
+
+                    &lt;div className="col-lg col-sm-6 col-md-6 text-center">
+                        &lt;Link exact to="/myInstitution/exhibits" >
+                            &lt;button type="button" className="btn btn-lg btn-info mb-3 institution-nav">
+                                &lt;div className="card-body">
+                                    &lt;h5 className="card-title">View Exhibits&lt;/h5>
+                                    &lt;p className="card-text">Get QR codes and manage your institution's exhibits&lt;/p>
+                                &lt;/div>
+                            &lt;/button>
+                        &lt;/Link>
+                    &lt;/div>
+
+                    &lt;div className="col-lg col-sm-6 col-md-6 text-center">
+                        &lt;Link exact to="/myInstitution/buildings" >
+                            &lt;button type="button" className="btn btn-lg btn-secondary mb-3 institution-nav">
+                                &lt;div className="card-body">
+                                    &lt;h5 className="card-title">Navigation&lt;/h5>
+                                    &lt;p className="card-text">Add and edit buildings, rooms and showcases for visitor navigation&lt;/p>
+                                &lt;/div>
+                            &lt;/button>
+                        &lt;/Link>
+                    &lt;/div>
+                &lt;/div>
+
+                &lt;form className="mb-4 mt-4">
+                    {
+                        imageUpdated &amp;&amp;
+                        &lt;div className="alert alert-success" role="alert">
+                            Institution image updated
+                        &lt;/div>
+                    }
+
+                    &lt;div className="form-group">
+                        &lt;Input type="file"
+                               onlyImage
+                               value={imageSelect}
+                               name="imageSelect"
+                               label="Institution image"
+                               placeholder="Select institution image"
+                               onChange={this.onImageSelect}
+                               hasError={errors.encodedImage &amp;&amp; true}
+                               error={errors.encodedImage}
+                        />
+
+                        {
+                            encodedImage ?
+                                &lt;div>
+                                    &lt;img className="img-fluid sizedImg img-thumbnail mt-2" src={encodedImage} alt="upload" />
+                                    &lt;br />
+                                    &lt;button className="btn btn-danger btn-lg mt-2" disabled={pendingApiCallUpdateImage} onClick={this.clearImage}>
+                                        &lt;i className="fa fa-times" /> Clear
+                                    &lt;/button>
+                                    &lt;ButtonWithProgress onClick={(e) => this.onClickImageUpdate(e)}
+                                                        className="btn btn-success btn-lg ml-2 mt-2"
+                                                        disabled={pendingApiCallUpdateImage}
+                                                        pendingApiCall={pendingApiCallUpdateImage}
+                                                        hasChildren>
+                                        &lt;i className="fa fa-paper-plane" /> Update image
+                                    &lt;/ButtonWithProgress>
+                                &lt;/div>
+                                :
+                                &lt;div>
+                                    &lt;img className="img-fluid sizedImg img-thumbnail mt-2" src={INSTITUTIONS_IMAGES_URL + image} alt="upload" />
+                                &lt;/div>
+                        }
+                    &lt;/div>
+                &lt;/form>
+
+                &lt;form>
+                    {
+                        institutionUpdated &amp;&amp;
+                        &lt;div className="alert alert-success" role="alert">
+                            Institution information updated
+                        &lt;/div>
+                    }
+
+                    &lt;div className="form-group">
+                        &lt;Input
+                            label="Name"
+                            placeholder="Enter name" name="name" value={name}
+                            onChange={this.onChange}
+                            hasError={errors.name &amp;&amp; true}
+                            error={errors.name}
+                        />
+                    &lt;/div>
+                    &lt;div className="form-group">
+                        &lt;Input
+                            label="Address"
+                            placeholder="Enter address" name="address" value={address}
+                            onChange={this.onChange}
+                            hasError={errors.address &amp;&amp; true}
+                            error={errors.address}
+                        />
+                    &lt;/div>
+                    &lt;div className="form-group">
+                        &lt;Input
+                            label="Description" type="textarea"
+                            placeholder="Enter description" name="description" value={description}
+                            onChange={this.onChange}
+                            hasError={errors.description &amp;&amp; true}
+                            error={errors.description}
+                        />
+                    &lt;/div>
+                    &lt;div className="form-group">
+                        &lt;Input
+                            label="Latitude"
+                            placeholder="Enter latitude" name="latitudeString" value={latitudeString}
+                            onChange={this.onChange}
+                            hasError={errors.latitudeString &amp;&amp; true}
+                            error={errors.latitudeString}
+                        />
+                    &lt;/div>
+                    &lt;div className="form-group">
+                        &lt;Input
+                            label="Longitude"
+                            placeholder="Enter longitude" name="longitudeString" value={longitudeString}
+                            onChange={this.onChange}
+                            hasError={errors.longitudeString &amp;&amp; true}
+                            error={errors.longitudeString}
+                        />
+                    &lt;/div>
+
+                    &lt;ButtonWithProgress  onClick={(e) => this.onClickInstitutionUpdate(e)}
+                                         className="btn btn-primary w-100 my-2"
+                                         disabled={pendingApiCallUpdateInstitution || name === "" || address === "" || description === "" ||
+                                             latitudeString === "" || longitudeString === ""}
+                                         pendingApiCall={pendingApiCallUpdateInstitution}
+                                         hasChildren>
+                        &lt;i className="fa fa-paper-plane" /> Update institution information
+                    &lt;/ButtonWithProgress>
+
+                &lt;/form>
+
+                &lt;form className="mt-4">
+                    {
+                        managerAdded &amp;&amp;
+                        &lt;div className="alert alert-success" role="alert">
+                            New manager added
+                        &lt;/div>
+                    }
+
+                    &lt;Input
+                        label="New institution manager"
+                        placeholder="Enter new manager's e-mail" name="email" value={email}
+                        onChange={this.onEmailChange}
+                        hasError={errors.email &amp;&amp; true}
+                        error={errors.email}
+                    />
+
+                    &lt;ButtonWithProgress  onClick={(e) => this.onClickManagerAdd(e)}
+                                         className="btn btn-primary w-100 my-2"
+                                         disabled={pendingApiCallAddManager || email === ""}
+                                         pendingApiCall={pendingApiCallAddManager}
+                                         hasChildren>
+                        &lt;i className="fa fa-paper-plane" /> Add new institution manager
+                    &lt;/ButtonWithProgress>
+                &lt;/form>
+
+                &lt;br />
+                &lt;ButtonWithProgress  onClick={this.onClickInstitutionDelete}
+                                     className="btn btn-lg mt-3 btn-danger"
+                                     disabled={pendingApiCallDeleteInstitution}
+                                     pendingApiCall={pendingApiCallDeleteInstitution}
+                                     hasChildren>
+                    &lt;i className="fa fa-times" /> Delete institution
+                &lt;/ButtonWithProgress>
+            &lt;/PageContentContainer>
+        );
+    }
+}
+
+/**
+ * maps redux dispatch to state props
+ * @param dispatch redux dispatch
+ */
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setIsInstitutionOwner: (value) => dispatch(authActions.setIsInstitutionOwner(value)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(UpdateInstitutionPage);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AddBuildingPage.html">AddBuildingPage</a></li><li><a href="AddExhibitPage.html">AddExhibitPage</a></li><li><a href="AddLanguagesPage.html">AddLanguagesPage</a></li><li><a href="AddRoomPage.html">AddRoomPage</a></li><li><a href="AddShowcasePage.html">AddShowcasePage</a></li><li><a href="App.html">App</a></li><li><a href="ApproveExhibitPage.html">ApproveExhibitPage</a></li><li><a href="BuildingsPage.html">BuildingsPage</a></li><li><a href="CreateInstitutionPage.html">CreateInstitutionPage</a></li><li><a href="LocationPicker.html">LocationPicker</a></li><li><a href="LocationPickerSelect.html">LocationPickerSelect</a></li><li><a href="LoginPage.html">LoginPage</a></li><li><a href="MyInstitutionExhibitsPage.html">MyInstitutionExhibitsPage</a></li><li><a href="MyInstitutionPage.html">MyInstitutionPage</a></li><li><a href="MyTranslationsPage.html">MyTranslationsPage</a></li><li><a href="Navigation.html">Navigation</a></li><li><a href="NewTranslationPage.html">NewTranslationPage</a></li><li><a href="OwnerRatePage.html">OwnerRatePage</a></li><li><a href="ProfilePage.html">ProfilePage</a></li><li><a href="RoomsPage.html">RoomsPage</a></li><li><a href="ShowcasePage.html">ShowcasePage</a></li><li><a href="SignupPage.html">SignupPage</a></li><li><a href="TranslateExhibitPage.html">TranslateExhibitPage</a></li><li><a href="TranslateInstitutionsPage.html">TranslateInstitutionsPage</a></li><li><a href="TranslationSequencePage.html">TranslationSequencePage</a></li><li><a href="TranslatorRatePage.html">TranslatorRatePage</a></li><li><a href="UpdateBuildingPage.html">UpdateBuildingPage</a></li><li><a href="UpdateExhibitPage.html">UpdateExhibitPage</a></li><li><a href="UpdateInstitutionPage.html">UpdateInstitutionPage</a></li><li><a href="UpdateRoomPage.html">UpdateRoomPage</a></li><li><a href="UpdateShowcasePage.html">UpdateShowcasePage</a></li><li><a href="UserDetailPage.html">UserDetailPage</a></li><li><a href="UserManagerPage.html">UserManagerPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addExhibit">addExhibit</a></li><li><a href="global.html#addInstitutionLanguage">addInstitutionLanguage</a></li><li><a href="global.html#addInstitutionManager">addInstitutionManager</a></li><li><a href="global.html#adminChangeBan">adminChangeBan</a></li><li><a href="global.html#adminChangePassword">adminChangePassword</a></li><li><a href="global.html#adminChangeTranslator">adminChangeTranslator</a></li><li><a href="global.html#adminRemoveInstitution">adminRemoveInstitution</a></li><li><a href="global.html#adminUpdateUsername">adminUpdateUsername</a></li><li><a href="global.html#ApproveExhibitCard">ApproveExhibitCard</a></li><li><a href="global.html#Breadcrumbs">Breadcrumbs</a></li><li><a href="global.html#BreadcrumbsLink">BreadcrumbsLink</a></li><li><a href="global.html#BuildingCard">BuildingCard</a></li><li><a href="global.html#ButtonWithProgress">ButtonWithProgress</a></li><li><a href="global.html#deleteBuilding">deleteBuilding</a></li><li><a href="global.html#deleteExhibit">deleteExhibit</a></li><li><a href="global.html#deleteInstitution">deleteInstitution</a></li><li><a href="global.html#deleteRoom">deleteRoom</a></li><li><a href="global.html#deleteSequence">deleteSequence</a></li><li><a href="global.html#deleteShowcase">deleteShowcase</a></li><li><a href="global.html#ExhibitLanguageCard">ExhibitLanguageCard</a></li><li><a href="global.html#EXHIBITS_IMAGES_URL">EXHIBITS_IMAGES_URL</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#getAllExhibitsOfMyInstitution">getAllExhibitsOfMyInstitution</a></li><li><a href="global.html#getAllInstitutions">getAllInstitutions</a></li><li><a href="global.html#getBuilding">getBuilding</a></li><li><a href="global.html#getBuildings">getBuildings</a></li><li><a href="global.html#getExhibit">getExhibit</a></li><li><a href="global.html#getExhibitsApproveTranslations">getExhibitsApproveTranslations</a></li><li><a href="global.html#getExhibitsTranslate">getExhibitsTranslate</a></li><li><a href="global.html#getFreshToken">getFreshToken</a></li><li><a href="global.html#getMyInstitution">getMyInstitution</a></li><li><a href="global.html#getMyInstitutionLanguages">getMyInstitutionLanguages</a></li><li><a href="global.html#getMyTranslationSequence">getMyTranslationSequence</a></li><li><a href="global.html#getMyTranslationSequences">getMyTranslationSequences</a></li><li><a href="global.html#getNewTranslation">getNewTranslation</a></li><li><a href="global.html#getQRCode">getQRCode</a></li><li><a href="global.html#getRateOverview">getRateOverview</a></li><li><a href="global.html#getRoom">getRoom</a></li><li><a href="global.html#getRooms">getRooms</a></li><li><a href="global.html#getShowcase">getShowcase</a></li><li><a href="global.html#getShowcases">getShowcases</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#home">home</a></li><li><a href="global.html#INFO_LABELS_IMAGES_URL">INFO_LABELS_IMAGES_URL</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#InstitutinCard">InstitutinCard</a></li><li><a href="global.html#INSTITUTIONS_IMAGES_URL">INSTITUTIONS_IMAGES_URL</a></li><li><a href="global.html#jumbotron">jumbotron</a></li><li><a href="global.html#layout">layout</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#LOGIN_SUCCESS">LOGIN_SUCCESS</a></li><li><a href="global.html#loginSuccess">loginSuccess</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#LOGOUT_SUCCESS">LOGOUT_SUCCESS</a></li><li><a href="global.html#mapDispatchToProps">mapDispatchToProps</a></li><li><a href="global.html#mapStateToProps">mapStateToProps</a></li><li><a href="global.html#MyExhibitCard">MyExhibitCard</a></li><li><a href="global.html#MyTranslationCard">MyTranslationCard</a></li><li><a href="global.html#MyTranslationSequenceCard">MyTranslationSequenceCard</a></li><li><a href="global.html#navigationItem">navigationItem</a></li><li><a href="global.html#NoContentMessage">NoContentMessage</a></li><li><a href="global.html#NOTHING_SELECTED_LABEL">NOTHING_SELECTED_LABEL</a></li><li><a href="global.html#OwnerRateTranslationCard">OwnerRateTranslationCard</a></li><li><a href="global.html#PageContentContainer">PageContentContainer</a></li><li><a href="global.html#PageInfo">PageInfo</a></li><li><a href="global.html#rollbackTranslation">rollbackTranslation</a></li><li><a href="global.html#RoomCard">RoomCard</a></li><li><a href="global.html#saveBuilding">saveBuilding</a></li><li><a href="global.html#saveMyInstitution">saveMyInstitution</a></li><li><a href="global.html#saveNewTranslation">saveNewTranslation</a></li><li><a href="global.html#saveRoom">saveRoom</a></li><li><a href="global.html#saveShowcase">saveShowcase</a></li><li><a href="global.html#SERVER_ROOT_URL">SERVER_ROOT_URL</a></li><li><a href="global.html#SET_EMAIL">SET_EMAIL</a></li><li><a href="global.html#SET_IS_INSTITUTION_OWNER">SET_IS_INSTITUTION_OWNER</a></li><li><a href="global.html#SET_USERNAME">SET_USERNAME</a></li><li><a href="global.html#setAuthorizationHeader">setAuthorizationHeader</a></li><li><a href="global.html#setEmail">setEmail</a></li><li><a href="global.html#setIsInstitutionOwner">setIsInstitutionOwner</a></li><li><a href="global.html#setLike">setLike</a></li><li><a href="global.html#setOfficial">setOfficial</a></li><li><a href="global.html#setUsername">setUsername</a></li><li><a href="global.html#ShowcaseCard">ShowcaseCard</a></li><li><a href="global.html#signup">signup</a></li><li><a href="global.html#Spinner">Spinner</a></li><li><a href="global.html#themesCard">themesCard</a></li><li><a href="global.html#TranslateExhibitCard">TranslateExhibitCard</a></li><li><a href="global.html#TranslatorRateTranslationCard">TranslatorRateTranslationCard</a></li><li><a href="global.html#updateBuilding">updateBuilding</a></li><li><a href="global.html#updateExhibit">updateExhibit</a></li><li><a href="global.html#updateExhibitImage">updateExhibitImage</a></li><li><a href="global.html#updateExhibitInfoLabelImage">updateExhibitInfoLabelImage</a></li><li><a href="global.html#updateInstitution">updateInstitution</a></li><li><a href="global.html#updateInstitutionImage">updateInstitutionImage</a></li><li><a href="global.html#updatePassword">updatePassword</a></li><li><a href="global.html#updateRoom">updateRoom</a></li><li><a href="global.html#updateShowcase">updateShowcase</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#UserManagerRow">UserManagerRow</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Mon May 02 2022 14:32:45 GMT+0200 (Středoevropský letní čas)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
